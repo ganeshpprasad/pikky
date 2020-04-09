@@ -10,17 +10,35 @@ import {
     TouchableWithoutFeedback,
 } from "react-native";
 
+import {msgTypes} from "../App";
+
 // user and bot msgs
 // split the bot line for a different question
 
-const userResponses = ["Hey", "Gmail", "Lets do it"];
+const userResponses = [
+    {
+        msg: "Hey",
+        type: msgTypes.USER,
+    },
+    {
+        msg: "Gmail",
+        type: msgTypes.USER,
+    },
+    {
+        msg: "Lets do it",
+        type: msgTypes.USER,
+    },
+];
 
 const MsgItem = ({item, msgNumber}) => {
     console.log("is", item);
 
     return (
-        <View style={styles.msgCon}>
-            <Text key={item}>{item}</Text>
+        <View
+            style={
+                item.type === msgTypes.PIKKY ? styles.msgCon : styles.userMsgCon
+            }>
+            <Text key={item}>{item.msg}</Text>
         </View>
     );
 };
@@ -28,7 +46,7 @@ const MsgItem = ({item, msgNumber}) => {
 const OnBoardChat = ({msgData, setmsgNumber, msgNumber}) => {
     console.log("msgnumb", msgNumber, userResponses[msgNumber]);
 
-    const userMsg = userResponses[msgNumber] || "Next";
+    const userMsg = userResponses[msgNumber] || {msg: "Next"};
     return (
         <View style={styles.screenCon}>
             <View style={styles.chatMsgsListCon}>
@@ -42,7 +60,7 @@ const OnBoardChat = ({msgData, setmsgNumber, msgNumber}) => {
                 <TouchableWithoutFeedback
                     style={styles.userButton}
                     onPress={() => setmsgNumber(userMsg)}>
-                    <Text>{userMsg}</Text>
+                    <Text>{userMsg.msg}</Text>
                 </TouchableWithoutFeedback>
             </View>
         </View>
@@ -52,7 +70,7 @@ const OnBoardChat = ({msgData, setmsgNumber, msgNumber}) => {
 const styles = StyleSheet.create({
     screenCon: {
         flexGrow: 1,
-        height: Dimensions.get("window").height - 50,
+        height: Dimensions.get("window").height - 150,
     },
     chatMsgsListCon: {
         flexGrow: 1,
@@ -71,14 +89,17 @@ const styles = StyleSheet.create({
         padding: 20,
         marginLeft: 10,
         marginTop: 10,
+        borderRadius: 10,
     },
     userMsgCon: {
-        backgroundColor: "#eee",
+        backgroundColor: "#b9b",
         width: "50%",
         padding: 20,
         marginLeft: 10,
         marginTop: 10,
+        marginBottom: 30,
         alignSelf: "flex-end",
+        borderRadius: 10,
     },
     msgText: {
         fontSize: 18,

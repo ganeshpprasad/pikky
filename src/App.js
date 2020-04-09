@@ -11,12 +11,32 @@ import {SafeAreaView, StyleSheet, StatusBar} from "react-native";
 
 import OnBoardChat from "./components/onBoardChat";
 
+export const msgTypes = {
+    USER: "user",
+    PIKKY: "pikky",
+};
+
 const onBoardingData = [
-    "Hello",
-    `Nice to meet you`,
-    `How would you like to login?`,
-    `Successfully logged in!`,
-    `Let's get to know you better`,
+    {
+        msg: "Hello",
+        type: msgTypes.PIKKY,
+    },
+    {
+        msg: `Nice to meet you`,
+        type: msgTypes.PIKKY,
+    },
+    {
+        msg: `How would you like to login?`,
+        type: msgTypes.PIKKY,
+    },
+    {
+        msg: `Successfully logged in!`,
+        type: msgTypes.PIKKY,
+    },
+    {
+        msg: `Let's get to know you better`,
+        type: msgTypes.PIKKY,
+    },
 ];
 
 const App = () => {
