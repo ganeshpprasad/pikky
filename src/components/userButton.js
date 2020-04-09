@@ -1,12 +1,7 @@
 import React, {useState} from "react";
-import {
-    View,
-    Button,
-    Text,
-    TouchableWithoutFeedback,
-    TextInput,
-} from "react-native";
+import {Button, Text, TouchableWithoutFeedback, TextInput} from "react-native";
 import {Navigation} from "react-native-navigation";
+import {View} from "react-native-animatable";
 
 import {NAMES, USER_ACCCOUNT} from "../screens/constants";
 import {styles} from "../styles/onBoardChat";
@@ -44,7 +39,7 @@ const UserButton = ({userMsg, componentId, setmsgNumber}) => {
     const decideButtonOrTextInput = umsg => {
         if (umsg.id === 3 || umsg.id === 5 || umsg.id === 7) {
             return (
-                <View style={styles.userText}>
+                <View animation={"bounceInUp"} style={styles.userText}>
                     <Text>{umsg.display}</Text>
                     <TextInput
                         style={styles.textInput}
@@ -57,7 +52,7 @@ const UserButton = ({userMsg, componentId, setmsgNumber}) => {
         }
 
         return (
-            <View style={styles.buttonCon}>
+            <View animation={"bounceInUp"} style={styles.buttonCon}>
                 <TouchableWithoutFeedback
                     style={styles.userButton}
                     onPress={() => userButtonCallback(umsg)}>
