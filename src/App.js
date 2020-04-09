@@ -17,26 +17,34 @@ export const msgTypes = {
 };
 
 const onBoardingData = [
-    {
-        msg: "Hello",
-        type: msgTypes.PIKKY,
-    },
-    {
-        msg: `Nice to meet you`,
-        type: msgTypes.PIKKY,
-    },
-    {
-        msg: `How would you like to login?`,
-        type: msgTypes.PIKKY,
-    },
-    {
-        msg: `Successfully logged in!`,
-        type: msgTypes.PIKKY,
-    },
-    {
-        msg: `Let's get to know you better`,
-        type: msgTypes.PIKKY,
-    },
+    [
+        {
+            msg: "Hello",
+            type: msgTypes.PIKKY,
+        },
+    ],
+    [
+        {
+            msg: `Nice to meet you`,
+            type: msgTypes.PIKKY,
+        },
+        {
+            msg: `How would you like to login?`,
+            type: msgTypes.PIKKY,
+        },
+    ],
+    [
+        {
+            msg: `Successfully logged in!`,
+            type: msgTypes.PIKKY,
+        },
+    ],
+    [
+        {
+            msg: `Let's get to know you better`,
+            type: msgTypes.PIKKY,
+        },
+    ],
 ];
 
 const App = () => {
@@ -57,7 +65,7 @@ const App = () => {
                 <OnBoardChat
                     msgData={msgData}
                     setmsgNumber={userMsg => {
-                        setMsgData(msgs => [...msgs, userMsg]);
+                        setMsgData(msgs => [...msgs, [userMsg]]);
                         setmsgNumber(msgNumber => msgNumber + 1);
                     }}
                     msgNumber={msgNumber}

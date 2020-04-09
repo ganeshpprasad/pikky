@@ -2,11 +2,9 @@ import React from "react";
 import {
     View,
     FlatList,
-    Button,
     Text,
     StyleSheet,
     Dimensions,
-    StatusBar,
     TouchableWithoutFeedback,
 } from "react-native";
 
@@ -16,35 +14,47 @@ import {msgTypes} from "../App";
 // split the bot line for a different question
 
 const userResponses = [
-    {
-        msg: "Hey",
-        type: msgTypes.USER,
-    },
-    {
-        msg: "Gmail",
-        type: msgTypes.USER,
-    },
-    {
-        msg: "Lets do it",
-        type: msgTypes.USER,
-    },
+    [
+        {
+            msg: "Hey",
+            type: msgTypes,
+        },
+    ],
+    [
+        {
+            msg: "Gmail",
+            type: msgTypes,
+        },
+        {
+            msg: "Phone Number",
+            type: msgTypes,
+        },
+    ],
+    [
+        {
+            msg: "Lets do it",
+            type: msgTypes,
+        },
+    ],
 ];
 
 const MsgItem = ({item, msgNumber}) => {
     console.log("is", item);
 
-    return (
+    return item.map(msgItem => (
         <View
             style={
-                item.type === msgTypes.PIKKY ? styles.msgCon : styles.userMsgCon
+                msgItem.type === msgTypes.PIKKY
+                    ? styles.msgCon
+                    : styles.userMsgCon
             }>
-            <Text key={item}>{item.msg}</Text>
+            <Text key={msgItem}>{msgItem.msg}</Text>
         </View>
-    );
+    ));
 };
 
 const OnBoardChat = ({msgData, setmsgNumber, msgNumber}) => {
-    console.log("msgnumb", msgNumber, userResponses[msgNumber]);
+    console.log("msgnumb", msgData);
 
     const userMsg = userResponses[msgNumber] || {msg: "Next"};
     return (
@@ -56,13 +66,15 @@ const OnBoardChat = ({msgData, setmsgNumber, msgNumber}) => {
                 />
             </View>
             {/* <TextInput /> */}
-            <View style={styles.buttonCOn}>
-                <TouchableWithoutFeedback
-                    style={styles.userButton}
-                    onPress={() => setmsgNumber(userMsg)}>
-                    <Text>{userMsg.msg}</Text>
-                </TouchableWithoutFeedback>
-            </View>
+            {userMsg.map(umsg => (
+                <View style={styles.buttonCOn}>
+                    <TouchableWithoutFeedback
+                        style={styles.userButton}
+                        onPress={() => setmsgNumber(umsg)}>
+                        <Text>{umsg.msg}</Text>
+                    </TouchableWithoutFeedback>
+                </View>
+            ))}
         </View>
     );
 };
@@ -82,6 +94,7 @@ const styles = StyleSheet.create({
         width: "50%",
         alignSelf: "center",
         padding: 20,
+        marginBottom: 10,
     },
     msgCon: {
         backgroundColor: "#eee",
