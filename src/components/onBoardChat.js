@@ -2,11 +2,16 @@ import React from "react";
 import {View} from "react-native";
 
 import {styles} from "../styles/onBoardChat";
-import {userResponses} from "../helperData/userMsgs";
 import UserButton from "./userButton";
 import ChatMsgList from "./chatMsgList";
 
-const OnBoardChat = ({msgData, setmsgNumber, msgNumber, componentId}) => {
+const OnBoardChat = ({
+    msgData,
+    setmsgNumber,
+    msgNumber,
+    componentId,
+    userResponses,
+}) => {
     const userMsg = userResponses[msgNumber] || {msg: "Next"};
     return (
         <View style={styles.screenCon}>

@@ -16,20 +16,13 @@ import {
 
 import OnBoardChat from "../components/onBoardChat";
 import {onBoardingData} from "../helperData/pikkyBotMsgs";
+import {userResponses} from "../helperData/userMsgs";
+import {useOnBoardChat} from "../effects/onBoardChat";
 
 const Login = props => {
-    const [msgNumber, setmsgNumber] = useState(0);
-    const [msgData, setMsgData] = useState([]);
-
-    useEffect(() => {
-        msgNumber < onBoardingData.length &&
-            setMsgData(msgs => [...msgs, onBoardingData[msgNumber]]);
-    }, [msgNumber]);
-
-    const setUserMsgNumber = userMsg => {
-        setMsgData(msgs => [...msgs, [userMsg]]);
-        setmsgNumber(msgNumber => msgNumber + 1);
-    };
+    const {msgData, setUserMsgNumber, msgNumber} = useOnBoardChat(
+        onBoardingData,
+    );
 
     return (
         <>
@@ -43,6 +36,7 @@ const Login = props => {
                         setmsgNumber={setUserMsgNumber}
                         msgNumber={msgNumber}
                         componentId={props.componentId}
+                        userResponses={userResponses}
                     />
                 </SafeAreaView>
             </KeyboardAvoidingView>

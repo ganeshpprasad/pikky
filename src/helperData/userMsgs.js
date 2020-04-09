@@ -36,28 +36,32 @@ export const userResponses = [
 export const nameResponses = [
     [
         {
-            id: 4,
+            id: 5,
             type: msgTypes.USER,
             msg: "User Name",
+            display: "User Name",
         },
     ],
     [
         {
             msg: "Detect Location",
             type: msgTypes,
-            id: 5,
+            id: 6,
+            display: "Detect Location",
         },
         {
             msg: "Enter Manually",
             type: msgTypes,
-            id: 6,
+            id: 7,
+            display: "Enter Manually",
         },
     ],
     [
         {
             msg: "Finish",
+            display: "Finish",
             type: msgTypes.USER,
-            id: 7,
+            id: 8,
         },
     ],
 ];

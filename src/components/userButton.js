@@ -8,14 +8,16 @@ import {
 } from "react-native";
 import {Navigation} from "react-native-navigation";
 
-import {NAMES} from "../screens/constants";
+import {NAMES, USER_ACCCOUNT} from "../screens/constants";
 import {styles} from "../styles/onBoardChat";
 
 const UserButton = ({userMsg, componentId, setmsgNumber}) => {
-    const navigateToNext = () => {
+    const navigateToNext = id => {
+        const screen = id === 4 ? NAMES : USER_ACCCOUNT;
+
         Navigation.push(componentId, {
             component: {
-                name: NAMES,
+                name: screen,
                 options: {
                     topBar: {
                         height: 0,
@@ -27,7 +29,8 @@ const UserButton = ({userMsg, componentId, setmsgNumber}) => {
     };
 
     const userButtonCallback = umsg => {
-        umsg.id === 4 ? navigateToNext() : setmsgNumber(umsg);
+        const _id = umsg.id;
+        _id === 4 || _id === 8 ? navigateToNext(_id) : setmsgNumber(umsg);
     };
 
     const savePhoneNumber = umsg => {
@@ -35,7 +38,7 @@ const UserButton = ({userMsg, componentId, setmsgNumber}) => {
     };
 
     const decideButtonOrTextInput = umsg => {
-        if (umsg.id === 3) {
+        if (umsg.id === 3 || umsg.id === 5 || umsg.id === 7) {
             return (
                 <>
                     <Text>Phone Number</Text>
@@ -51,7 +54,7 @@ const UserButton = ({userMsg, componentId, setmsgNumber}) => {
             <TouchableWithoutFeedback
                 style={styles.userButton}
                 onPress={() => userButtonCallback(umsg)}>
-                <Text>{umsg.display}</Text>
+                <Text style={styles.buttonText}>{umsg.display}</Text>
             </TouchableWithoutFeedback>
         );
     };

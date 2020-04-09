@@ -13,9 +13,11 @@ export const styles = StyleSheet.create({
         flexGrow: 0,
         backgroundColor: "#a6a",
         width: "50%",
-        alignSelf: "center",
+        alignSelf: "flex-end",
         padding: 20,
         marginBottom: 10,
+        marginRight: 10,
+        borderRadius: 5,
     },
     msgCon: {
         backgroundColor: "#eee",
@@ -35,6 +37,11 @@ export const styles = StyleSheet.create({
         alignSelf: "flex-end",
         borderRadius: 10,
     },
+    userMsgText: {
+        textAlign: "right",
+        color: "#fff",
+    },
+    botMsgText: {},
     msgText: {
         fontSize: 18,
     },
@@ -42,6 +49,11 @@ export const styles = StyleSheet.create({
         backgroundColor: "#eee",
         marginLeft: 10,
         marginTop: 10,
+    },
+    buttonText: {
+        color: "#fff",
         textAlign: "center",
+        fontSize: 15,
+        fontWeight: "500",
     },
 });
