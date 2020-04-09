@@ -1,15 +1,21 @@
 import {StyleSheet, Dimensions} from "react-native";
 
 export const styles = StyleSheet.create({
+    mainTitle: {
+        fontSize: 21,
+        color: "#a6a",
+        margin: 10,
+        textAlign: "center",
+    },
     screenCon: {
         flexGrow: 1,
-        height: Dimensions.get("window").height - 150,
+        height: Dimensions.get("window").height - 100,
     },
     chatMsgsListCon: {
         flexGrow: 1,
         padding: 10,
     },
-    buttonCOn: {
+    buttonCon: {
         flexGrow: 0,
         backgroundColor: "#a6a",
         width: "50%",
@@ -28,7 +34,7 @@ export const styles = StyleSheet.create({
         borderRadius: 10,
     },
     userMsgCon: {
-        backgroundColor: "#b9b",
+        backgroundColor: "#a9a",
         width: "50%",
         padding: 20,
         marginLeft: 10,
@@ -49,6 +55,20 @@ export const styles = StyleSheet.create({
         backgroundColor: "#eee",
         marginLeft: 10,
         marginTop: 10,
+    },
+    userText: {
+        borderColor: "#b9b",
+        borderWidth: 1,
+        width: "50%",
+        alignSelf: "flex-end",
+        padding: 20,
+        marginBottom: 10,
+        marginRight: 10,
+        borderRadius: 5,
+    },
+    textInput: {
+        borderBottomColor: "#a6a",
+        borderBottomWidth: 2,
     },
     buttonText: {
         color: "#fff",

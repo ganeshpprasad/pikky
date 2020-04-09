@@ -6,7 +6,7 @@ export const msgTypes = {
 export const onBoardingData = [
     [
         {
-            msg: "Hello",
+            msg: "Hello. I'm Pikky. Your personal food connoisseur",
             type: msgTypes.PIKKY,
         },
     ],

@@ -6,11 +6,12 @@
  * @flow strict-local
  */
 
-import React, {useState, useEffect} from "react";
+import React from "react";
 import {
     SafeAreaView,
     KeyboardAvoidingView,
     Platform,
+    Text,
     StatusBar,
 } from "react-native";
 
@@ -18,6 +19,7 @@ import OnBoardChat from "../components/onBoardChat";
 import {onBoardingData} from "../helperData/pikkyBotMsgs";
 import {userResponses} from "../helperData/userMsgs";
 import {useOnBoardChat} from "../effects/onBoardChat";
+import {styles} from "../styles/onBoardChat";
 
 const Login = props => {
     const {msgData, setUserMsgNumber, msgNumber} = useOnBoardChat(
@@ -31,6 +33,9 @@ const Login = props => {
                 behavior={Platform.Os == "ios" ? "padding" : "position"}
                 style={{flex: 1}}>
                 <SafeAreaView>
+                    <Text style={styles.mainTitle}>
+                        Let's get to know each other
+                    </Text>
                     <OnBoardChat
                         msgData={msgData}
                         setmsgNumber={setUserMsgNumber}

@@ -3,10 +3,10 @@ import {msgTypes} from "./pikkyBotMsgs";
 export const userResponses = [
     [
         {
-            msg: "Hey",
+            msg: "Hi, Pikky",
             type: msgTypes,
             id: 1,
-            display: "Hey",
+            display: "Hi, Pikky",
         },
     ],
     [
@@ -28,7 +28,7 @@ export const userResponses = [
             msg: "Lets do it",
             type: msgTypes,
             id: 4,
-            display: "Lets do it",
+            display: "Next",
         },
     ],
 ];
@@ -50,7 +50,7 @@ export const nameResponses = [
             display: "Detect Location",
         },
         {
-            msg: "Enter Manually",
+            msg: "Saved location",
             type: msgTypes,
             id: 7,
             display: "Enter Manually",

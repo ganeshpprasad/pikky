@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {
     View,
     Button,
@@ -12,6 +12,8 @@ import {NAMES, USER_ACCCOUNT} from "../screens/constants";
 import {styles} from "../styles/onBoardChat";
 
 const UserButton = ({userMsg, componentId, setmsgNumber}) => {
+    const [textValue, setText] = useState("");
+
     const navigateToNext = id => {
         const screen = id === 4 ? NAMES : USER_ACCCOUNT;
 
@@ -34,34 +36,38 @@ const UserButton = ({userMsg, componentId, setmsgNumber}) => {
     };
 
     const savePhoneNumber = umsg => {
+        umsg.msg = umsg.msg + ": " + textValue;
         userButtonCallback(umsg);
+        setText("");
     };
 
     const decideButtonOrTextInput = umsg => {
         if (umsg.id === 3 || umsg.id === 5 || umsg.id === 7) {
             return (
-                <>
-                    <Text>Phone Number</Text>
+                <View style={styles.userText}>
+                    <Text>{umsg.display}</Text>
                     <TextInput
-                        style={styles.userButton}
+                        style={styles.textInput}
+                        value={textValue}
+                        onChangeText={text => setText(text)}
                         onSubmitEditing={() => savePhoneNumber(umsg)}
                     />
-                </>
+                </View>
             );
         }
 
         return (
-            <TouchableWithoutFeedback
-                style={styles.userButton}
-                onPress={() => userButtonCallback(umsg)}>
-                <Text style={styles.buttonText}>{umsg.display}</Text>
-            </TouchableWithoutFeedback>
+            <View style={styles.buttonCon}>
+                <TouchableWithoutFeedback
+                    style={styles.userButton}
+                    onPress={() => userButtonCallback(umsg)}>
+                    <Text style={styles.buttonText}>{umsg.display}</Text>
+                </TouchableWithoutFeedback>
+            </View>
         );
     };
 
-    const returnUserMsg = umsg => (
-        <View style={styles.buttonCOn}>{decideButtonOrTextInput(umsg)}</View>
-    );
+    const returnUserMsg = umsg => <>{decideButtonOrTextInput(umsg)}</>;
 
     return <>{userMsg.map(returnUserMsg)}</>;
 };
