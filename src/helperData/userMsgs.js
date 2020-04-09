@@ -6,24 +6,29 @@ export const userResponses = [
             msg: "Hey",
             type: msgTypes,
             id: 1,
+            display: "Hey",
         },
     ],
     [
         {
-            msg: "Gmail",
+            msg: "Logged in using Gmail",
             type: msgTypes,
             id: 2,
+            display: "GMail",
         },
         {
-            msg: "Phone Number",
+            msg: "Logged in using Phone Number",
             type: msgTypes,
+            display: "Phone number",
+            id: 3,
         },
     ],
     [
         {
             msg: "Lets do it",
             type: msgTypes,
-            id: 3,
+            id: 4,
+            display: "Lets do it",
         },
     ],
 ];

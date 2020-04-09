@@ -7,7 +7,12 @@
  */
 
 import React, {useState, useEffect} from "react";
-import {SafeAreaView, StyleSheet, StatusBar} from "react-native";
+import {
+    SafeAreaView,
+    KeyboardAvoidingView,
+    Platform,
+    StatusBar,
+} from "react-native";
 
 import OnBoardChat from "../components/onBoardChat";
 import {onBoardingData} from "../helperData/pikkyBotMsgs";
@@ -29,14 +34,18 @@ const Login = props => {
     return (
         <>
             <StatusBar barStyle="light-content" />
-            <SafeAreaView>
-                <OnBoardChat
-                    msgData={msgData}
-                    setmsgNumber={setUserMsgNumber}
-                    msgNumber={msgNumber}
-                    componentId={props.componentId}
-                />
-            </SafeAreaView>
+            <KeyboardAvoidingView
+                behavior={Platform.Os == "ios" ? "padding" : "position"}
+                style={{flex: 1}}>
+                <SafeAreaView>
+                    <OnBoardChat
+                        msgData={msgData}
+                        setmsgNumber={setUserMsgNumber}
+                        msgNumber={msgNumber}
+                        componentId={props.componentId}
+                    />
+                </SafeAreaView>
+            </KeyboardAvoidingView>
         </>
     );
 };
