@@ -12,28 +12,29 @@ import {SafeAreaView, StyleSheet, StatusBar} from "react-native";
 import OnBoardChat from "../components/onBoardChat";
 import {onBoardingData} from "../helperData/pikkyBotMsgs";
 
-const Login = () => {
+const Login = props => {
     const [msgNumber, setmsgNumber] = useState(0);
     const [msgData, setMsgData] = useState([]);
-
-    console.log("msgNumber", msgNumber);
 
     useEffect(() => {
         msgNumber < onBoardingData.length &&
             setMsgData(msgs => [...msgs, onBoardingData[msgNumber]]);
     }, [msgNumber]);
 
+    const setUserMsgNumber = userMsg => {
+        setMsgData(msgs => [...msgs, [userMsg]]);
+        setmsgNumber(msgNumber => msgNumber + 1);
+    };
+
     return (
         <>
-            <StatusBar barStyle="dark-content" />
+            <StatusBar barStyle="light-content" />
             <SafeAreaView>
                 <OnBoardChat
                     msgData={msgData}
-                    setmsgNumber={userMsg => {
-                        setMsgData(msgs => [...msgs, [userMsg]]);
-                        setmsgNumber(msgNumber => msgNumber + 1);
-                    }}
+                    setmsgNumber={setUserMsgNumber}
                     msgNumber={msgNumber}
+                    componentId={props.componentId}
                 />
             </SafeAreaView>
         </>

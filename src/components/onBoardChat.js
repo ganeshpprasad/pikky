@@ -1,43 +1,41 @@
 import React from "react";
-import {View, FlatList, Text, TouchableWithoutFeedback} from "react-native";
+import {View, Text, TouchableWithoutFeedback} from "react-native";
+import {Navigation} from "react-native-navigation";
 
 import {styles} from "../styles/onBoardChat";
 import {userResponses} from "../helperData/userMsgs";
-import {msgTypes} from "../helperData/pikkyBotMsgs";
+import {NAMES} from "../screens/constants";
+import ChatMsgList from "./chatMsgList";
 
-const MsgItem = ({item, msgNumber}) => {
-    console.log("is", item);
+const OnBoardChat = ({msgData, setmsgNumber, msgNumber, componentId}) => {
+    const navigateToNext = () => {
+        Navigation.push(componentId, {
+            component: {
+                name: NAMES,
+                options: {
+                    topBar: {
+                        height: 0,
+                        visible: false,
+                    },
+                },
+            },
+        });
+    };
 
-    return item.map(msgItem => (
-        <View
-            style={
-                msgItem.type === msgTypes.PIKKY
-                    ? styles.msgCon
-                    : styles.userMsgCon
-            }>
-            <Text key={msgItem}>{msgItem.msg}</Text>
-        </View>
-    ));
-};
-
-const OnBoardChat = ({msgData, setmsgNumber, msgNumber}) => {
-    console.log("msgnumb", msgData);
+    const userButtonCallback = umsg => {
+        umsg.id === 3 ? navigateToNext() : setmsgNumber(umsg);
+    };
 
     const userMsg = userResponses[msgNumber] || {msg: "Next"};
     return (
         <View style={styles.screenCon}>
-            <View style={styles.chatMsgsListCon}>
-                <FlatList
-                    data={msgData}
-                    renderItem={({item}) => <MsgItem item={item} />}
-                />
-            </View>
+            <ChatMsgList msgData={msgData} />
             {/* <TextInput /> */}
             {userMsg.map(umsg => (
                 <View style={styles.buttonCOn}>
                     <TouchableWithoutFeedback
                         style={styles.userButton}
-                        onPress={() => setmsgNumber(umsg)}>
+                        onPress={() => userButtonCallback(umsg)}>
                         <Text>{umsg.msg}</Text>
                     </TouchableWithoutFeedback>
                 </View>

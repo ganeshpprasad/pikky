@@ -2,7 +2,10 @@
  * @format
  */
 
-import {AppRegistry} from 'react-native';
-import App from './src/App';
+import React from "react";
+import {Text} from "react-native";
+import {Navigation} from "react-native-navigation";
+import App from "./src/App";
 
-AppRegistry.registerComponent('pikkyOnboard', () => App);
+Navigation.events().registerAppLaunchedListener(App);
+// AppRegistry.registerComponent('pikkyOnboard', () => App);
