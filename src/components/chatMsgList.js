@@ -9,16 +9,16 @@ const {botMsgText, userMsgText, chatMsgsListCon, msgCon, userMsgCon} = styles;
 
 const MsgItem = ({item}) => {
     return item.map(({id, type, msg}) => (
-        <Animatable.View
-            animation={
-                type === msgTypes.PIKKY ? "bounceInLeft" : "bounceInRight"
-            }
+        <View
+            // animation={
+            //     type === msgTypes.PIKKY ? "bounceInLeft" : "bounceInRight"
+            // }
             key={id}
             style={type === msgTypes.PIKKY ? msgCon : userMsgCon}>
             <Text style={type === msgTypes.PIKKY ? botMsgText : userMsgText}>
                 {msg}
             </Text>
-        </Animatable.View>
+        </View>
     ));
 };
 
@@ -26,6 +26,7 @@ const ChatMsgList = ({msgData}) => {
     return (
         <View style={chatMsgsListCon}>
             <FlatList
+                inverted
                 data={msgData}
                 renderItem={({item}) => <MsgItem item={item} />}
             />

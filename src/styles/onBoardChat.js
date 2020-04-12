@@ -9,20 +9,23 @@ export const styles = StyleSheet.create({
     },
     screenCon: {
         flexGrow: 1,
-        height: Dimensions.get("window").height - 100,
+        height: Dimensions.get("window").height - 280,
     },
     chatMsgsListCon: {
-        flexGrow: 1,
+        // flexGrow: 1,
         padding: 10,
     },
     buttonCon: {
         flexGrow: 0,
         backgroundColor: "#a6a",
-        width: "50%",
+        // width: "70%",
         alignSelf: "flex-end",
         padding: 20,
+        paddingLeft: 40,
+        paddingRight: 40,
         marginBottom: 10,
         marginRight: 10,
+        marginLeft: 10,
         borderRadius: 5,
     },
     msgCon: {
@@ -59,7 +62,7 @@ export const styles = StyleSheet.create({
     userText: {
         borderColor: "#b9b",
         borderWidth: 1,
-        width: "50%",
+        width: "80%",
         alignSelf: "flex-end",
         padding: 20,
         marginBottom: 10,

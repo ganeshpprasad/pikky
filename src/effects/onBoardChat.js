@@ -6,11 +6,11 @@ export const useOnBoardChat = onBoardingData => {
 
     useEffect(() => {
         msgNumber < onBoardingData.length &&
-            setMsgData(msgs => [...msgs, onBoardingData[msgNumber]]);
+            setMsgData(msgs => [onBoardingData[msgNumber], ...msgs]);
     }, [msgNumber, onBoardingData]);
 
     const setUserMsgNumber = userMsg => {
-        setMsgData(msgs => [...msgs, [userMsg]]);
+        setMsgData(msgs => [[userMsg], ...msgs]);
         setTimeout(() => {
             setmsgNumber(msgNumber => msgNumber + 1);
         }, 500);

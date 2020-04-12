@@ -1,7 +1,7 @@
 import React, {useState} from "react";
-import {Button, Text, TouchableWithoutFeedback, TextInput} from "react-native";
+import {View, Text, TouchableWithoutFeedback, TextInput} from "react-native";
 import {Navigation} from "react-native-navigation";
-import {View} from "react-native-animatable";
+// import {View} from "react-native-animatable";
 
 import {NAMES, USER_ACCCOUNT} from "../screens/constants";
 import {styles} from "../styles/onBoardChat";
@@ -9,12 +9,10 @@ import {styles} from "../styles/onBoardChat";
 const UserButton = ({userMsg, componentId, setmsgNumber}) => {
     const [textValue, setText] = useState("");
 
-    const navigateToNext = id => {
-        const screen = id === 4 ? NAMES : USER_ACCCOUNT;
-
+    const navigateToNext = () => {
         Navigation.push(componentId, {
             component: {
-                name: screen,
+                name: USER_ACCCOUNT,
                 options: {
                     topBar: {
                         height: 0,
@@ -27,19 +25,20 @@ const UserButton = ({userMsg, componentId, setmsgNumber}) => {
 
     const userButtonCallback = umsg => {
         const _id = umsg.id;
-        _id === 4 || _id === 8 ? navigateToNext(_id) : setmsgNumber(umsg);
+        _id === 8 ? navigateToNext(_id) : setmsgNumber(umsg);
     };
 
     const savePhoneNumber = umsg => {
         umsg.msg = umsg.msg + ": " + textValue;
-        userButtonCallback(umsg);
+        setmsgNumber(umsg);
+        // userButtonCallback(umsg);
         setText("");
     };
 
     const decideButtonOrTextInput = umsg => {
         if (umsg.id === 3 || umsg.id === 5 || umsg.id === 7) {
             return (
-                <View animation={"bounceInUp"} style={styles.userText}>
+                <View style={styles.userText}>
                     <Text>{umsg.display}</Text>
                     <TextInput
                         style={styles.textInput}
@@ -52,7 +51,7 @@ const UserButton = ({userMsg, componentId, setmsgNumber}) => {
         }
 
         return (
-            <View animation={"bounceInUp"} style={styles.buttonCon}>
+            <View style={styles.buttonCon}>
                 <TouchableWithoutFeedback
                     style={styles.userButton}
                     onPress={() => userButtonCallback(umsg)}>
@@ -64,7 +63,16 @@ const UserButton = ({userMsg, componentId, setmsgNumber}) => {
 
     const returnUserMsg = umsg => <>{decideButtonOrTextInput(umsg)}</>;
 
-    return <>{userMsg.map(returnUserMsg)}</>;
+    return (
+        <View
+            style={{
+                flexDirection: "column",
+                padding: 10,
+                // alignItems: "center",
+            }}>
+            {userMsg.map(returnUserMsg)}
+        </View>
+    );
 };
 
 export default UserButton;
