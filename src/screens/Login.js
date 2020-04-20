@@ -1,12 +1,8 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
+ * Landing screen if the user is not logged in.
  */
 
-import React from 'react';
+import React, {useState} from 'react';
 import {
     SafeAreaView,
     KeyboardAvoidingView,
@@ -15,6 +11,7 @@ import {
     StatusBar,
     View,
 } from 'react-native';
+import GestureRecognizer from 'react-native-swipe-gestures';
 
 import OnBoardChat from '../components/onBoardChat';
 import {onBoardingData} from '../helperData/pikkyBotMsgs';
@@ -29,19 +26,30 @@ const {
     shadowOfPikky,
     brandingCon,
     loginCon,
+    brandingConHidden,
+    chatConFullScreen,
 } = styles;
 
 const Login = props => {
     const {msgData, setUserMsgNumber, msgNumber} = useOnBoardChat(
         onBoardingData,
     );
+    const [loginFullScreen, setLoginFullScreen] = useState(false);
+
+    const config = {
+        velocityThreshold: 0.3,
+        directionalOffsetThreshold: 80,
+    };
 
     return (
         <>
             <StatusBar barStyle="light-content" />
             <SafeAreaView>
                 <View style={loginCon}>
-                    <View style={brandingCon}>
+                    <View
+                        style={
+                            loginFullScreen ? brandingConHidden : brandingCon
+                        }>
                         <Image
                             source={require('../assets/onBoarding/43x.png')}
                             style={pikkySignal}
@@ -73,17 +81,29 @@ const Login = props => {
                             resizeMode="contain"
                         />
                     </View>
-                    <KeyboardAvoidingView
-                        behavior={Platform.Os == 'ios' ? 'padding' : 'position'}
-                        style={chatCon}>
-                        <OnBoardChat
-                            msgData={msgData}
-                            setmsgNumber={setUserMsgNumber}
-                            msgNumber={msgNumber}
-                            componentId={props.componentId}
-                            userResponses={userResponses}
-                        />
-                    </KeyboardAvoidingView>
+                    <GestureRecognizer
+                        config={config}
+                        style={{
+                            flex: 1,
+                            flexGrow: 1,
+                        }}
+                        onSwipeUp={() => setLoginFullScreen(true)}>
+                        <KeyboardAvoidingView
+                            behavior={
+                                Platform.Os == 'ios' ? 'padding' : 'position'
+                            }
+                            style={
+                                loginFullScreen ? chatConFullScreen : chatCon
+                            }>
+                            <OnBoardChat
+                                msgData={msgData}
+                                setmsgNumber={setUserMsgNumber}
+                                msgNumber={msgNumber}
+                                componentId={props.componentId}
+                                userResponses={userResponses}
+                            />
+                        </KeyboardAvoidingView>
+                    </GestureRecognizer>
                 </View>
             </SafeAreaView>
         </>

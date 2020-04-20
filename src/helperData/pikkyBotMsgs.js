@@ -1,12 +1,13 @@
 export const msgTypes = {
-    USER: "user",
-    PIKKY: "pikky",
+    USER: 'user',
+    PIKKY: 'pikky',
 };
 
 export const onBoardingData = [
     [
         {
-            msg: "Hello. I'm Pikky. Your personal food connoisseur",
+            msg:
+                'Go ahead, tell me a little about yourself and your food preferences.',
             type: msgTypes.PIKKY,
         },
     ],
@@ -34,27 +35,27 @@ export const onBoardingData = [
     ],
     [
         {
-            msg: "Please enter your name",
+            msg: 'Please enter your name',
             type: msgTypes.PIKKY,
         },
     ],
     [
         {
-            msg: "Glad to meet you",
+            msg: 'Glad to meet you',
             type: msgTypes.PIKKY,
         },
         {
-            msg: "Please select your location",
+            msg: 'Please select your location',
             type: msgTypes.PIKKY,
         },
     ],
     [
         {
-            msg: "Thanks for signing up",
+            msg: 'Thanks for signing up',
             type: msgTypes.PIKKY,
         },
         {
-            msg: "Click next to confirm details",
+            msg: 'Click next to confirm details',
             type: msgTypes.PIKKY,
         },
     ],
@@ -63,27 +64,27 @@ export const onBoardingData = [
 export const nameData = [
     [
         {
-            msg: "Please enter your name",
+            msg: 'Please enter your name',
             type: msgTypes.PIKKY,
         },
     ],
     [
         {
-            msg: "Glad to meet you",
+            msg: 'Glad to meet you',
             type: msgTypes.PIKKY,
         },
         {
-            msg: "Please select your location",
+            msg: 'Please select your location',
             type: msgTypes.PIKKY,
         },
     ],
     [
         {
-            msg: "Thanks for signing up",
+            msg: 'Thanks for signing up',
             type: msgTypes.PIKKY,
         },
         {
-            msg: "Click next to confirm details",
+            msg: 'Click next to confirm details',
             type: msgTypes.PIKKY,
         },
     ],
