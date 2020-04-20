@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
     },
     screenCon: {
         flexGrow: 1,
-        height: Dimensions.get("window").height - 280,
+        // height: Dimensions.get("window").height - 280,
     },
     chatMsgsListCon: {
         // flexGrow: 1,

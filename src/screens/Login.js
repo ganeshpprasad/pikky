@@ -6,20 +6,30 @@
  * @flow strict-local
  */
 
-import React from "react";
+import React from 'react';
 import {
     SafeAreaView,
     KeyboardAvoidingView,
     Platform,
-    Text,
+    Image,
     StatusBar,
-} from "react-native";
+    View,
+} from 'react-native';
 
-import OnBoardChat from "../components/onBoardChat";
-import {onBoardingData} from "../helperData/pikkyBotMsgs";
-import {userResponses} from "../helperData/userMsgs";
-import {useOnBoardChat} from "../effects/onBoardChat";
-import {styles} from "../styles/onBoardChat";
+import OnBoardChat from '../components/onBoardChat';
+import {onBoardingData} from '../helperData/pikkyBotMsgs';
+import {userResponses} from '../helperData/userMsgs';
+import {useOnBoardChat} from '../effects/onBoardChat';
+import {styles} from '../styles/login';
+
+const {
+    pikkyImage,
+    pikkySignal,
+    chatCon,
+    shadowOfPikky,
+    brandingCon,
+    loginCon,
+} = styles;
 
 const Login = props => {
     const {msgData, setUserMsgNumber, msgNumber} = useOnBoardChat(
@@ -29,22 +39,53 @@ const Login = props => {
     return (
         <>
             <StatusBar barStyle="light-content" />
-            <KeyboardAvoidingView
-                behavior={Platform.Os == "ios" ? "padding" : "position"}
-                style={{flex: 1}}>
-                <SafeAreaView>
-                    <Text style={styles.mainTitle}>
-                        Let's get to know each other
-                    </Text>
-                    <OnBoardChat
-                        msgData={msgData}
-                        setmsgNumber={setUserMsgNumber}
-                        msgNumber={msgNumber}
-                        componentId={props.componentId}
-                        userResponses={userResponses}
-                    />
-                </SafeAreaView>
-            </KeyboardAvoidingView>
+            <SafeAreaView>
+                <View style={loginCon}>
+                    <View style={brandingCon}>
+                        <Image
+                            source={require('../assets/onBoarding/43x.png')}
+                            style={pikkySignal}
+                            resizeMode="contain"
+                        />
+                        <Image
+                            source={require('../assets/onBoarding/33x.png')}
+                            style={pikkySignal}
+                            resizeMode="contain"
+                        />
+                        <Image
+                            source={require('../assets/onBoarding/23x.png')}
+                            style={pikkySignal}
+                            resizeMode="contain"
+                        />
+                        <Image
+                            source={require('../assets/onBoarding/13x.png')}
+                            style={pikkySignal}
+                            resizeMode="contain"
+                        />
+                        <Image
+                            source={require('../assets/onBoarding/logo2x.png')}
+                            style={pikkyImage}
+                            resizeMode="contain"
+                        />
+                        <Image
+                            source={require('../assets/onBoarding/shad3x.png')}
+                            style={shadowOfPikky}
+                            resizeMode="contain"
+                        />
+                    </View>
+                    <KeyboardAvoidingView
+                        behavior={Platform.Os == 'ios' ? 'padding' : 'position'}
+                        style={chatCon}>
+                        <OnBoardChat
+                            msgData={msgData}
+                            setmsgNumber={setUserMsgNumber}
+                            msgNumber={msgNumber}
+                            componentId={props.componentId}
+                            userResponses={userResponses}
+                        />
+                    </KeyboardAvoidingView>
+                </View>
+            </SafeAreaView>
         </>
     );
 };
