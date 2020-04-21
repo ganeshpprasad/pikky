@@ -31,7 +31,7 @@ export const onBoardingData = [
     ],
     [
         {
-            msg: 'Please enter your name',
+            msg: 'Please type the verification code sent to',
             type: msgTypes.PIKKY,
         },
     ],

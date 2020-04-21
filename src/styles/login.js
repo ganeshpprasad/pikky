@@ -17,13 +17,16 @@ export const styles = StyleSheet.create({
     pikkyImage: {width: 120, height: 120, marginLeft: 30},
     shadowOfPikky: {width: 150, height: 60, marginLeft: 15},
     chatCon: {
-        flex: 1,
+        flexGrow: 1,
         backgroundColor: 'rgb(255, 230, 72)',
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,
     },
     chatConFullScreen: {
         backgroundColor: 'rgb(255, 230, 72)',
-        flex: 1,
+        flexGrow: 1,
+        height: screenHeight,
+        paddingTop: 50,
+        paddingBottom: 60,
     },
 });

@@ -61,14 +61,8 @@ export const userResponses = [
         {
             msg: 'Detect Location',
             type: msgTypes,
-            id: 6,
-            display: 'Detect Location',
-        },
-        {
-            msg: 'Saved location',
-            type: msgTypes,
-            id: 7,
-            display: 'Enter Manually',
+            id: 8,
+            display: null,
         },
     ],
     [

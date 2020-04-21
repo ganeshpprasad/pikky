@@ -1,5 +1,5 @@
 import React from 'react';
-import {View} from 'react-native';
+import {ScrollView} from 'react-native';
 
 import {styles} from '../styles/onBoardChat';
 import UserButton from './userButton';
@@ -14,14 +14,14 @@ const OnBoardChat = ({
 }) => {
     const userMsg = userResponses[msgNumber] || {msg: 'Next'};
     return (
-        <View style={styles.screenCon}>
+        <ScrollView style={styles.screenCon}>
             <ChatMsgList msgData={msgData} />
             <UserButton
                 userMsg={userMsg}
                 componentId={componentId}
                 setmsgNumber={setmsgNumber}
             />
-        </View>
+        </ScrollView>
     );
 };
 

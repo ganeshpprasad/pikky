@@ -15,10 +15,18 @@ export const styles = StyleSheet.create({
         // flexGrow: 1,
         padding: 10,
     },
+    centralButton: {
+        width: '60%',
+        alignSelf: 'center',
+    },
     userText: {
         backgroundColor: '#fff',
         flexDirection: 'row',
         marginBottom: 20,
+        width: '80%',
+        alignSelf: 'flex-end',
+        paddingLeft: 40,
+        paddingRight: 40,
     },
     chatButton: {
         justifyContent: 'center',
@@ -37,7 +45,7 @@ export const styles = StyleSheet.create({
         shadowRadius: 2,
         shadowOpacity: 0.2,
         elevation: 4,
-        marginLeft: 20,
+        marginRight: 20,
     },
     skipButton: {
         backgroundColor: '#ff7366',
@@ -111,6 +119,7 @@ export const styles = StyleSheet.create({
         color: '#000',
         height: 30,
         padding: 0,
+        flexGrow: 1,
     },
     buttonDefaultCon: {
         flexDirection: 'row',
