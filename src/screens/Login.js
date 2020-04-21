@@ -11,7 +11,6 @@ import {
     StatusBar,
     View,
 } from 'react-native';
-import GestureRecognizer from 'react-native-swipe-gestures';
 
 import OnBoardChat from '../components/onBoardChat';
 import {onBoardingData} from '../helperData/pikkyBotMsgs';
@@ -35,6 +34,10 @@ const Login = props => {
         onBoardingData,
     );
     const [loginFullScreen, setLoginFullScreen] = useState(false);
+
+    if (msgNumber > 0) {
+        !loginFullScreen ? setLoginFullScreen(true) : null;
+    }
 
     const config = {
         velocityThreshold: 0.3,
@@ -81,29 +84,20 @@ const Login = props => {
                             resizeMode="contain"
                         />
                     </View>
-                    <GestureRecognizer
-                        config={config}
-                        style={{
-                            flex: 1,
-                            flexGrow: 1,
-                        }}
-                        onSwipeUp={() => setLoginFullScreen(true)}>
-                        <KeyboardAvoidingView
-                            behavior={
-                                Platform.Os == 'ios' ? 'padding' : 'position'
-                            }
-                            style={
-                                loginFullScreen ? chatConFullScreen : chatCon
-                            }>
-                            <OnBoardChat
-                                msgData={msgData}
-                                setmsgNumber={setUserMsgNumber}
-                                msgNumber={msgNumber}
-                                componentId={props.componentId}
-                                userResponses={userResponses}
-                            />
-                        </KeyboardAvoidingView>
-                    </GestureRecognizer>
+
+                    <KeyboardAvoidingView
+                        behavior={
+                            Platform.Os === 'ios' ? 'padding' : 'position'
+                        }
+                        style={loginFullScreen ? chatConFullScreen : chatCon}>
+                        <OnBoardChat
+                            msgData={msgData}
+                            setmsgNumber={setUserMsgNumber}
+                            msgNumber={msgNumber}
+                            componentId={props.componentId}
+                            userResponses={userResponses}
+                        />
+                    </KeyboardAvoidingView>
                 </View>
             </SafeAreaView>
         </>

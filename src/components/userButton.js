@@ -1,13 +1,13 @@
-import React, {useState} from "react";
-import {View, Text, TouchableWithoutFeedback, TextInput} from "react-native";
-import {Navigation} from "react-native-navigation";
+import React, {useState} from 'react';
+import {View, Text, TouchableOpacity, TextInput} from 'react-native';
+import {Navigation} from 'react-native-navigation';
 // import {View} from "react-native-animatable";
 
-import {NAMES, USER_ACCCOUNT} from "../screens/constants";
-import {styles} from "../styles/onBoardChat";
+import {NAMES, USER_ACCCOUNT} from '../screens/constants';
+import {styles} from '../styles/onBoardChat';
 
 const UserButton = ({userMsg, componentId, setmsgNumber}) => {
-    const [textValue, setText] = useState("");
+    const [textValue, setText] = useState('');
 
     const navigateToNext = () => {
         Navigation.push(componentId, {
@@ -29,47 +29,52 @@ const UserButton = ({userMsg, componentId, setmsgNumber}) => {
     };
 
     const savePhoneNumber = umsg => {
-        umsg.msg = umsg.msg + ": " + textValue;
+        umsg.msg = umsg.msg + ': ' + textValue;
         setmsgNumber(umsg);
         // userButtonCallback(umsg);
-        setText("");
+        setText('');
     };
 
-    const decideButtonOrTextInput = umsg => {
-        if (umsg.id === 3 || umsg.id === 5 || umsg.id === 7) {
+    const decideButtonOrTextInput = (umsg, index) => {
+        if (umsg.id === 6) {
             return (
-                <View style={styles.userText}>
-                    <Text>{umsg.display}</Text>
+                <View style={[styles.userText, styles.chatButton]}>
+                    <Text> {umsg.msg}</Text>
                     <TextInput
                         style={styles.textInput}
                         value={textValue}
                         onChangeText={text => setText(text)}
-                        onSubmitEditing={() => savePhoneNumber(umsg)}
+                        // onSubmitEditing={() => savePhoneNumber(umsg)}
                     />
                 </View>
             );
         }
 
+        let color = index > 0 ? styles.submitCon : styles.cancelCon;
+        if (umsg.id === 1) color = styles.skipButton;
+        let colorText = index !== 1 ? styles.buttonText : styles.skipButtonText;
+
         return (
-            <View style={styles.buttonCon}>
-                <TouchableWithoutFeedback
-                    style={styles.userButton}
-                    onPress={() => userButtonCallback(umsg)}>
-                    <Text style={styles.buttonText}>{umsg.display}</Text>
-                </TouchableWithoutFeedback>
-            </View>
+            <TouchableOpacity
+                // style={styles.userButton}
+                style={[styles.chatButton, color]}
+                onPress={() => userButtonCallback(umsg)}>
+                <Text style={colorText}>{umsg.display}</Text>
+            </TouchableOpacity>
         );
     };
 
-    const returnUserMsg = umsg => <>{decideButtonOrTextInput(umsg)}</>;
+    const returnUserMsg = (umsg, index) => (
+        <>{decideButtonOrTextInput(umsg, index)}</>
+    );
 
     return (
         <View
-            style={{
-                flexDirection: "column",
-                padding: 10,
-                // alignItems: "center",
-            }}>
+            style={
+                userMsg[0].id !== 6
+                    ? styles.buttonDefaultCon
+                    : styles.buttonsWithSubmit
+            }>
             {userMsg.map(returnUserMsg)}
         </View>
     );

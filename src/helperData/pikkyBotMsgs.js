@@ -13,23 +13,19 @@ export const onBoardingData = [
     ],
     [
         {
-            msg: `Nice to meet you`,
-            type: msgTypes.PIKKY,
-        },
-        {
-            msg: `How would you like to login?`,
+            msg: `Your details are safe with us. You can read our policy here.`,
             type: msgTypes.PIKKY,
         },
     ],
     [
         {
-            msg: `Successfully logged in!`,
+            msg: `How would you like to sign up?`,
             type: msgTypes.PIKKY,
         },
     ],
     [
         {
-            msg: `Let's get to know you better`,
+            msg: `Can I please have your number? I will send you an OTP to verify.`,
             type: msgTypes.PIKKY,
         },
     ],
