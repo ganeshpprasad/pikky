@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useRef} from 'react';
 import {ScrollView} from 'react-native';
 
 import {styles} from '../styles/onBoardChat';
@@ -13,8 +13,12 @@ const OnBoardChat = ({
     userResponses,
 }) => {
     const userMsg = userResponses[msgNumber] || {msg: 'Next'};
+    let scrollRef = useRef(null);
     return (
-        <ScrollView style={styles.screenCon}>
+        <ScrollView
+            ref={scrollRef}
+            style={styles.screenCon}
+            onContentSizeChange={() => scrollRef.current.scrollToEnd()}>
             <ChatMsgList msgData={msgData} />
             <UserButton
                 userMsg={userMsg}
