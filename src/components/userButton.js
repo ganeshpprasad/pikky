@@ -36,14 +36,15 @@ const UserButton = ({userMsg, componentId, setmsgNumber}) => {
     // };
 
     const decideButtonOrTextInput = (umsg, index) => {
-        if (umsg.id === 6) {
+        if (umsg.id === 6 || umsg.id === 10) {
             return (
                 <View style={[styles.chatButton, styles.userText]}>
-                    <Text> {umsg.msg}</Text>
+                    {umsg.id !== 10 ? <Text> {umsg.msg}</Text> : null}
                     <TextInput
                         style={styles.textInput}
                         value={textValue}
                         onChangeText={text => setText(text)}
+                        placeholder={umsg.id === 10 ? umsg.display : null}
                     />
                 </View>
             );
@@ -51,24 +52,24 @@ const UserButton = ({userMsg, componentId, setmsgNumber}) => {
 
         if (umsg.id === 8) {
             return (
-                <View style={[styles.userText]}>
+                <View style={[styles.otpButtonCon]}>
                     <TextInput
-                        style={styles.chatButton}
+                        style={styles.otpButton}
                         value={'0'}
                         // onChangeText={text => setText(text)}
                     />
                     <TextInput
-                        // style={styles.textInput}
+                        style={styles.otpButton}
                         value={'0'}
                         // onChangeText={text => setText(text)}
                     />
                     <TextInput
-                        // style={styles.textInput}
+                        style={styles.otpButton}
                         value={'0'}
                         // onChangeText={text => setText(text)}
                     />
                     <TextInput
-                        // style={styles.textInput}
+                        style={[styles.otpButton, styles.otpButtonLast]}
                         value={'0'}
                         // onChangeText={text => setText(text)}
                     />
@@ -79,7 +80,10 @@ const UserButton = ({userMsg, componentId, setmsgNumber}) => {
         let color = index > 0 ? styles.submitCon : styles.cancelCon;
         if (umsg.id === 1) color = styles.skipButton;
         let colorText = index !== 1 ? styles.buttonText : styles.skipButtonText;
-        let extraStyle = umsg.id === 7 ? styles.centralButton : null;
+        let extraStyle =
+            umsg.id === 7 || umsg.id === 9 || umsg.id === 11
+                ? styles.centralButton
+                : null;
         return (
             <TouchableOpacity
                 // style={styles.userButton}
@@ -97,9 +101,11 @@ const UserButton = ({userMsg, componentId, setmsgNumber}) => {
     return (
         <View
             style={
-                userMsg[0].id !== 6
-                    ? styles.buttonDefaultCon
-                    : styles.buttonsWithSubmit
+                userMsg[0].id === 6 ||
+                userMsg[0].id === 8 ||
+                userMsg[0].id === 10
+                    ? styles.buttonsWithSubmit
+                    : styles.buttonDefaultCon
             }>
             {userMsg.map(returnUserMsg)}
         </View>

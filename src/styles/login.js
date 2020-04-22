@@ -25,7 +25,7 @@ export const styles = StyleSheet.create({
     chatConFullScreen: {
         backgroundColor: 'rgb(255, 230, 72)',
         flexGrow: 1,
-        height: screenHeight,
+        height: screenHeight - 120,
         paddingTop: 50,
         paddingBottom: 60,
     },

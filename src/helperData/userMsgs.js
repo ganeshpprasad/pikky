@@ -59,18 +59,64 @@ export const userResponses = [
     ],
     [
         {
-            msg: 'Detect Location',
+            msg: '',
             type: msgTypes,
             id: 8,
             display: null,
         },
+        {
+            msg: 'Verified',
+            type: msgTypes,
+            id: 9,
+            display: 'Enter OTP',
+        },
     ],
     [
         {
-            msg: 'Finish',
-            display: 'Finish',
+            msg: 'username',
+            display: '@username',
             type: msgTypes.USER,
-            id: 8,
+            id: 10,
+        },
+        {
+            msg: 'username',
+            display: 'Done',
+            type: msgTypes.USER,
+            id: 11,
+        },
+    ],
+    [
+        {
+            msg: 'username',
+            display: 'FEMALE',
+            type: msgTypes.USER,
+            id: 12,
+        },
+        {
+            msg: 'username',
+            display: 'MALE',
+            type: msgTypes.USER,
+            id: 13,
+        },
+        {
+            msg: 'username',
+            display: 'OTHERS',
+            type: msgTypes.USER,
+            id: 14,
+        },
+    ],
+    [
+        {
+            msg: 'username',
+            display: 'Locate',
+            type: msgTypes.USER,
+            id: 14,
+        },
+        {
+            msg: 'username',
+            display: 'Manual',
+            type: msgTypes.USER,
+            id: 14,
         },
     ],
 ];

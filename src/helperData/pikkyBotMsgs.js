@@ -37,21 +37,23 @@ export const onBoardingData = [
     ],
     [
         {
-            msg: 'Glad to meet you',
+            msg: 'Let’s begin with a username.',
             type: msgTypes.PIKKY,
         },
         {
-            msg: 'Please select your location',
+            msg: 'Verified! I need a few details to assist you better.',
             type: msgTypes.PIKKY,
         },
     ],
     [
         {
-            msg: 'Thanks for signing up',
+            msg: 'Alright @moodyfoody Please select you gender. ',
             type: msgTypes.PIKKY,
         },
+    ],
+    [
         {
-            msg: 'Click next to confirm details',
+            msg: 'Let us locate you to serve from restaurants around.',
             type: msgTypes.PIKKY,
         },
     ],

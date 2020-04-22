@@ -9,11 +9,14 @@ export const styles = StyleSheet.create({
     },
     screenCon: {
         flexGrow: 1,
-        // height: Dimensions.get("window").height - 280,
+        backgroundColor: '#3fa',
+        maxHeight: Dimensions.get('screen').height - 140,
+        margin: 10,
     },
     chatMsgsListCon: {
-        // flexGrow: 1,
-        padding: 10,
+        flexGrow: 1,
+        margin: 10,
+        backgroundColor: '#ef1',
     },
     centralButton: {
         width: '60%',
@@ -125,9 +128,37 @@ export const styles = StyleSheet.create({
         flexDirection: 'row',
         margin: 10,
         justifyContent: 'flex-end',
+        backgroundColor: '#e4e',
     },
     buttonsWithSubmit: {
         flexDirection: 'column',
         margin: 10,
+        backgroundColor: '#4fd',
+    },
+    otpButton: {
+        borderRadius: 15,
+        shadowColor: 'rgb(0,0,0)',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowRadius: 2,
+        shadowOpacity: 0.2,
+        elevation: 4,
+        padding: 10,
+        textAlign: 'center',
+        backgroundColor: '#fff',
+        marginRight: 10,
+    },
+    otpButtonCon: {
+        flexDirection: 'row',
+        marginBottom: 20,
+        marginRight: 20,
+        alignSelf: 'flex-end',
+        //    paddingLeft: 40,
+        //    paddingRight: 40,
+    },
+    otpButtonLast: {
+        borderBottomRightRadius: 0,
     },
 });
