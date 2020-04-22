@@ -36,7 +36,7 @@ const UserButton = ({userMsg, componentId, setmsgNumber}) => {
     // };
 
     const decideButtonOrTextInput = (umsg, index) => {
-        if (umsg.id === 6 || umsg.id === 10) {
+        if (umsg.id === 6 || umsg.id === 10 || umsg.id === 16) {
             return (
                 <View style={[styles.chatButton, styles.userText]}>
                     {umsg.id !== 10 ? <Text> {umsg.msg}</Text> : null}
@@ -81,8 +81,10 @@ const UserButton = ({userMsg, componentId, setmsgNumber}) => {
         if (umsg.id === 1) color = styles.skipButton;
         let colorText = index !== 1 ? styles.buttonText : styles.skipButtonText;
         let extraStyle =
-            umsg.id === 7 || umsg.id === 9 || umsg.id === 11
+            umsg.id === 7 || umsg.id === 9 || umsg.id === 11 || umsg.id === 15
                 ? styles.centralButton
+                : umsg.id === 12 || umsg.id === 13 || umsg.id === 14
+                ? styles.genderButtons
                 : null;
         return (
             <TouchableOpacity
@@ -103,7 +105,8 @@ const UserButton = ({userMsg, componentId, setmsgNumber}) => {
             style={
                 userMsg[0].id === 6 ||
                 userMsg[0].id === 8 ||
-                userMsg[0].id === 10
+                userMsg[0].id === 10 ||
+                userMsg[0].id === 15
                     ? styles.buttonsWithSubmit
                     : styles.buttonDefaultCon
             }>

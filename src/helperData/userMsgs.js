@@ -107,16 +107,16 @@ export const userResponses = [
     ],
     [
         {
-            msg: 'username',
+            msg: 'Locate',
             display: 'Locate',
             type: msgTypes.USER,
-            id: 14,
+            id: 15,
         },
         {
-            msg: 'username',
+            msg: 'Manual',
             display: 'Manual',
             type: msgTypes.USER,
-            id: 14,
+            id: 16,
         },
     ],
 ];

@@ -8,13 +8,14 @@ export const styles = StyleSheet.create({
         textAlign: 'center',
     },
     screenCon: {
-        flexGrow: 1,
+        // flex: 1,
         backgroundColor: '#3fa',
         maxHeight: Dimensions.get('screen').height - 140,
         margin: 10,
+        // justifyContent: 'center',
     },
     chatMsgsListCon: {
-        flexGrow: 1,
+        flexShrink: 1,
         margin: 10,
         backgroundColor: '#ef1',
     },
@@ -30,6 +31,11 @@ export const styles = StyleSheet.create({
         alignSelf: 'flex-end',
         paddingLeft: 40,
         paddingRight: 40,
+    },
+    genderButtons: {
+        paddingLeft: 30,
+        paddingRight: 30,
+        marginRight: 8,
     },
     chatButton: {
         justifyContent: 'center',
@@ -129,11 +135,13 @@ export const styles = StyleSheet.create({
         margin: 10,
         justifyContent: 'flex-end',
         backgroundColor: '#e4e',
+        flexGrow: 1,
     },
     buttonsWithSubmit: {
         flexDirection: 'column',
         margin: 10,
         backgroundColor: '#4fd',
+        flexGrow: 1,
     },
     otpButton: {
         borderRadius: 15,

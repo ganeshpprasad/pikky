@@ -87,7 +87,7 @@ const Login = props => {
 
                     <KeyboardAvoidingView
                         behavior={Platform.Os === 'ios' ? 'padding' : 'padding'}
-                        // keyboardVerticalOffset={40}
+                        keyboardVerticalOffset={150}
                         style={loginFullScreen ? chatConFullScreen : chatCon}>
                         <OnBoardChat
                             msgData={msgData}

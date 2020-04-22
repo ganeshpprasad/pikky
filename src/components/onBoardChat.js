@@ -1,5 +1,5 @@
 import React, {useRef} from 'react';
-import {ScrollView} from 'react-native';
+import {View} from 'react-native';
 
 import {styles} from '../styles/onBoardChat';
 import UserButton from './userButton';
@@ -15,17 +15,14 @@ const OnBoardChat = ({
     const userMsg = userResponses[msgNumber] || {msg: 'Next'};
     let scrollRef = useRef(null);
     return (
-        <ScrollView
-            ref={scrollRef}
-            style={styles.screenCon}
-            onContentSizeChange={() => scrollRef.current.scrollToEnd()}>
+        <View style={styles.screenCon}>
             <ChatMsgList msgData={msgData} />
             <UserButton
                 userMsg={userMsg}
                 componentId={componentId}
                 setmsgNumber={setmsgNumber}
             />
-        </ScrollView>
+        </View>
     );
 };
 
