@@ -80,8 +80,11 @@ export const styles = StyleSheet.create({
     userMsgText: {
         textAlign: 'right',
         color: '#fff',
+        fontFamily: 'OpenSans-Regular',
     },
-    botMsgText: {},
+    botMsgText: {
+        fontFamily: 'OpenSans-Regular',
+    },
     msgText: {
         fontSize: 18,
     },
@@ -137,12 +140,14 @@ export const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 15,
         fontWeight: '500',
+        fontFamily: 'OpenSans-Regular',
     },
     skipButtonText: {
         color: '#111',
         textAlign: 'center',
         fontSize: 15,
         fontWeight: '500',
+        fontFamily: 'OpenSans-Regular',
     },
     textInput: {
         color: '#000',

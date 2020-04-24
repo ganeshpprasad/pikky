@@ -57,8 +57,16 @@ const UserButton = ({userMsg, componentId, setmsgNumber}) => {
                         ref={textRef}
                         autoFocus
                         style={styles.textInput}
-                        value={textValue}
-                        onChangeText={text => setText(text)}
+                        value={
+                            textValue.length > 0 ? '@' + textValue : textValue
+                        }
+                        onChangeText={text => {
+                            const t =
+                                text.indexOf('@') !== -1
+                                    ? text.slice(1, text.length)
+                                    : text;
+                            setText(t);
+                        }}
                         placeholder={
                             umsg.id === 10 || umsg.id === 16
                                 ? umsg.display
