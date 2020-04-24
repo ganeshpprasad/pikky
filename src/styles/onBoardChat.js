@@ -23,19 +23,9 @@ export const styles = StyleSheet.create({
         width: '60%',
         alignSelf: 'center',
     },
-    userText: {
-        backgroundColor: '#fff',
-        flexDirection: 'row',
-        marginBottom: 20,
-        width: '60%',
-        alignSelf: 'flex-end',
-        paddingLeft: 40,
-        paddingRight: 40,
-    },
     genderButtons: {
-        paddingLeft: 30,
-        paddingRight: 30,
-        marginRight: 8,
+        marginRight: 6,
+        flexGrow: 1,
     },
     //
     // User and pikky msgs
@@ -82,6 +72,28 @@ export const styles = StyleSheet.create({
     //
     // User button
     //
+    userText: {
+        backgroundColor: '#fff',
+        flexDirection: 'row',
+        marginBottom: 20,
+        width: '80%',
+        alignSelf: 'flex-end',
+        paddingLeft: 40,
+        paddingRight: 40,
+        height: 50,
+        borderTopRightRadius: 40,
+        borderBottomLeftRadius: 35,
+        borderTopLeftRadius: 35,
+        shadowColor: 'rgb(0,0,0)',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowRadius: 2,
+        shadowOpacity: 0.2,
+        elevation: 4,
+        alignItems: 'center',
+    },
     buttonDefaultCon: {
         flexDirection: 'row',
         margin: 10,
@@ -110,12 +122,8 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         flexGrow: 1,
         maxWidth: '40%',
-        // paddingRight: 60,
-        // paddingLeft: 60,
         height: 50,
-        borderTopRightRadius: 40,
-        borderBottomLeftRadius: 35,
-        borderTopLeftRadius: 35,
+        borderRadius: 40,
         shadowColor: 'rgb(0,0,0)',
         shadowOffset: {
             width: 0,
@@ -173,7 +181,7 @@ export const styles = StyleSheet.create({
         marginBottom: 0,
     },
     locateButton: {
-        // width: '60%',
+        width: '40%',
         alignSelf: 'flex-end',
         flexDirection: 'row',
     },

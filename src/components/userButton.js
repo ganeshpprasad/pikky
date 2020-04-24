@@ -44,12 +44,7 @@ const UserButton = ({userMsg, componentId, setmsgNumber}) => {
                 umsg.id === 16 ? styles.locationTextInput : null;
 
             return (
-                <View
-                    style={[
-                        styles.chatButton,
-                        styles.userText,
-                        extraTextStyle,
-                    ]}>
+                <View style={[styles.userText, extraTextStyle]}>
                     {umsg.id !== 10 && umsg.id !== 16 ? (
                         <Text> {umsg.msg}</Text>
                     ) : null}
@@ -58,7 +53,9 @@ const UserButton = ({userMsg, componentId, setmsgNumber}) => {
                         autoFocus
                         style={styles.textInput}
                         value={
-                            textValue.length > 0 ? '@' + textValue : textValue
+                            textValue.length > 0 && umsg.id === 10
+                                ? '@' + textValue
+                                : textValue
                         }
                         onChangeText={text => {
                             const t =

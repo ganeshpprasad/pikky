@@ -4,7 +4,7 @@ import {View, TextInput} from 'react-native';
 import {styles} from '../styles/onBoardChat';
 
 const OTPbuttons = () => {
-    const [otp, setOtp] = useState(['', '', '', '']);
+    const [otp, setOtp] = useState([]);
     const ref1 = useRef(null);
     const ref2 = useRef(null);
     const ref3 = useRef(null);
@@ -35,26 +35,21 @@ const OTPbuttons = () => {
         prevRef && prevRef.current.focus();
     };
 
-    const focusOnNextText = () => {
+    const focusOnNextText = pos => {
         const ref =
-            otp.length === 0
-                ? ref2
-                : otp.length === 1
-                ? ref3
-                : otp.length === 2
-                ? ref4
-                : null;
+            pos === 0 ? ref2 : pos === 1 ? ref3 : pos === 2 ? ref4 : null;
         ref && ref.current.focus();
     };
 
     const setOtpInPos = (pos, num) => {
         const charCode = num.charCodeAt(0);
         if (charCode > 47 && charCode < 58) {
-            console.log('asdf');
-            focusOnNextText();
+            focusOnNextText(pos);
             const newArr = otp;
             newArr[pos] = num;
+            console.log('asdf 1', num);
             setOtp(newArr);
+            console.log('asdf', num);
         }
     };
     console.log('otp', otp);
