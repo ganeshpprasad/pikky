@@ -83,7 +83,7 @@ const UserButton = ({userMsg, componentId, setmsgNumber}) => {
 
         let color = index > 0 ? styles.submitCon : styles.cancelCon;
         if (umsg.id === 1) color = styles.skipButton;
-        let colorText = index !== 1 ? styles.buttonText : styles.skipButtonText;
+
         let extraStyle =
             umsg.id === 7 || umsg.id === 9 || umsg.id === 11
                 ? styles.centralButton
@@ -104,7 +104,7 @@ const UserButton = ({userMsg, componentId, setmsgNumber}) => {
                         resizeMode="contain"
                     />
                 ) : null}
-                <Text style={colorText}>{umsg.display}</Text>
+                <Text style={styles.buttonText}>{umsg.display}</Text>
             </TouchableOpacity>
         );
     };

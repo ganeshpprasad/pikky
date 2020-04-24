@@ -82,7 +82,7 @@ const Login = props => {
 
                     <KeyboardAvoidingView
                         behavior={Platform.Os === 'ios' ? 'padding' : 'padding'}
-                        keyboardVerticalOffset={150}
+                        keyboardVerticalOffset={220}
                         style={loginFullScreen ? chatConFullScreen : chatCon}>
                         {loginFullScreen ? (
                             <View

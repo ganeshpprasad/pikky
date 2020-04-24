@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
     screenCon: {
         // flex: 1,
         backgroundColor: '#3fa',
-        maxHeight: Dimensions.get('screen').height - 160,
+        maxHeight: Dimensions.get('screen').height - 150,
         margin: 10,
         // justifyContent: 'center',
     },
@@ -37,12 +37,12 @@ export const styles = StyleSheet.create({
         paddingRight: 30,
         marginRight: 8,
     },
+    //
+    // User and pikky msgs
+    //
     msgCon: {
         padding: 20,
         margin: 20,
-        borderTopRightRadius: 35,
-        borderBottomLeftRadius: 40,
-        borderBottomRightRadius: 35,
         shadowColor: 'rgb(0,0,0)',
         shadowOffset: {
             width: 0,
@@ -54,24 +54,15 @@ export const styles = StyleSheet.create({
     },
     pikkyMsgCon: {
         backgroundColor: '#fff',
+        borderTopRightRadius: 35,
+        borderBottomLeftRadius: 40,
+        borderBottomRightRadius: 35,
     },
     userMsgCon: {
         backgroundColor: '#49dfc4',
-        // padding: 15,
-        // paddingLeft: 40,
-        // paddingRight: 40,
-        height: 50,
         borderTopRightRadius: 40,
         borderBottomLeftRadius: 35,
         borderTopLeftRadius: 35,
-        shadowColor: 'rgb(0,0,0)',
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowRadius: 2,
-        shadowOpacity: 0.2,
-        elevation: 4,
         alignSelf: 'flex-end',
     },
     userMsgConCancel: {
@@ -136,13 +127,6 @@ export const styles = StyleSheet.create({
         // marginRight: 20,
     },
     buttonText: {
-        color: '#111',
-        textAlign: 'center',
-        fontSize: 15,
-        fontWeight: '500',
-        fontFamily: 'OpenSans-Regular',
-    },
-    skipButtonText: {
         color: '#111',
         textAlign: 'center',
         fontSize: 15,
