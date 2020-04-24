@@ -39,11 +39,6 @@ const Login = props => {
         !loginFullScreen ? setLoginFullScreen(true) : null;
     }
 
-    const config = {
-        velocityThreshold: 0.3,
-        directionalOffsetThreshold: 80,
-    };
-
     return (
         <>
             <StatusBar barStyle="light-content" />

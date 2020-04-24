@@ -1,4 +1,4 @@
-import {useState, useEffect} from "react";
+import {useState, useEffect} from 'react';
 
 export const useOnBoardChat = onBoardingData => {
     const [msgNumber, setmsgNumber] = useState(0);
@@ -11,9 +11,7 @@ export const useOnBoardChat = onBoardingData => {
 
     const setUserMsgNumber = userMsg => {
         setMsgData(msgs => [[userMsg], ...msgs]);
-        setTimeout(() => {
-            setmsgNumber(msgNumber => msgNumber + 1);
-        }, 500);
+        setmsgNumber(_msgNumber => _msgNumber + 1);
     };
 
     return {

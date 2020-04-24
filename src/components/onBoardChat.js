@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React from 'react';
 import {View} from 'react-native';
 
 import {styles} from '../styles/onBoardChat';
@@ -13,7 +13,6 @@ const OnBoardChat = ({
     userResponses,
 }) => {
     const userMsg = userResponses[msgNumber] || {msg: 'Next'};
-    let scrollRef = useRef(null);
     return (
         <View style={styles.screenCon}>
             <ChatMsgList msgData={msgData} />

@@ -114,7 +114,7 @@ export const userResponses = [
         },
         {
             msg: 'Manual',
-            display: 'Manual',
+            display: 'Enter manually',
             type: msgTypes.USER,
             id: 16,
         },

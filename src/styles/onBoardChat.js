@@ -27,7 +27,7 @@ export const styles = StyleSheet.create({
         backgroundColor: '#fff',
         flexDirection: 'row',
         marginBottom: 20,
-        width: '80%',
+        width: '60%',
         alignSelf: 'flex-end',
         paddingLeft: 40,
         paddingRight: 40,
@@ -168,5 +168,14 @@ export const styles = StyleSheet.create({
     },
     otpButtonLast: {
         borderBottomRightRadius: 0,
+    },
+    locationTextInput: {
+        marginTop: 20,
+        marginBottom: 0,
+    },
+    locateButton: {
+        // width: '60%',
+        alignSelf: 'flex-end',
+        flexDirection: 'row',
     },
 });
