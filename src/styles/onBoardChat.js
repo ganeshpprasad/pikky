@@ -10,7 +10,7 @@ export const styles = StyleSheet.create({
     screenCon: {
         // flex: 1,
         backgroundColor: '#3fa',
-        maxHeight: Dimensions.get('screen').height - 140,
+        maxHeight: Dimensions.get('screen').height - 160,
         margin: 10,
         // justifyContent: 'center',
     },
@@ -37,37 +37,7 @@ export const styles = StyleSheet.create({
         paddingRight: 30,
         marginRight: 8,
     },
-    chatButton: {
-        justifyContent: 'center',
-        alignItems: 'center',
-        paddingLeft: 60,
-        paddingRight: 60,
-        height: 50,
-        borderTopRightRadius: 40,
-        borderBottomLeftRadius: 35,
-        borderTopLeftRadius: 35,
-        shadowColor: 'rgb(0,0,0)',
-        shadowOffset: {
-            width: 0,
-            height: 2,
-        },
-        shadowRadius: 2,
-        shadowOpacity: 0.2,
-        elevation: 4,
-        marginRight: 20,
-    },
-    skipButton: {
-        backgroundColor: '#ff7366',
-    },
-    cancelCon: {
-        backgroundColor: '#fff',
-    },
-    submitCon: {
-        backgroundColor: '#49dfc4',
-    },
     msgCon: {
-        backgroundColor: '#fff',
-        // width: '50%',
         padding: 20,
         margin: 20,
         borderTopRightRadius: 35,
@@ -82,11 +52,14 @@ export const styles = StyleSheet.create({
         shadowOpacity: 0.2,
         elevation: 4,
     },
+    pikkyMsgCon: {
+        backgroundColor: '#fff',
+    },
     userMsgCon: {
         backgroundColor: '#49dfc4',
-        padding: 15,
-        paddingLeft: 40,
-        paddingRight: 40,
+        // padding: 15,
+        // paddingLeft: 40,
+        // paddingRight: 40,
         height: 50,
         borderTopRightRadius: 40,
         borderBottomLeftRadius: 35,
@@ -112,6 +85,53 @@ export const styles = StyleSheet.create({
     msgText: {
         fontSize: 18,
     },
+    //
+    // User button
+    //
+    buttonDefaultCon: {
+        flexDirection: 'row',
+        margin: 10,
+        padding: 20,
+        justifyContent: 'space-between',
+        backgroundColor: '#e4e',
+        flexGrow: 1,
+    },
+    buttonsWithSubmit: {
+        flexDirection: 'column',
+        margin: 10,
+        backgroundColor: '#4fd',
+        flexGrow: 1,
+    },
+    skipButton: {
+        backgroundColor: '#ff7366',
+    },
+    cancelCon: {
+        backgroundColor: '#fff',
+    },
+    submitCon: {
+        backgroundColor: '#49dfc4',
+    },
+    chatButton: {
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexGrow: 1,
+        maxWidth: '40%',
+        // paddingRight: 60,
+        // paddingLeft: 60,
+        height: 50,
+        borderTopRightRadius: 40,
+        borderBottomLeftRadius: 35,
+        borderTopLeftRadius: 35,
+        shadowColor: 'rgb(0,0,0)',
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowRadius: 2,
+        shadowOpacity: 0.2,
+        elevation: 4,
+        // marginRight: 20,
+    },
     buttonText: {
         color: '#111',
         textAlign: 'center',
@@ -130,19 +150,9 @@ export const styles = StyleSheet.create({
         padding: 0,
         flexGrow: 1,
     },
-    buttonDefaultCon: {
-        flexDirection: 'row',
-        margin: 10,
-        justifyContent: 'flex-end',
-        backgroundColor: '#e4e',
-        flexGrow: 1,
-    },
-    buttonsWithSubmit: {
-        flexDirection: 'column',
-        margin: 10,
-        backgroundColor: '#4fd',
-        flexGrow: 1,
-    },
+    //
+    // OTP C
+    //
     otpButton: {
         borderRadius: 15,
         shadowColor: 'rgb(0,0,0)',

@@ -84,6 +84,23 @@ const Login = props => {
                         behavior={Platform.Os === 'ios' ? 'padding' : 'padding'}
                         keyboardVerticalOffset={150}
                         style={loginFullScreen ? chatConFullScreen : chatCon}>
+                        {loginFullScreen ? (
+                            <View
+                                style={{
+                                    flexDirection: 'row',
+                                    justifyContent: 'space-between',
+                                    margin: 10,
+                                }}>
+                                <Image
+                                    source={require('../assets/onBoarding/chatPikkyIcon3.png')}
+                                    resizeMode="contain"
+                                />
+                                <Image
+                                    source={require('../assets/onBoarding/question3.png')}
+                                    resizeMode="contain"
+                                />
+                            </View>
+                        ) : null}
                         <OnBoardChat
                             msgData={msgData}
                             setmsgNumber={setUserMsgNumber}

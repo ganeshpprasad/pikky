@@ -26,7 +26,7 @@ export const styles = StyleSheet.create({
         backgroundColor: 'rgb(255, 230, 72)',
         flexGrow: 1,
         height: screenHeight - 120,
-        paddingTop: 50,
+        // paddingTop: 50,
         paddingBottom: 60,
     },
 });
