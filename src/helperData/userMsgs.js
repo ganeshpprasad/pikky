@@ -49,6 +49,8 @@ export const userResponses = [
             id: 6,
             type: msgTypes.USER,
             display: null,
+            isSubmit: true,
+            isTextInput: true,
         },
         {
             msg: 'OTP',
@@ -63,6 +65,7 @@ export const userResponses = [
             type: msgTypes,
             id: 8,
             display: null,
+            isSubmit: true,
         },
         {
             msg: 'Verified',
@@ -77,6 +80,8 @@ export const userResponses = [
             display: '@username',
             type: msgTypes.USER,
             id: 10,
+            isSubmit: true,
+            isTextInput: true,
         },
         {
             msg: 'username',
@@ -111,12 +116,14 @@ export const userResponses = [
             display: 'Locate',
             type: msgTypes.USER,
             id: 15,
+            isSubmit: true,
         },
         {
             msg: 'Manual',
             display: 'Enter manually',
             type: msgTypes.USER,
             id: 16,
+            isTextInput: true,
         },
     ],
 ];

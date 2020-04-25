@@ -66,6 +66,7 @@ const OTPbuttons = () => {
                 onKeyPress={e => handleKeyPress(0, e)}
                 onChangeText={text => setOtpInPos(0, text)}
                 ref={ref1}
+                keyboardType={'numeric'}
             />
             <TextInput
                 maxLength={1}
@@ -74,6 +75,7 @@ const OTPbuttons = () => {
                 onKeyPress={e => handleKeyPress(1, e)}
                 onChangeText={text => setOtpInPos(1, text)}
                 ref={ref2}
+                keyboardType={'numeric'}
             />
             <TextInput
                 maxLength={1}
@@ -82,6 +84,7 @@ const OTPbuttons = () => {
                 onKeyPress={e => handleKeyPress(2, e)}
                 onChangeText={text => setOtpInPos(2, text)}
                 ref={ref3}
+                keyboardType={'numeric'}
             />
             <TextInput
                 maxLength={1}
@@ -90,6 +93,7 @@ const OTPbuttons = () => {
                 onKeyPress={e => handleKeyPress(3, e)}
                 onChangeText={text => setOtpInPos(3, text)}
                 ref={ref4}
+                keyboardType={'numeric'}
             />
         </View>
     );
