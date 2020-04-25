@@ -5,6 +5,7 @@ import {
     GoogleSigninButton,
     statusCodes,
 } from '@react-native-community/google-signin';
+import GetLocation from 'react-native-get-location';
 
 GoogleSignin.configure({
     // scopes: ['https://www.googleapis.com/auth/drive.readonly'], // what API you want to access on behalf of the user, default is email and profile
@@ -28,6 +29,7 @@ import OTPbuttons from './OTPbuttons';
 const UserButton = ({userMsg, componentId, setmsgNumber}) => {
     const [textValue, setText] = useState('');
     const [isError, setError] = useState(false);
+    const [location, setLocation] = useState(null);
     const textRef = useRef(null);
 
     // const navigateToNext = () => {
@@ -60,9 +62,12 @@ const UserButton = ({userMsg, componentId, setmsgNumber}) => {
             setError(true);
             return;
         }
-        console.log('no issuse', textValue);
-        setmsgNumber(umsg);
-        setText('');
+        if (umsg.id === 15) {
+            getLocation();
+        } else {
+            setmsgNumber(umsg);
+            setText('');
+        }
     };
 
     // const savePhoneNumber = umsg => {
@@ -89,6 +94,15 @@ const UserButton = ({userMsg, componentId, setmsgNumber}) => {
                 // some other error happened
             }
         }
+    };
+
+    const getLocation = async () => {
+        const location = await GetLocation.getCurrentPosition({
+            enableHighAccuracy: true,
+            timeout: 15000,
+        });
+
+        console.log('loc', location);
     };
 
     const decideButtonOrTextInput = (umsg, index) => {

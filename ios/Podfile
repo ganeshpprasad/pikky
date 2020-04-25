@@ -56,6 +56,8 @@ target 'pikkyOnboard' do
 
   pod 'RNGoogleSignin', :path => '../node_modules/@react-native-community/google-signin'
 
+  pod 'ReactNativeGetLocation', :path => '../node_modules/react-native-get-location'
+
   target 'pikkyOnboardTests' do
     inherit! :complete
     # Pods for testing
