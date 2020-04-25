@@ -4,7 +4,7 @@ import {View, Image, Text, TouchableOpacity, TextInput} from 'react-native';
 // import {View} from "react-native-animatable";
 
 // import {NAMES, USER_ACCCOUNT} from '../screens/constants';
-import {styles} from '../styles/onBoardChat';
+import {styles} from '../styles/userButtonStyle';
 import OTPbuttons from './OTPbuttons';
 
 const UserButton = ({userMsg, componentId, setmsgNumber}) => {
@@ -90,19 +90,26 @@ const UserButton = ({userMsg, componentId, setmsgNumber}) => {
                 ? styles.locateButton
                 : null;
         return (
-            <TouchableOpacity
-                // style={styles.userButton}
-                style={[styles.chatButton, color, extraStyle]}
-                onPress={() => userButtonCallback(umsg)}>
-                {umsg.id === 15 ? (
-                    <Image
-                        source={require('../assets/onBoarding/locpin3.png')}
-                        style={{paddingRight: 30}}
-                        resizeMode="contain"
-                    />
+            <>
+                <TouchableOpacity
+                    // style={styles.userButton}
+                    style={[styles.chatButton, color, extraStyle]}
+                    onPress={() => userButtonCallback(umsg)}>
+                    {umsg.id === 15 ? (
+                        <Image
+                            source={require('../assets/onBoarding/locpin3.png')}
+                            style={{paddingRight: 30}}
+                            resizeMode="contain"
+                        />
+                    ) : null}
+                    <Text style={styles.buttonText}>{umsg.display}</Text>
+                </TouchableOpacity>
+                {false ? (
+                    <Text style={styles.errorMsgTxt}>
+                        {'Username not available'}
+                    </Text>
                 ) : null}
-                <Text style={styles.buttonText}>{umsg.display}</Text>
-            </TouchableOpacity>
+            </>
         );
     };
 

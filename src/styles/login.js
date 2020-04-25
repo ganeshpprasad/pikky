@@ -5,6 +5,11 @@ export const styles = StyleSheet.create({
     loginCon: {
         height: screenHeight,
     },
+    topbar: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        margin: 10,
+    },
     brandingCon: {
         flexGrow: 1,
         alignItems: 'center',

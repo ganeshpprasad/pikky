@@ -1,7 +1,7 @@
 import React, {useState, useRef} from 'react';
 import {View, TextInput} from 'react-native';
 
-import {styles} from '../styles/onBoardChat';
+import {styles} from '../styles/otpButtonStyle';
 
 const OTPbuttons = () => {
     const [otp, setOtp] = useState([]);
@@ -13,9 +13,13 @@ const OTPbuttons = () => {
     const handleKeyPress = (pos, e) => {
         const {key} = e.nativeEvent;
         if (key === 'Backspace') {
-            focusOnPrevText(pos + 1);
-            const newOtp = otp;
-            newOtp[pos] = '';
+            const newOtp = [...otp];
+            if (otp[pos] === undefined) {
+                focusOnPrevText(pos + 1);
+                newOtp[pos - 1] = undefined;
+            } else {
+                newOtp[pos] = undefined;
+            }
             setOtp(newOtp);
             console.log('pre');
         }
@@ -45,11 +49,9 @@ const OTPbuttons = () => {
         const charCode = num.charCodeAt(0);
         if (charCode > 47 && charCode < 58) {
             focusOnNextText(pos);
-            const newArr = otp;
+            const newArr = [...otp];
             newArr[pos] = num;
-            console.log('asdf 1', num);
             setOtp(newArr);
-            console.log('asdf', num);
         }
     };
     console.log('otp', otp);

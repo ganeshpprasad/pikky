@@ -1,8 +1,8 @@
 import React from 'react';
 import {View, Text, FlatList} from 'react-native';
-import * as Animatable from 'react-native-animatable';
+// import * as Animatable from 'react-native-animatable';
 
-import {styles} from '../styles/onBoardChat';
+import {styles} from '../styles/chatMsgListStyle';
 import {msgTypes} from '../helperData/pikkyBotMsgs';
 
 const {

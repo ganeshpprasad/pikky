@@ -27,6 +27,7 @@ const {
     loginCon,
     brandingConHidden,
     chatConFullScreen,
+    topbar,
 } = styles;
 
 const Login = props => {
@@ -85,12 +86,7 @@ const Login = props => {
                         keyboardVerticalOffset={220}
                         style={loginFullScreen ? chatConFullScreen : chatCon}>
                         {loginFullScreen ? (
-                            <View
-                                style={{
-                                    flexDirection: 'row',
-                                    justifyContent: 'space-between',
-                                    margin: 10,
-                                }}>
+                            <View style={topbar}>
                                 <Image
                                     source={require('../assets/onBoarding/chatPikkyIcon3.png')}
                                     resizeMode="contain"
