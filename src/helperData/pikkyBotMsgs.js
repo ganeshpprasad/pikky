@@ -1,60 +1,59 @@
 export const msgTypes = {
-    USER: "user",
-    PIKKY: "pikky",
+    USER: 'user',
+    PIKKY: 'pikky',
 };
 
 export const onBoardingData = [
     [
         {
-            msg: "Hello. I'm Pikky. Your personal food connoisseur",
+            msg:
+                'Go ahead, tell me a little about yourself and your food preferences.',
             type: msgTypes.PIKKY,
         },
     ],
     [
         {
-            msg: `Nice to meet you`,
-            type: msgTypes.PIKKY,
-        },
-        {
-            msg: `How would you like to login?`,
+            msg: `Your details are safe with us. You can read our policy here.`,
             type: msgTypes.PIKKY,
         },
     ],
     [
         {
-            msg: `Successfully logged in!`,
+            msg: `How would you like to sign up?`,
             type: msgTypes.PIKKY,
         },
     ],
     [
         {
-            msg: `Let's get to know you better`,
+            msg: `Can I please have your number? I will send you an OTP to verify.`,
             type: msgTypes.PIKKY,
         },
     ],
     [
         {
-            msg: "Please enter your name",
+            msg: 'Please type the verification code sent to',
             type: msgTypes.PIKKY,
         },
     ],
     [
         {
-            msg: "Glad to meet you",
+            msg: 'Let’s begin with a username.',
             type: msgTypes.PIKKY,
         },
         {
-            msg: "Please select your location",
+            msg: 'Verified! I need a few details to assist you better.',
             type: msgTypes.PIKKY,
         },
     ],
     [
         {
-            msg: "Thanks for signing up",
+            msg: 'Alright @moodyfoody Please select you gender. ',
             type: msgTypes.PIKKY,
         },
+    ],
+    [
         {
-            msg: "Click next to confirm details",
+            msg: 'Let us locate you to serve from restaurants around.',
             type: msgTypes.PIKKY,
         },
     ],
@@ -63,27 +62,27 @@ export const onBoardingData = [
 export const nameData = [
     [
         {
-            msg: "Please enter your name",
+            msg: 'Please enter your name',
             type: msgTypes.PIKKY,
         },
     ],
     [
         {
-            msg: "Glad to meet you",
+            msg: 'Glad to meet you',
             type: msgTypes.PIKKY,
         },
         {
-            msg: "Please select your location",
+            msg: 'Please select your location',
             type: msgTypes.PIKKY,
         },
     ],
     [
         {
-            msg: "Thanks for signing up",
+            msg: 'Thanks for signing up',
             type: msgTypes.PIKKY,
         },
         {
-            msg: "Click next to confirm details",
+            msg: 'Click next to confirm details',
             type: msgTypes.PIKKY,
         },
     ],

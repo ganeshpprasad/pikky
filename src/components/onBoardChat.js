@@ -1,9 +1,9 @@
-import React from "react";
-import {View} from "react-native";
+import React from 'react';
+import {View} from 'react-native';
 
-import {styles} from "../styles/onBoardChat";
-import UserButton from "./userButton";
-import ChatMsgList from "./chatMsgList";
+import {styles} from '../styles/onBoardChat';
+import UserButton from './userButton';
+import ChatMsgList from './chatMsgList';
 
 const OnBoardChat = ({
     msgData,
@@ -12,7 +12,7 @@ const OnBoardChat = ({
     componentId,
     userResponses,
 }) => {
-    const userMsg = userResponses[msgNumber] || {msg: "Next"};
+    const userMsg = userResponses[msgNumber] || {msg: 'Next'};
     return (
         <View style={styles.screenCon}>
             <ChatMsgList msgData={msgData} />

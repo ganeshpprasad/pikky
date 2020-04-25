@@ -1,64 +1,122 @@
-import {msgTypes} from "./pikkyBotMsgs";
+import {msgTypes} from './pikkyBotMsgs';
 
 export const userResponses = [
     [
         {
-            msg: "Hi, Pikky",
+            msg: 'Skip',
             type: msgTypes,
             id: 1,
-            display: "Hi, Pikky",
+            display: 'Skip',
+        },
+        {
+            msg: 'Sign Up',
+            type: msgTypes,
+            id: 1.5,
+            display: 'Sign Up',
         },
     ],
     [
         {
-            msg: "Logged in using Gmail",
+            msg: 'Read',
             type: msgTypes,
             id: 2,
-            display: "GMail",
+            display: 'Read',
         },
         {
-            msg: "Logged in using Phone Number",
+            msg: 'Accept',
             type: msgTypes,
-            display: "Phone number",
             id: 3,
+            display: 'Accept',
         },
     ],
     [
         {
-            msg: "Lets do it",
+            msg: 'Social',
             type: msgTypes,
             id: 4,
-            display: "Next",
+            display: 'Social',
         },
-    ],
-    [
         {
-            id: 5,
-            type: msgTypes.USER,
-            msg: "User Name",
-            display: "User Name",
-        },
-    ],
-    [
-        {
-            msg: "Detect Location",
+            msg: 'Phone',
             type: msgTypes,
+            id: 5,
+            display: 'Phone',
+        },
+    ],
+    [
+        {
+            msg: '91+ ',
             id: 6,
-            display: "Detect Location",
+            type: msgTypes.USER,
+            display: null,
         },
         {
-            msg: "Saved location",
+            msg: 'OTP',
             type: msgTypes,
             id: 7,
-            display: "Enter Manually",
+            display: 'OTP',
         },
     ],
     [
         {
-            msg: "Finish",
-            display: "Finish",
-            type: msgTypes.USER,
+            msg: '',
+            type: msgTypes,
             id: 8,
+            display: null,
+        },
+        {
+            msg: 'Verified',
+            type: msgTypes,
+            id: 9,
+            display: 'Enter OTP',
+        },
+    ],
+    [
+        {
+            msg: 'username',
+            display: '@username',
+            type: msgTypes.USER,
+            id: 10,
+        },
+        {
+            msg: 'username',
+            display: 'Done',
+            type: msgTypes.USER,
+            id: 11,
+        },
+    ],
+    [
+        {
+            msg: 'username',
+            display: 'FEMALE',
+            type: msgTypes.USER,
+            id: 12,
+        },
+        {
+            msg: 'username',
+            display: 'MALE',
+            type: msgTypes.USER,
+            id: 13,
+        },
+        {
+            msg: 'username',
+            display: 'OTHERS',
+            type: msgTypes.USER,
+            id: 14,
+        },
+    ],
+    [
+        {
+            msg: 'Locate',
+            display: 'Locate',
+            type: msgTypes.USER,
+            id: 15,
+        },
+        {
+            msg: 'Manual',
+            display: 'Enter manually',
+            type: msgTypes.USER,
+            id: 16,
         },
     ],
 ];
@@ -68,28 +126,28 @@ export const nameResponses = [
         {
             id: 5,
             type: msgTypes.USER,
-            msg: "User Name",
-            display: "User Name",
+            msg: 'User Name',
+            display: 'User Name',
         },
     ],
     [
         {
-            msg: "Detect Location",
+            msg: 'Detect Location',
             type: msgTypes,
             id: 6,
-            display: "Detect Location",
+            display: 'Detect Location',
         },
         {
-            msg: "Saved location",
+            msg: 'Saved location',
             type: msgTypes,
             id: 7,
-            display: "Enter Manually",
+            display: 'Enter Manually',
         },
     ],
     [
         {
-            msg: "Finish",
-            display: "Finish",
+            msg: 'Finish',
+            display: 'Finish',
             type: msgTypes.USER,
             id: 8,
         },

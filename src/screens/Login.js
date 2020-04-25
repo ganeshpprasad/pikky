@@ -1,50 +1,112 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
+ * Landing screen if the user is not logged in.
  */
 
-import React from "react";
+import React, {useState} from 'react';
 import {
     SafeAreaView,
     KeyboardAvoidingView,
     Platform,
-    Text,
+    Image,
     StatusBar,
-} from "react-native";
+    View,
+} from 'react-native';
 
-import OnBoardChat from "../components/onBoardChat";
-import {onBoardingData} from "../helperData/pikkyBotMsgs";
-import {userResponses} from "../helperData/userMsgs";
-import {useOnBoardChat} from "../effects/onBoardChat";
-import {styles} from "../styles/onBoardChat";
+import OnBoardChat from '../components/onBoardChat';
+import {onBoardingData} from '../helperData/pikkyBotMsgs';
+import {userResponses} from '../helperData/userMsgs';
+import {useOnBoardChat} from '../effects/onBoardChat';
+import {styles} from '../styles/login';
+
+const {
+    pikkyImage,
+    pikkySignal,
+    chatCon,
+    shadowOfPikky,
+    brandingCon,
+    loginCon,
+    brandingConHidden,
+    chatConFullScreen,
+    topbar,
+} = styles;
 
 const Login = props => {
     const {msgData, setUserMsgNumber, msgNumber} = useOnBoardChat(
         onBoardingData,
     );
+    const [loginFullScreen, setLoginFullScreen] = useState(false);
+
+    if (msgNumber > 0) {
+        !loginFullScreen ? setLoginFullScreen(true) : null;
+    }
 
     return (
         <>
             <StatusBar barStyle="light-content" />
-            <KeyboardAvoidingView
-                behavior={Platform.Os == "ios" ? "padding" : "position"}
-                style={{flex: 1}}>
-                <SafeAreaView>
-                    <Text style={styles.mainTitle}>
-                        Let's get to know each other
-                    </Text>
-                    <OnBoardChat
-                        msgData={msgData}
-                        setmsgNumber={setUserMsgNumber}
-                        msgNumber={msgNumber}
-                        componentId={props.componentId}
-                        userResponses={userResponses}
-                    />
-                </SafeAreaView>
-            </KeyboardAvoidingView>
+            <SafeAreaView>
+                <View style={loginCon}>
+                    <View
+                        style={
+                            loginFullScreen ? brandingConHidden : brandingCon
+                        }>
+                        <Image
+                            source={require('../assets/onBoarding/43x.png')}
+                            style={pikkySignal}
+                            resizeMode="contain"
+                        />
+                        <Image
+                            source={require('../assets/onBoarding/33x.png')}
+                            style={pikkySignal}
+                            resizeMode="contain"
+                        />
+                        <Image
+                            source={require('../assets/onBoarding/23x.png')}
+                            style={pikkySignal}
+                            resizeMode="contain"
+                        />
+                        <Image
+                            source={require('../assets/onBoarding/13x.png')}
+                            style={pikkySignal}
+                            resizeMode="contain"
+                        />
+                        <Image
+                            source={require('../assets/onBoarding/logo2x.png')}
+                            style={pikkyImage}
+                            resizeMode="contain"
+                        />
+                        <Image
+                            source={require('../assets/onBoarding/shad3x.png')}
+                            style={shadowOfPikky}
+                            resizeMode="contain"
+                        />
+                    </View>
+
+                    <KeyboardAvoidingView
+                        behavior={Platform.Os === 'ios' ? 'padding' : 'padding'}
+                        keyboardVerticalOffset={220}
+                        style={loginFullScreen ? chatConFullScreen : chatCon}>
+                        {loginFullScreen ? (
+                            <View style={topbar}>
+                                <Image
+                                    source={require('../assets/onBoarding/chatPikkyIcon3.png')}
+                                    resizeMode="contain"
+                                />
+                                <Image
+                                    source={require('../assets/onBoarding/question3.png')}
+                                    resizeMode="contain"
+                                />
+                            </View>
+                        ) : null}
+                        <OnBoardChat
+                            msgData={msgData}
+                            setmsgNumber={setUserMsgNumber}
+                            msgNumber={msgNumber}
+                            componentId={props.componentId}
+                            userResponses={userResponses}
+                        />
+                    </KeyboardAvoidingView>
+                </View>
+            </SafeAreaView>
         </>
     );
 };
