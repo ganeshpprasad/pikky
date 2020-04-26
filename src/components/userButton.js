@@ -51,7 +51,7 @@ const UserButton = ({userMsg, componentId, setmsgNumber}) => {
         // const _id = umsg.id;
         // _id === 8 ? navigateToNext(_id) :
 
-        if (umsg.id === 15) {
+        if (umsg.id === 1.5) {
             navigateToNext();
         }
 

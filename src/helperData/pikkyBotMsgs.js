@@ -58,32 +58,3 @@ export const onBoardingData = [
         },
     ],
 ];
-
-export const nameData = [
-    [
-        {
-            msg: 'Please enter your name',
-            type: msgTypes.PIKKY,
-        },
-    ],
-    [
-        {
-            msg: 'Glad to meet you',
-            type: msgTypes.PIKKY,
-        },
-        {
-            msg: 'Please select your location',
-            type: msgTypes.PIKKY,
-        },
-    ],
-    [
-        {
-            msg: 'Thanks for signing up',
-            type: msgTypes.PIKKY,
-        },
-        {
-            msg: 'Click next to confirm details',
-            type: msgTypes.PIKKY,
-        },
-    ],
-];
