@@ -1,12 +1,16 @@
 import React, {useState, useRef} from 'react';
-import {View, Image, Text, TouchableOpacity, TextInput} from 'react-native';
 import {
-    GoogleSignin,
-    GoogleSigninButton,
-    statusCodes,
-} from '@react-native-community/google-signin';
+    View,
+    Image,
+    Text,
+    TouchableOpacity,
+    TextInput,
+    FlatList,
+} from 'react-native';
+import {GoogleSignin, statusCodes} from '@react-native-community/google-signin';
 import GetLocation from 'react-native-get-location';
 import RNGooglePlaces from 'react-native-google-places';
+import {debounce} from 'lodash';
 
 GoogleSignin.configure({
     // scopes: ['https://www.googleapis.com/auth/drive.readonly'], // what API you want to access on behalf of the user, default is email and profile
@@ -30,8 +34,29 @@ import OTPbuttons from './OTPbuttons';
 const UserButton = ({userMsg, componentId, setmsgNumber}) => {
     const [textValue, setText] = useState('');
     const [isError, setError] = useState(false);
-    const [location, setLocation] = useState(null);
+    const [locations, setLocation] = useState([]);
     const textRef = useRef(null);
+
+    const LocationItem = ({item}) => (
+        <View key={item.placeID} style={{padding: 6, marginBottom: 6}}>
+            <Text style={{fontFamily: 'OpenSans-Regular', fontSize: 15}}>
+                {item.primaryText}
+            </Text>
+        </View>
+    );
+
+    const LocationSelection = () => {
+        if (locations.length < 0) {
+            return null;
+        }
+        return (
+            <FlatList
+                style={{backgroundColor: '#fff', padding: 10}}
+                data={locations}
+                renderItem={LocationItem}
+            />
+        );
+    };
 
     const navigateToNext = () => {
         Navigation.push(componentId, {
@@ -51,8 +76,12 @@ const UserButton = ({userMsg, componentId, setmsgNumber}) => {
         // const _id = umsg.id;
         // _id === 8 ? navigateToNext(_id) :
 
-        if (umsg.id === 1.5) {
+        if (umsg.id === 15) {
             navigateToNext();
+        }
+
+        if (umsg.id === 4) {
+            return signIn(umsg);
         }
 
         setError(false);
@@ -81,14 +110,15 @@ const UserButton = ({userMsg, componentId, setmsgNumber}) => {
     //     setText('');
     // };
 
-    const signIn = async () => {
+    const signIn = async umsg => {
         try {
             await GoogleSignin.hasPlayServices();
             const userInfo = await GoogleSignin.signIn();
             console.log('user', userInfo);
-
+            setmsgNumber(umsg);
             // this.setState({ userInfo });
         } catch (error) {
+            setError(true);
             if (error.code === statusCodes.SIGN_IN_CANCELLED) {
                 // user cancelled the login flow
             } else if (error.code === statusCodes.IN_PROGRESS) {
@@ -111,17 +141,17 @@ const UserButton = ({userMsg, componentId, setmsgNumber}) => {
     };
 
     const decideButtonOrTextInput = (umsg, index) => {
-        if (umsg.id === 4) {
-            return (
-                <GoogleSigninButton
-                    style={{width: 192, height: 48}}
-                    size={GoogleSigninButton.Size.Wide}
-                    color={GoogleSigninButton.Color.Dark}
-                    onPress={signIn}
-                    // disabled={this.state.isSigninInProgress}
-                />
-            );
-        }
+        // if (umsg.id === 4) {
+        //     return (
+        //         <GoogleSigninButton
+        //             style={{width: 192, height: 48}}
+        //             size={GoogleSigninButton.Size.Wide}
+        //             color={GoogleSigninButton.Color.Dark}
+        //             onPress={signIn}
+        //             // disabled={this.state.isSigninInProgress}
+        //         />
+        //     );
+        // }
         if (umsg.isTextInput) {
             const extraTextStyle =
                 umsg.id === 16 ? styles.locationTextInput : null;
@@ -132,7 +162,8 @@ const UserButton = ({userMsg, componentId, setmsgNumber}) => {
                       types: ['geocode', 'address', 'establishment', 'regions'],
                   })
                       .then(place => {
-                          console.log(place);
+                          console.log('place, ', place);
+                          setLocation(place);
                           // place represents user's selection from the
                           // suggestions and it is a simplified Google Place object.
                       })
@@ -140,33 +171,40 @@ const UserButton = ({userMsg, componentId, setmsgNumber}) => {
                 : null;
 
             return (
-                <View style={[styles.userText, extraTextStyle]}>
-                    {umsg.id !== 10 && umsg.id !== 16 ? (
-                        <Text> {umsg.msg}</Text>
+                <>
+                    <View style={[styles.userText, extraTextStyle]}>
+                        {umsg.id !== 10 && umsg.id !== 16 ? (
+                            <Text> {umsg.msg}</Text>
+                        ) : null}
+                        <TextInput
+                            ref={textRef}
+                            autoFocus
+                            style={styles.textInput}
+                            value={
+                                textValue.length > 0 && umsg.id === 10
+                                    ? '@' + textValue
+                                    : textValue
+                            }
+                            onChangeText={text => {
+                                const t =
+                                    text.indexOf('@') !== -1
+                                        ? text.slice(1, text.length)
+                                        : text;
+                                setText(t);
+                            }}
+                            placeholder={
+                                umsg.id === 10 || umsg.id === 16
+                                    ? umsg.display
+                                    : null
+                            }
+                        />
+                    </View>
+                    {isError ? (
+                        <Text style={styles.errorMsgTxt}>
+                            {'Something went wrong'}
+                        </Text>
                     ) : null}
-                    <TextInput
-                        ref={textRef}
-                        autoFocus
-                        style={styles.textInput}
-                        value={
-                            textValue.length > 0 && umsg.id === 10
-                                ? '@' + textValue
-                                : textValue
-                        }
-                        onChangeText={text => {
-                            const t =
-                                text.indexOf('@') !== -1
-                                    ? text.slice(1, text.length)
-                                    : text;
-                            setText(t);
-                        }}
-                        placeholder={
-                            umsg.id === 10 || umsg.id === 16
-                                ? umsg.display
-                                : null
-                        }
-                    />
-                </View>
+                </>
             );
         }
 
@@ -200,11 +238,6 @@ const UserButton = ({userMsg, componentId, setmsgNumber}) => {
                     ) : null}
                     <Text style={styles.buttonText}>{umsg.display}</Text>
                 </TouchableOpacity>
-                {isError ? (
-                    <Text style={styles.errorMsgTxt}>
-                        {'Username not available'}
-                    </Text>
-                ) : null}
             </>
         );
     };
@@ -217,10 +250,13 @@ const UserButton = ({userMsg, componentId, setmsgNumber}) => {
         <View
             style={
                 userMsg[0].isSubmit
-                    ? styles.buttonsWithSubmit
+                    ? userMsg[0].id === 15
+                        ? styles.buttonsForLocation
+                        : styles.buttonsWithSubmit
                     : styles.buttonDefaultCon
             }>
             {userMsg.map(returnUserMsg)}
+            {userMsg[0].id === 15 ? LocationSelection() : null}
         </View>
     );
 };

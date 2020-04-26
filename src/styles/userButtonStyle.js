@@ -40,6 +40,13 @@ export const styles = StyleSheet.create({
         // backgroundColor: '#4fd',
         flexGrow: 1,
     },
+    buttonsForLocation: {
+        flexDirection: 'column',
+        margin: 10,
+        // backgroundColor: '#4fd',
+        flexGrow: 1,
+        paddingBottom: 300,
+    },
     skipButton: {
         backgroundColor: '#ff7366',
     },
@@ -93,7 +100,8 @@ export const styles = StyleSheet.create({
         color: 'red',
         alignSelf: 'flex-end',
         marginRight: 10,
-        marginTop: 6,
+        marginTop: -12,
+        marginBottom: 6,
         fontFamily: 'OpenSans-Regular',
         fontSize: 12,
     },
