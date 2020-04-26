@@ -6,6 +6,7 @@ import {
     statusCodes,
 } from '@react-native-community/google-signin';
 import GetLocation from 'react-native-get-location';
+import RNGooglePlaces from 'react-native-google-places';
 
 GoogleSignin.configure({
     // scopes: ['https://www.googleapis.com/auth/drive.readonly'], // what API you want to access on behalf of the user, default is email and profile
@@ -19,10 +20,10 @@ GoogleSignin.configure({
     accountName: '', // [Android] specifies an account name on the device that should be used
     // iosClientId: '<FROM DEVELOPER CONSOLE>', // [iOS] optional, if you want to specify the client ID of type iOS
 });
-// import {Navigation} from 'react-native-navigation';
+import {Navigation} from 'react-native-navigation';
 // import {View} from "react-native-animatable";
 
-// import {NAMES, USER_ACCCOUNT} from '../screens/constants';
+import {NAMES, USER_ACCCOUNT} from '../screens/constants';
 import {styles} from '../styles/userButtonStyle';
 import OTPbuttons from './OTPbuttons';
 
@@ -32,23 +33,27 @@ const UserButton = ({userMsg, componentId, setmsgNumber}) => {
     const [location, setLocation] = useState(null);
     const textRef = useRef(null);
 
-    // const navigateToNext = () => {
-    //     Navigation.push(componentId, {
-    //         component: {
-    //             name: USER_ACCCOUNT,
-    //             options: {
-    //                 topBar: {
-    //                     height: 0,
-    //                     visible: false,
-    //                 },
-    //             },
-    //         },
-    //     });
-    // };
+    const navigateToNext = () => {
+        Navigation.push(componentId, {
+            component: {
+                name: USER_ACCCOUNT,
+                options: {
+                    topBar: {
+                        height: 0,
+                        visible: false,
+                    },
+                },
+            },
+        });
+    };
 
     const userButtonCallback = umsg => {
         // const _id = umsg.id;
         // _id === 8 ? navigateToNext(_id) :
+
+        if (umsg.id === 1.5) {
+            navigateToNext();
+        }
 
         setError(false);
         if (
@@ -120,6 +125,19 @@ const UserButton = ({userMsg, componentId, setmsgNumber}) => {
         if (umsg.isTextInput) {
             const extraTextStyle =
                 umsg.id === 16 ? styles.locationTextInput : null;
+
+            umsg.id === 16
+                ? RNGooglePlaces.getAutocompletePredictions(textValue, {
+                      country: 'IN',
+                      types: ['geocode', 'address', 'establishment', 'regions'],
+                  })
+                      .then(place => {
+                          console.log(place);
+                          // place represents user's selection from the
+                          // suggestions and it is a simplified Google Place object.
+                      })
+                      .catch(error => console.log('loc', error.message))
+                : null;
 
             return (
                 <View style={[styles.userText, extraTextStyle]}>
