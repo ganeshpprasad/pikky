@@ -12,6 +12,7 @@ import {
     View,
 } from 'react-native';
 
+import ImageItem from '../components/ImageItem';
 import OnBoardChat from '../components/onBoardChat';
 import {onBoardingData} from '../helperData/pikkyBotMsgs';
 import {userResponses} from '../helperData/userMsgs';
@@ -29,10 +30,6 @@ const {
     chatConFullScreen,
     topbar,
 } = styles;
-
-const ImageItem = (source, style) => (
-    <Image source={source} style={style} resizeMode="contain" />
-);
 
 const ImageCircle = source => ImageItem(source, pikkySignal);
 
@@ -57,10 +54,7 @@ const topbarRender = msgNumber =>
     msgNumber > 0 ? (
         <View style={topbar}>
             {ImageItem(require('../assets/onBoarding/chatPikkyIcon3.png'))}
-            <Image
-                source={require('../assets/onBoarding/question3.png')}
-                resizeMode="contain"
-            />
+            {ImageItem(require('../assets/onBoarding/question3.png'))}
         </View>
     ) : null;
 

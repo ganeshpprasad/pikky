@@ -30,6 +30,7 @@ import {Navigation} from 'react-native-navigation';
 import {NAMES, USER_ACCCOUNT} from '../screens/constants';
 import {styles} from '../styles/userButtonStyle';
 import OTPbuttons from './OTPbuttons';
+import ChatTextInput from './chatTexInput';
 
 const UserButton = ({userMsg, componentId, setmsgNumber}) => {
     const [textValue, setText] = useState('');
@@ -38,19 +39,28 @@ const UserButton = ({userMsg, componentId, setmsgNumber}) => {
     const textRef = useRef(null);
 
     const LocationItem = ({item}) => (
-        <View key={item.placeID} style={{padding: 6, marginBottom: 6}}>
+        <TouchableOpacity
+            onPress={() => {
+                console.log('loc', item);
+                // userButtonCallback({id: 16});
+                setLocation([]);
+                navigateToNext();
+            }}
+            key={item.placeID}
+            style={{padding: 6, marginBottom: 6}}>
             <Text style={{fontFamily: 'OpenSans-Regular', fontSize: 15}}>
                 {item.primaryText}
             </Text>
-        </View>
+        </TouchableOpacity>
     );
 
     const LocationSelection = () => {
-        if (locations.length < 0) {
+        if (locations.length < 1) {
             return null;
         }
         return (
             <FlatList
+                keyboardShouldPersistTaps="handled"
                 style={{backgroundColor: '#fff', padding: 10}}
                 data={locations}
                 renderItem={LocationItem}
@@ -76,10 +86,6 @@ const UserButton = ({userMsg, componentId, setmsgNumber}) => {
         // const _id = umsg.id;
         // _id === 8 ? navigateToNext(_id) :
 
-        if (umsg.id === 15) {
-            navigateToNext();
-        }
-
         if (umsg.id === 4) {
             return signIn(umsg);
         }
@@ -98,6 +104,7 @@ const UserButton = ({userMsg, componentId, setmsgNumber}) => {
         }
         if (umsg.id === 15) {
             getLocation();
+            navigateToNext();
         } else {
             setmsgNumber(umsg);
             setText('');
@@ -172,33 +179,13 @@ const UserButton = ({userMsg, componentId, setmsgNumber}) => {
 
             return (
                 <>
-                    <View style={[styles.userText, extraTextStyle]}>
-                        {umsg.id !== 10 && umsg.id !== 16 ? (
-                            <Text> {umsg.msg}</Text>
-                        ) : null}
-                        <TextInput
-                            ref={textRef}
-                            autoFocus
-                            style={styles.textInput}
-                            value={
-                                textValue.length > 0 && umsg.id === 10
-                                    ? '@' + textValue
-                                    : textValue
-                            }
-                            onChangeText={text => {
-                                const t =
-                                    text.indexOf('@') !== -1
-                                        ? text.slice(1, text.length)
-                                        : text;
-                                setText(t);
-                            }}
-                            placeholder={
-                                umsg.id === 10 || umsg.id === 16
-                                    ? umsg.display
-                                    : null
-                            }
-                        />
-                    </View>
+                    <ChatTextInput
+                        extraTextStyle={extraTextStyle}
+                        umsg={umsg}
+                        textRef={textRef}
+                        textValue={textValue}
+                        setText={setText}
+                    />
                     {isError ? (
                         <Text style={styles.errorMsgTxt}>
                             {'Something went wrong'}

@@ -31,22 +31,6 @@ export const userResponses = [
     ],
     [
         {
-            msg: 'Locate',
-            display: 'Locate',
-            type: msgTypes.USER,
-            id: 15,
-            isSubmit: true,
-        },
-        {
-            msg: 'Manual',
-            display: 'Enter manually',
-            type: msgTypes.USER,
-            id: 16,
-            isTextInput: true,
-        },
-    ],
-    [
-        {
             msg: 'Google',
             type: msgTypes,
             id: 4,
@@ -124,6 +108,31 @@ export const userResponses = [
             display: 'OTHERS',
             type: msgTypes.USER,
             id: 14,
+        },
+    ],
+    [
+        {
+            msg: 'Locate',
+            display: 'Locate',
+            type: msgTypes.USER,
+            id: 15,
+            isSubmit: true,
+        },
+        {
+            msg: 'Manual',
+            display: 'Enter manually',
+            type: msgTypes.USER,
+            id: 16,
+            isTextInput: true,
+        },
+    ],
+    [
+        {
+            msg: 'Proceed',
+            display: 'Proceed',
+            type: msgTypes.USER,
+            id: 17,
+            isTextInput: false,
         },
     ],
 ];

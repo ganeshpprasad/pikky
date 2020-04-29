@@ -1,41 +1,25 @@
 import React from 'react';
-import {View, Image, Text} from 'react-native';
+import {View} from 'react-native';
+
+import ImageItem from '../components/ImageItem';
+import PikkyMessageItem from '../components/PikkyMessageItem';
 
 import {styles} from '../styles/onboardfinish';
-import {styles as msgStyles} from '../styles/chatMsgListStyle';
-
-const {userMsgCon, pikkyMsgCon, botMsgText, msgCon} = msgStyles;
+import SerialUserMessages from '../components/SerialUserMessages';
 
 const LogoSection = () => (
     <View style={styles.logoCon}>
-        <Image
-            source={require('../assets/onBoarding/onboardfinish3.png')}
-            // style={pikkySignal}
-            resizeMode="contain"
-        />
+        {ImageItem(require('../assets/onBoarding/onboardfinish3.png'))}
     </View>
 );
 
-const FinalUserMsgs = msg => (
-    <View style={[pikkyMsgCon, msgCon, styles.pikkyMsgYellow]}>
-        <Text style={botMsgText}>{msg}</Text>
-    </View>
-);
-
-const Buttons = (msg, isLeft) => {
-    const leftButtonStyle = isLeft ? styles.leftButton : null;
-    return (
-        <View style={[userMsgCon, msgCon, styles.finishMsgs, leftButtonStyle]}>
-            <Text style={[botMsgText, styles.finishMsgText]}>{msg}</Text>
-        </View>
-    );
-};
+const FinalUserMsgs = msg => <PikkyMessageItem msg={msg} />;
 
 const FinalButtons = () => (
-    <View style={styles.finishMsgsCon}>
-        {Buttons('Later Pikky!', true)}
-        {Buttons('Finally!', false)}
-    </View>
+    <SerialUserMessages
+        leftButtonText={'Later Pikky!'}
+        rightButtonText={'Finally!'}
+    />
 );
 
 const UserAccount = () => {

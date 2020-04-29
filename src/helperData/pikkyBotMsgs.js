@@ -57,4 +57,10 @@ export const onBoardingData = [
             type: msgTypes.PIKKY,
         },
     ],
+    [
+        {
+            // msg: 'Let us locate you to serve from restaurants around.',
+            // type: msgTypes.PIKKY,
+        },
+    ],
 ];
