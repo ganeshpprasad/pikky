@@ -11,7 +11,13 @@ export const useOnBoardChat = onBoardingData => {
 
     const setUserMsgNumber = userMsg => {
         setMsgData(msgs => [[userMsg], ...msgs]);
-        setmsgNumber(_msgNumber => _msgNumber + 1);
+        let ONE_INC = 1;
+        if (userMsg.id === 4) {
+            ONE_INC = 3;
+        } else if (userMsg.id == 9) {
+            ONE_INC = 2;
+        }
+        setmsgNumber(_msgNumber => _msgNumber + ONE_INC);
     };
 
     return {

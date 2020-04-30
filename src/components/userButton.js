@@ -29,7 +29,7 @@ import {Navigation} from 'react-native-navigation';
 
 import {NAMES, USER_ACCCOUNT} from '../screens/constants';
 import {styles} from '../styles/userButtonStyle';
-import OTPbuttons from './OTPbuttons';
+import OTPbuttons from '../containers/OTPbuttons';
 import ChatTextInput from './chatTexInput';
 
 const UserButton = ({userMsg, componentId, setmsgNumber}) => {
