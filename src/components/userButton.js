@@ -1,16 +1,6 @@
 import React, {useState, useRef} from 'react';
-import {
-    View,
-    Image,
-    Text,
-    TouchableOpacity,
-    TextInput,
-    FlatList,
-} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import {GoogleSignin, statusCodes} from '@react-native-community/google-signin';
-import GetLocation from 'react-native-get-location';
-import RNGooglePlaces from 'react-native-google-places';
-import {debounce} from 'lodash';
 
 GoogleSignin.configure({
     // scopes: ['https://www.googleapis.com/auth/drive.readonly'], // what API you want to access on behalf of the user, default is email and profile
@@ -27,47 +17,19 @@ GoogleSignin.configure({
 import {Navigation} from 'react-native-navigation';
 // import {View} from "react-native-animatable";
 
-import {NAMES, USER_ACCCOUNT} from '../screens/constants';
-import {styles} from '../styles/userButtonStyle';
-import OTPbuttons from '../containers/OTPbuttons';
+import {USER_ACCCOUNT} from '../screens/constants';
+
 import ChatTextInput from './chatTexInput';
+import GenderButtons from './GenderButtons';
+
+import OTPbuttons from '../containers/OTPbuttons';
+import LocationInput from '../containers/LocationInput';
+import UserNameInput from '../containers/UserNameinput';
+import PhoneNumberinput from '../containers/PhoneNumberinput';
+
+import {styles} from '../styles/userButtonStyle';
 
 const UserButton = ({userMsg, componentId, setmsgNumber}) => {
-    const [textValue, setText] = useState('');
-    const [isError, setError] = useState(false);
-    const [locations, setLocation] = useState([]);
-    const textRef = useRef(null);
-
-    const LocationItem = ({item}) => (
-        <TouchableOpacity
-            onPress={() => {
-                console.log('loc', item);
-                // userButtonCallback({id: 16});
-                setLocation([]);
-                navigateToNext();
-            }}
-            key={item.placeID}
-            style={{padding: 6, marginBottom: 6}}>
-            <Text style={{fontFamily: 'OpenSans-Regular', fontSize: 15}}>
-                {item.primaryText}
-            </Text>
-        </TouchableOpacity>
-    );
-
-    const LocationSelection = () => {
-        if (locations.length < 1) {
-            return null;
-        }
-        return (
-            <FlatList
-                keyboardShouldPersistTaps="handled"
-                style={{backgroundColor: '#fff', padding: 10}}
-                data={locations}
-                renderItem={LocationItem}
-            />
-        );
-    };
-
     const navigateToNext = () => {
         Navigation.push(componentId, {
             component: {
@@ -83,146 +45,26 @@ const UserButton = ({userMsg, componentId, setmsgNumber}) => {
     };
 
     const userButtonCallback = umsg => {
-        // const _id = umsg.id;
-        // _id === 8 ? navigateToNext(_id) :
-
-        if (umsg.id === 4) {
-            return signIn(umsg);
-        }
-
-        setError(false);
-        if (
-            umsg.id === 7 &&
-            !textValue.match(
-                /^(?:(?:\+|0{0,2})91(\s*[\ -]\s*)?|[0]?)?[789]\d{9}|(\d[ -]?){10}\d$/,
-            )
-        ) {
-            console.log('callback', textValue);
-            // check phone number
-            setError(true);
-            return;
-        }
-        if (umsg.id === 15) {
-            getLocation();
+        if (umsg.id === 15 || umsg.id === 16) {
             navigateToNext();
         } else {
             setmsgNumber(umsg);
-            setText('');
         }
-    };
-
-    // const savePhoneNumber = umsg => {
-    //     umsg.msg = umsg.msg + ': ' + textValue;
-    //     setmsgNumber(umsg);
-    //     setText('');
-    // };
-
-    const signIn = async umsg => {
-        try {
-            await GoogleSignin.hasPlayServices();
-            const userInfo = await GoogleSignin.signIn();
-            console.log('user', userInfo);
-            setmsgNumber(umsg);
-            // this.setState({ userInfo });
-        } catch (error) {
-            setError(true);
-            if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-                // user cancelled the login flow
-            } else if (error.code === statusCodes.IN_PROGRESS) {
-                // operation (e.g. sign in) is in progress already
-            } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-                // play services not available or outdated
-            } else {
-                // some other error happened
-            }
-        }
-    };
-
-    const getLocation = async () => {
-        const location = await GetLocation.getCurrentPosition({
-            enableHighAccuracy: true,
-            timeout: 15000,
-        });
-
-        console.log('loc', location);
     };
 
     const decideButtonOrTextInput = (umsg, index) => {
-        // if (umsg.id === 4) {
-        //     return (
-        //         <GoogleSigninButton
-        //             style={{width: 192, height: 48}}
-        //             size={GoogleSigninButton.Size.Wide}
-        //             color={GoogleSigninButton.Color.Dark}
-        //             onPress={signIn}
-        //             // disabled={this.state.isSigninInProgress}
-        //         />
-        //     );
-        // }
-        if (umsg.isTextInput) {
-            const extraTextStyle =
-                umsg.id === 16 ? styles.locationTextInput : null;
+        let color =
+            index > 0
+                ? styles.submitCon
+                : umsg.id === 1
+                ? styles.skipButton
+                : styles.cancelCon;
 
-            umsg.id === 16
-                ? RNGooglePlaces.getAutocompletePredictions(textValue, {
-                      country: 'IN',
-                      types: ['geocode', 'address', 'establishment', 'regions'],
-                  })
-                      .then(place => {
-                          console.log('place, ', place);
-                          setLocation(place);
-                          // place represents user's selection from the
-                          // suggestions and it is a simplified Google Place object.
-                      })
-                      .catch(error => console.log('loc', error.message))
-                : null;
-
-            return (
-                <>
-                    <ChatTextInput
-                        extraTextStyle={extraTextStyle}
-                        umsg={umsg}
-                        textRef={textRef}
-                        textValue={textValue}
-                        setText={setText}
-                    />
-                    {isError ? (
-                        <Text style={styles.errorMsgTxt}>
-                            {'Something went wrong'}
-                        </Text>
-                    ) : null}
-                </>
-            );
-        }
-
-        if (umsg.id === 8) {
-            return <OTPbuttons />;
-        }
-
-        let color = index > 0 ? styles.submitCon : styles.cancelCon;
-        if (umsg.id === 1) color = styles.skipButton;
-
-        let extraStyle =
-            umsg.id === 7 || umsg.id === 9 || umsg.id === 11
-                ? styles.centralButton
-                : umsg.id === 12 || umsg.id === 13 || umsg.id === 14
-                ? styles.genderButtons
-                : umsg.id === 15
-                ? styles.locateButton
-                : null;
         return (
             <>
                 <TouchableOpacity
-                    // style={styles.userButton}
-                    style={[styles.chatButton, color, extraStyle]}
+                    style={[styles.chatButton, color]}
                     onPress={() => userButtonCallback(umsg)}>
-                    {umsg.id === 15 ? (
-                        <Image
-                            source={require('../assets/onBoarding/locpin3.png')}
-                            style={{paddingRight: 30}}
-                            resizeMode="contain"
-                        />
-                    ) : null}
                     <Text style={styles.buttonText}>{umsg.display}</Text>
                 </TouchableOpacity>
             </>
@@ -232,6 +74,85 @@ const UserButton = ({userMsg, componentId, setmsgNumber}) => {
     const returnUserMsg = (umsg, index) => (
         <>{decideButtonOrTextInput(umsg, index)}</>
     );
+
+    if (userMsg[0].id === 4) {
+        return (
+            <View style={styles.buttonDefaultCon}>
+                <TouchableOpacity
+                    style={[styles.chatButton, styles.cancelCon]}
+                    onPress={() => userButtonCallback(userMsg[0])}>
+                    <Text style={styles.buttonText}>{userMsg[0].display}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={[styles.chatButton, styles.submitCon]}
+                    onPress={() => userButtonCallback(userMsg[1])}>
+                    <Text style={styles.buttonText}>{userMsg[1].display}</Text>
+                </TouchableOpacity>
+            </View>
+        );
+    }
+
+    if (userMsg[0].id === 6) {
+        return (
+            <View style={styles.buttonsWithSubmit}>
+                <PhoneNumberinput
+                    userMsg={userMsg}
+                    userButtonCallback={userButtonCallback}
+                />
+            </View>
+        );
+    }
+
+    if (userMsg[0].id === 8) {
+        return (
+            <View style={styles.buttonsWithSubmit}>
+                <OTPbuttons />
+                <TouchableOpacity
+                    // style={styles.userButton}
+                    style={[
+                        styles.chatButton,
+                        styles.submitCon,
+                        styles.centralButton,
+                    ]}
+                    onPress={() => userButtonCallback(userMsg[1])}>
+                    <Text style={styles.buttonText}>{userMsg[1].display}</Text>
+                </TouchableOpacity>
+            </View>
+        );
+    }
+
+    if (userMsg[0].id === 10) {
+        return (
+            <View style={styles.buttonsWithSubmit}>
+                <UserNameInput
+                    userMsg={userMsg}
+                    userButtonCallback={userButtonCallback}
+                />
+            </View>
+        );
+    }
+
+    if (userMsg[0].id === 12) {
+        return (
+            <View style={styles.buttonDefaultCon}>
+                <GenderButtons
+                    userMsg={userMsg}
+                    userButtonCallback={userButtonCallback}
+                />
+            </View>
+        );
+    }
+
+    if (userMsg[0].id === 15) {
+        return (
+            <View style={styles.buttonsForLocation}>
+                <LocationInput
+                    userMsg={userMsg}
+                    userButtonCallback={userButtonCallback}
+                />
+            </View>
+        );
+    }
 
     return (
         <View
@@ -243,7 +164,6 @@ const UserButton = ({userMsg, componentId, setmsgNumber}) => {
                     : styles.buttonDefaultCon
             }>
             {userMsg.map(returnUserMsg)}
-            {userMsg[0].id === 15 ? LocationSelection() : null}
         </View>
     );
 };

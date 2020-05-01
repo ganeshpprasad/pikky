@@ -82,6 +82,7 @@ export const styles = StyleSheet.create({
     genderButtons: {
         marginRight: 6,
         flexGrow: 1,
+        backgroundColor: '#49dfc4',
     },
     buttonText: {
         color: '#111',

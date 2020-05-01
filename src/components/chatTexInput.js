@@ -7,30 +7,22 @@ export default class Chatbutton extends PureComponent {
     render() {
         return (
             <View style={[styles.userText, this.props.extraTextStyle]}>
-                {this.props.umsg.id !== 10 && this.props.umsg.id !== 16 ? (
-                    <Text> {this.props.umsg.msg}</Text>
-                ) : null}
+                {this.props.pretext ? <Text> {this.props.pretext}</Text> : null}
                 <TextInput
                     ref={this.props.textRef}
                     autoFocus
+                    keyboardType={
+                        this.props.numericKeyboard ? 'numeric' : 'default'
+                    }
                     style={styles.textInput}
                     value={
-                        this.props.textValue.length > 0 &&
-                        this.props.umsg.id === 10
-                            ? '@' + this.props.textValue
-                            : this.props.textValue
-                    }
-                    onChangeText={text => {
-                        const t =
-                            text.indexOf('@') !== -1
-                                ? text.slice(1, text.length)
-                                : text;
-                        this.props.setText(t);
-                    }}
-                    placeholder={
-                        this.props.umsg.id === 10 || this.props.umsg.id === 16
-                            ? this.props.umsg.display
+                        this.props.textValue.length > 0
+                            ? this.props.textValue
                             : null
+                    }
+                    onChangeText={text => this.props.setText(text)}
+                    placeholder={
+                        this.props.placeholder ? this.props.placeholder : null
                     }
                 />
             </View>

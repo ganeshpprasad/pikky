@@ -35,12 +35,12 @@ export const onBoardingData = [
             type: msgTypes.PIKKY,
         },
     ],
-    [
-        {
-            msg: 'Thought as much homie! Select from the following.',
-            type: msgTypes.PIKKY,
-        },
-    ],
+    // [
+    //     {
+    //         msg: 'Thought as much homie! Select from the following.',
+    //         type: msgTypes.PIKKY,
+    //     },
+    // ],
     [
         {
             msg: 'Let’s begin with a username.',
