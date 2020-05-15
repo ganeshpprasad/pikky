@@ -65,6 +65,25 @@ export const onBoardingData = [
     ],
     [
         {
+            msg: 'Alright @moodyfoody, do you have any favourites?',
+            type: msgTypes.PIKKY,
+        },
+    ],
+    [
+        {
+            msg: 'Now that’s an explorer!',
+            type: msgTypes.PIKKY,
+        },
+    ],
+    [
+        {
+            msg:
+                'What are your food preferences? Make as many choices you like.',
+            type: msgTypes.PIKKY,
+        },
+    ],
+    [
+        {
             // msg: 'Let us locate you to serve from restaurants around.',
             // type: msgTypes.PIKKY,
         },

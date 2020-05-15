@@ -17,7 +17,7 @@ GoogleSignin.configure({
 import {Navigation} from 'react-native-navigation';
 // import {View} from "react-native-animatable";
 
-import {USER_ACCCOUNT} from '../screens/constants';
+import {USER_ACCCOUNT} from '../screens';
 
 import ChatTextInput from './chatTexInput';
 import GenderButtons from './GenderButtons';
@@ -45,11 +45,11 @@ const UserButton = ({userMsg, componentId, setmsgNumber}) => {
     };
 
     const userButtonCallback = umsg => {
-        if (umsg.id === 15 || umsg.id === 16) {
-            navigateToNext();
-        } else {
-            setmsgNumber(umsg);
-        }
+        // if (umsg.id === 15 || umsg.id === 16) {
+        // navigateToNext();
+        // } else {
+        setmsgNumber(umsg);
+        // }
     };
 
     const decideButtonOrTextInput = (umsg, index) => {
@@ -63,7 +63,15 @@ const UserButton = ({userMsg, componentId, setmsgNumber}) => {
         return (
             <>
                 <TouchableOpacity
-                    style={[styles.chatButton, color]}
+                    style={[
+                        styles.chatButton,
+                        color,
+                        {
+                            width: '40%',
+                            alignSelf: 'flex-end',
+                            marginTop: 10,
+                        },
+                    ]}
                     onPress={() => userButtonCallback(umsg)}>
                     <Text style={styles.buttonText}>{umsg.display}</Text>
                 </TouchableOpacity>
@@ -150,6 +158,24 @@ const UserButton = ({userMsg, componentId, setmsgNumber}) => {
                     userMsg={userMsg}
                     userButtonCallback={userButtonCallback}
                 />
+            </View>
+        );
+    }
+
+    if (userMsg[0].verticalList) {
+        return (
+            <View style={styles.buttonsForLocation}>
+                {userMsg.map(returnUserMsg)}
+            </View>
+        );
+    }
+
+    if (userMsg[0].isGrid) {
+        return (
+            <View style={{flex: 1}}>
+                <View style={styles.gridView}>
+                    {userMsg.map(returnUserMsg)}
+                </View>
             </View>
         );
     }

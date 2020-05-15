@@ -43,9 +43,15 @@ export const styles = StyleSheet.create({
     buttonsForLocation: {
         flexDirection: 'column',
         margin: 10,
-        // backgroundColor: '#4fd',
         flexGrow: 1,
         paddingBottom: 300,
+    },
+    gridView: {
+        flexWrap: 'wrap',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        flex: 1,
+        flexDirection: 'row',
     },
     skipButton: {
         backgroundColor: '#ff7366',
