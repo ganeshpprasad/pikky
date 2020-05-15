@@ -1,13 +1,37 @@
-import React from "react";
-import {View, Text} from "react-native";
+import React from 'react';
+import {View} from 'react-native';
 
-import {styles} from "../styles/onBoardChat";
+import ImageItem from '../components/ImageItem';
+import PikkyMessageItem from '../components/PikkyMessageItem';
+
+import {styles} from '../styles/onboardfinish';
+import SerialUserMessages from '../components/SerialUserMessages';
+
+const LogoSection = () => (
+    <View style={styles.logoCon}>
+        {ImageItem(require('../assets/onBoarding/onboardfinish3.png'))}
+    </View>
+);
+
+const FinalUserMsgs = msg => <PikkyMessageItem msg={msg} />;
+
+const FinalButtons = () => (
+    <SerialUserMessages
+        leftButtonText={'Later Pikky!'}
+        rightButtonText={'Finally!'}
+    />
+);
 
 const UserAccount = () => {
     return (
-        <View>
-            <Text style={styles.mainTitle}>User Account Details</Text>
-            <Text style={styles.msgText}>State mgmnt needed for this </Text>
+        <View style={styles.onboardfinishCon}>
+            {LogoSection()}
+            <View style={styles.onboardMsgsCon}>
+                {FinalUserMsgs('Sweet tooth! You are all set.')}
+                {FinalUserMsgs('Now, let’s talk food.')}
+                {FinalButtons()}
+                {FinalUserMsgs('P.S. I am always hungry :)')}
+            </View>
         </View>
     );
 };

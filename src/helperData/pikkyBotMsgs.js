@@ -35,6 +35,12 @@ export const onBoardingData = [
             type: msgTypes.PIKKY,
         },
     ],
+    // [
+    //     {
+    //         msg: 'Thought as much homie! Select from the following.',
+    //         type: msgTypes.PIKKY,
+    //     },
+    // ],
     [
         {
             msg: 'Let’s begin with a username.',
@@ -57,33 +63,29 @@ export const onBoardingData = [
             type: msgTypes.PIKKY,
         },
     ],
-];
-
-export const nameData = [
     [
         {
-            msg: 'Please enter your name',
+            msg: 'Alright @moodyfoody, do you have any favourites?',
             type: msgTypes.PIKKY,
         },
     ],
     [
         {
-            msg: 'Glad to meet you',
-            type: msgTypes.PIKKY,
-        },
-        {
-            msg: 'Please select your location',
+            msg: 'Now that’s an explorer!',
             type: msgTypes.PIKKY,
         },
     ],
     [
         {
-            msg: 'Thanks for signing up',
+            msg:
+                'What are your food preferences? Make as many choices you like.',
             type: msgTypes.PIKKY,
         },
+    ],
+    [
         {
-            msg: 'Click next to confirm details',
-            type: msgTypes.PIKKY,
+            // msg: 'Let us locate you to serve from restaurants around.',
+            // type: msgTypes.PIKKY,
         },
     ],
 ];

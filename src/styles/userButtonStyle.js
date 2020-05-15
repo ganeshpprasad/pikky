@@ -40,6 +40,19 @@ export const styles = StyleSheet.create({
         // backgroundColor: '#4fd',
         flexGrow: 1,
     },
+    buttonsForLocation: {
+        flexDirection: 'column',
+        margin: 10,
+        flexGrow: 1,
+        paddingBottom: 300,
+    },
+    gridView: {
+        flexWrap: 'wrap',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        flex: 1,
+        flexDirection: 'row',
+    },
     skipButton: {
         backgroundColor: '#ff7366',
     },
@@ -75,6 +88,7 @@ export const styles = StyleSheet.create({
     genderButtons: {
         marginRight: 6,
         flexGrow: 1,
+        backgroundColor: '#49dfc4',
     },
     buttonText: {
         color: '#111',
@@ -93,7 +107,8 @@ export const styles = StyleSheet.create({
         color: 'red',
         alignSelf: 'flex-end',
         marginRight: 10,
-        marginTop: 6,
+        marginTop: -12,
+        marginBottom: 6,
         fontFamily: 'OpenSans-Regular',
         fontSize: 12,
     },

@@ -1,114 +1,80 @@
 import React, {useState, useRef} from 'react';
-import {View, Image, Text, TouchableOpacity, TextInput} from 'react-native';
-// import {Navigation} from 'react-native-navigation';
+import {View, Text, TouchableOpacity} from 'react-native';
+import {GoogleSignin, statusCodes} from '@react-native-community/google-signin';
+
+GoogleSignin.configure({
+    // scopes: ['https://www.googleapis.com/auth/drive.readonly'], // what API you want to access on behalf of the user, default is email and profile
+    client_id:
+        '235278786718-nat9vk6f9c6p9orov5d9ur66n2kse9pm.apps.googleusercontent.com',
+    // webClientId: '', // client ID of type WEB for your server (needed to verify user ID and offline access)
+    // offlineAccess: true, // if you want to access Google API on behalf of the user FROM YOUR SERVER
+    // hostedDomain: '', // specifies a hosted domain restriction
+    // loginHint: '', // [iOS] The user's ID, or email address, to be prefilled in the authentication UI if possible. [See docs here](https://developers.google.com/identity/sign-in/ios/api/interface_g_i_d_sign_in.html#a0a68c7504c31ab0b728432565f6e33fd)
+    forceCodeForRefreshToken: true, // [Android] related to `serverAuthCode`, read the docs link below *.
+    accountName: '', // [Android] specifies an account name on the device that should be used
+    // iosClientId: '<FROM DEVELOPER CONSOLE>', // [iOS] optional, if you want to specify the client ID of type iOS
+});
+import {Navigation} from 'react-native-navigation';
 // import {View} from "react-native-animatable";
 
-// import {NAMES, USER_ACCCOUNT} from '../screens/constants';
+import {USER_ACCCOUNT} from '../screens';
+
+import ChatTextInput from './chatTexInput';
+import GenderButtons from './GenderButtons';
+
+import OTPbuttons from '../containers/OTPbuttons';
+import LocationInput from '../containers/LocationInput';
+import UserNameInput from '../containers/UserNameinput';
+import PhoneNumberinput from '../containers/PhoneNumberinput';
+
 import {styles} from '../styles/userButtonStyle';
-import OTPbuttons from './OTPbuttons';
 
 const UserButton = ({userMsg, componentId, setmsgNumber}) => {
-    const [textValue, setText] = useState('');
-    const textRef = useRef(null);
-
-    // const navigateToNext = () => {
-    //     Navigation.push(componentId, {
-    //         component: {
-    //             name: USER_ACCCOUNT,
-    //             options: {
-    //                 topBar: {
-    //                     height: 0,
-    //                     visible: false,
-    //                 },
-    //             },
-    //         },
-    //     });
-    // };
-
-    const userButtonCallback = umsg => {
-        // const _id = umsg.id;
-        // _id === 8 ? navigateToNext(_id) :
-        setmsgNumber(umsg);
-        setText('');
+    const navigateToNext = () => {
+        Navigation.push(componentId, {
+            component: {
+                name: USER_ACCCOUNT,
+                options: {
+                    topBar: {
+                        height: 0,
+                        visible: false,
+                    },
+                },
+            },
+        });
     };
 
-    // const savePhoneNumber = umsg => {
-    //     umsg.msg = umsg.msg + ': ' + textValue;
-    //     setmsgNumber(umsg);
-    //     setText('');
-    // };
+    const userButtonCallback = umsg => {
+        // if (umsg.id === 15 || umsg.id === 16) {
+        // navigateToNext();
+        // } else {
+        setmsgNumber(umsg);
+        // }
+    };
 
     const decideButtonOrTextInput = (umsg, index) => {
-        if (umsg.id === 6 || umsg.id === 10 || umsg.id === 16) {
-            const extraTextStyle =
-                umsg.id === 16 ? styles.locationTextInput : null;
+        let color =
+            index > 0
+                ? styles.submitCon
+                : umsg.id === 1
+                ? styles.skipButton
+                : styles.cancelCon;
 
-            return (
-                <View style={[styles.userText, extraTextStyle]}>
-                    {umsg.id !== 10 && umsg.id !== 16 ? (
-                        <Text> {umsg.msg}</Text>
-                    ) : null}
-                    <TextInput
-                        ref={textRef}
-                        autoFocus
-                        style={styles.textInput}
-                        value={
-                            textValue.length > 0 && umsg.id === 10
-                                ? '@' + textValue
-                                : textValue
-                        }
-                        onChangeText={text => {
-                            const t =
-                                text.indexOf('@') !== -1
-                                    ? text.slice(1, text.length)
-                                    : text;
-                            setText(t);
-                        }}
-                        placeholder={
-                            umsg.id === 10 || umsg.id === 16
-                                ? umsg.display
-                                : null
-                        }
-                    />
-                </View>
-            );
-        }
-
-        if (umsg.id === 8) {
-            return <OTPbuttons />;
-        }
-
-        let color = index > 0 ? styles.submitCon : styles.cancelCon;
-        if (umsg.id === 1) color = styles.skipButton;
-
-        let extraStyle =
-            umsg.id === 7 || umsg.id === 9 || umsg.id === 11
-                ? styles.centralButton
-                : umsg.id === 12 || umsg.id === 13 || umsg.id === 14
-                ? styles.genderButtons
-                : umsg.id === 15
-                ? styles.locateButton
-                : null;
         return (
             <>
                 <TouchableOpacity
-                    // style={styles.userButton}
-                    style={[styles.chatButton, color, extraStyle]}
+                    style={[
+                        styles.chatButton,
+                        color,
+                        {
+                            width: '40%',
+                            alignSelf: 'flex-end',
+                            marginTop: 10,
+                        },
+                    ]}
                     onPress={() => userButtonCallback(umsg)}>
-                    {umsg.id === 15 ? (
-                        <Image
-                            source={require('../assets/onBoarding/locpin3.png')}
-                            style={{paddingRight: 30}}
-                            resizeMode="contain"
-                        />
-                    ) : null}
                     <Text style={styles.buttonText}>{umsg.display}</Text>
                 </TouchableOpacity>
-                {false ? (
-                    <Text style={styles.errorMsgTxt}>
-                        {'Username not available'}
-                    </Text>
-                ) : null}
             </>
         );
     };
@@ -117,14 +83,110 @@ const UserButton = ({userMsg, componentId, setmsgNumber}) => {
         <>{decideButtonOrTextInput(umsg, index)}</>
     );
 
+    if (userMsg[0].id === 4) {
+        return (
+            <View style={styles.buttonDefaultCon}>
+                <TouchableOpacity
+                    style={[styles.chatButton, styles.cancelCon]}
+                    onPress={() => userButtonCallback(userMsg[0])}>
+                    <Text style={styles.buttonText}>{userMsg[0].display}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={[styles.chatButton, styles.submitCon]}
+                    onPress={() => userButtonCallback(userMsg[1])}>
+                    <Text style={styles.buttonText}>{userMsg[1].display}</Text>
+                </TouchableOpacity>
+            </View>
+        );
+    }
+
+    if (userMsg[0].id === 6) {
+        return (
+            <View style={styles.buttonsWithSubmit}>
+                <PhoneNumberinput
+                    userMsg={userMsg}
+                    userButtonCallback={userButtonCallback}
+                />
+            </View>
+        );
+    }
+
+    if (userMsg[0].id === 8) {
+        return (
+            <View style={styles.buttonsWithSubmit}>
+                <OTPbuttons />
+                <TouchableOpacity
+                    // style={styles.userButton}
+                    style={[
+                        styles.chatButton,
+                        styles.submitCon,
+                        styles.centralButton,
+                    ]}
+                    onPress={() => userButtonCallback(userMsg[1])}>
+                    <Text style={styles.buttonText}>{userMsg[1].display}</Text>
+                </TouchableOpacity>
+            </View>
+        );
+    }
+
+    if (userMsg[0].id === 10) {
+        return (
+            <View style={styles.buttonsWithSubmit}>
+                <UserNameInput
+                    userMsg={userMsg}
+                    userButtonCallback={userButtonCallback}
+                />
+            </View>
+        );
+    }
+
+    if (userMsg[0].id === 12) {
+        return (
+            <View style={styles.buttonDefaultCon}>
+                <GenderButtons
+                    userMsg={userMsg}
+                    userButtonCallback={userButtonCallback}
+                />
+            </View>
+        );
+    }
+
+    if (userMsg[0].id === 15) {
+        return (
+            <View style={styles.buttonsForLocation}>
+                <LocationInput
+                    userMsg={userMsg}
+                    userButtonCallback={userButtonCallback}
+                />
+            </View>
+        );
+    }
+
+    if (userMsg[0].verticalList) {
+        return (
+            <View style={styles.buttonsForLocation}>
+                {userMsg.map(returnUserMsg)}
+            </View>
+        );
+    }
+
+    if (userMsg[0].isGrid) {
+        return (
+            <View style={{flex: 1}}>
+                <View style={styles.gridView}>
+                    {userMsg.map(returnUserMsg)}
+                </View>
+            </View>
+        );
+    }
+
     return (
         <View
             style={
-                userMsg[0].id === 6 ||
-                userMsg[0].id === 8 ||
-                userMsg[0].id === 10 ||
-                userMsg[0].id === 15
-                    ? styles.buttonsWithSubmit
+                userMsg[0].isSubmit
+                    ? userMsg[0].id === 15
+                        ? styles.buttonsForLocation
+                        : styles.buttonsWithSubmit
                     : styles.buttonDefaultCon
             }>
             {userMsg.map(returnUserMsg)}
