@@ -9,6 +9,7 @@ const OTPbuttons = () => {
     const ref2 = useRef(null);
     const ref3 = useRef(null);
     const ref4 = useRef(null);
+    const refs = [ref1, ref2, ref3, ref4];
 
     const handleKeyPress = (pos, e) => {
         const {key} = e.nativeEvent;
@@ -26,7 +27,6 @@ const OTPbuttons = () => {
     };
 
     const focusOnPrevText = olength => {
-        console.log('pre', prevRef);
         const prevRef =
             olength === 4
                 ? ref3
@@ -56,45 +56,28 @@ const OTPbuttons = () => {
     };
     console.log('otp', otp);
 
+    const createTextInput = index => (
+        <TextInput
+            maxLength={1}
+            style={[
+                styles.otpButton,
+                index === 3 ? styles.otpButtonLast : null,
+            ]}
+            value={otp[index]}
+            autoFocus={index === 0 ? true : false}
+            onKeyPress={e => handleKeyPress(index, e)}
+            onChangeText={text => setOtpInPos(index, text)}
+            ref={refs[index]}
+            keyboardType={'numeric'}
+        />
+    );
+
     return (
         <View style={[styles.otpButtonCon]}>
-            <TextInput
-                maxLength={1}
-                style={styles.otpButton}
-                value={otp[0]}
-                autoFocus
-                onKeyPress={e => handleKeyPress(0, e)}
-                onChangeText={text => setOtpInPos(0, text)}
-                ref={ref1}
-                keyboardType={'numeric'}
-            />
-            <TextInput
-                maxLength={1}
-                style={styles.otpButton}
-                value={otp[1]}
-                onKeyPress={e => handleKeyPress(1, e)}
-                onChangeText={text => setOtpInPos(1, text)}
-                ref={ref2}
-                keyboardType={'numeric'}
-            />
-            <TextInput
-                maxLength={1}
-                style={styles.otpButton}
-                value={otp[2]}
-                onKeyPress={e => handleKeyPress(2, e)}
-                onChangeText={text => setOtpInPos(2, text)}
-                ref={ref3}
-                keyboardType={'numeric'}
-            />
-            <TextInput
-                maxLength={1}
-                style={[styles.otpButton, styles.otpButtonLast]}
-                value={otp[3]}
-                onKeyPress={e => handleKeyPress(3, e)}
-                onChangeText={text => setOtpInPos(3, text)}
-                ref={ref4}
-                keyboardType={'numeric'}
-            />
+            {createTextInput(0)}
+            {createTextInput(1)}
+            {createTextInput(2)}
+            {createTextInput(3)}
         </View>
     );
 };

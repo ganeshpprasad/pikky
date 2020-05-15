@@ -2,7 +2,7 @@ import {Navigation} from 'react-native-navigation';
 
 import Landing from './screens/Login';
 import UserAccount from './screens/UserAccount';
-import {LOGIN, USER_ACCCOUNT} from './screens/constants';
+import {LOGIN, USER_ACCCOUNT} from './screens';
 
 Navigation.registerComponent(LOGIN, () => Landing);
 Navigation.registerComponent(USER_ACCCOUNT, () => UserAccount);
