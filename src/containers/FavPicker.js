@@ -11,30 +11,7 @@ import ChatTextInput from '../components/chatTexInput';
 // styles
 import {styles} from '../styles/userButtonStyle';
 
-const options = [
-    {
-        name: 'Idly',
-        isSelected: false,
-        id: 1,
-    },
-    {
-        name: 'Omlets',
-        isSelected: false,
-        id: 2,
-    },
-    {
-        name: 'Rotis',
-        isSelected: false,
-        id: 3,
-    },
-    {
-        name: 'Cereal',
-        isSelected: false,
-        id: 4,
-    },
-];
-
-const FavPicker = ({optionsArray, chatNextCallback}) => {
+const FavPicker = ({options, chatNextCallback}) => {
     const [selectedOptions, setSelectedOptions] = useState([...options]);
     const [textValue, setTextValue] = useState('');
     const textRef = useRef(null);
@@ -45,10 +22,8 @@ const FavPicker = ({optionsArray, chatNextCallback}) => {
             _selectedOptions.push(item);
             _setTextValue('');
         } else if (selectedOptions[index].isSelected) {
-            console.log('umsg', item);
             _selectedOptions[index].isSelected = false;
         } else {
-            console.log('setSelectedOptions', selectedOptions);
             _selectedOptions[index].isSelected = true;
         }
         setSelectedOptions([..._selectedOptions]);
@@ -87,6 +62,7 @@ const FavPicker = ({optionsArray, chatNextCallback}) => {
                 setText={_setTextValue}
                 placeholder={'Add More'}
                 onSubmitEditing={_onSubmitEditing}
+                extraTextStyle={{marginTop: 10, width: '50%'}}
             />
             <Chatbutton
                 list={{name: 'Next'}}

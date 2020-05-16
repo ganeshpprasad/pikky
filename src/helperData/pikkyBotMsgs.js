@@ -84,6 +84,27 @@ export const onBoardingData = [
     ],
     [
         {
+            msg:
+                'What food did you grow up eating? Let me know at least three.',
+            type: msgTypes.PIKKY,
+        },
+    ],
+    [
+        {
+            msg:
+                'Quite a South Indian spice :) We’ve got a lot of flavours for you!',
+            type: msgTypes.PIKKY,
+        },
+    ],
+    [
+        {
+            msg:
+                'Now let’s talk love. Swipe left or right, like you always do :)',
+            type: msgTypes.PIKKY,
+        },
+    ],
+    [
+        {
             // msg: 'Let us locate you to serve from restaurants around.',
             // type: msgTypes.PIKKY,
         },

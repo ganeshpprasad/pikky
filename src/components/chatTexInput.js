@@ -10,7 +10,7 @@ export default class ChatTextInput extends PureComponent {
                 {this.props.pretext ? <Text> {this.props.pretext}</Text> : null}
                 <TextInput
                     ref={this.props.textRef}
-                    autoFocus
+                    autoFocus={this.props.autoFocus ? true : false}
                     keyboardType={this.props.numericKeyboard ? 'numeric' : null}
                     style={[styles.textInput, this.props.style]}
                     value={

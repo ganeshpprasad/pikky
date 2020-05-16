@@ -10,7 +10,7 @@ const PikkyMessageItem = props => {
             style={[
                 styles.pikkyMsgCon,
                 styles.msgCon,
-                finalScreenStyles.pikkyMsgYellow,
+                props.isWhiteMsg ? null : finalScreenStyles.pikkyMsgYellow,
             ]}>
             <Text style={styles.botMsgText}>{props.msg}</Text>
         </View>
