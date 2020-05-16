@@ -30,8 +30,8 @@ export const styles = StyleSheet.create({
     chatConFullScreen: {
         backgroundColor: 'rgb(255, 230, 72)',
         flexGrow: 1,
-        height: screenHeight - 120,
+        height: screenHeight,
         // paddingTop: 50,
-        paddingBottom: 60,
+        // paddingBottom: 60,
     },
 });

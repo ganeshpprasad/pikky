@@ -44,7 +44,7 @@ export const styles = StyleSheet.create({
         flexDirection: 'column',
         margin: 10,
         flexGrow: 1,
-        paddingBottom: 300,
+        // paddingBottom: 300,
     },
     gridView: {
         flexWrap: 'wrap',

@@ -105,7 +105,6 @@ const favPickerStyles = StyleSheet.create({
         flexDirection: 'column',
         margin: 10,
         flexGrow: 1,
-        paddingBottom: 300,
     },
     button: {
         width: '40%',

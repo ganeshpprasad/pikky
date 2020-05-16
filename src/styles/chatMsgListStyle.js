@@ -36,7 +36,7 @@ export const styles = StyleSheet.create({
         fontSize: 18,
     },
     chatMsgsListCon: {
-        flexShrink: 1,
+        // flexShrink: 1,
         padding: 10,
         // backgroundColor: '#ef1',
     },

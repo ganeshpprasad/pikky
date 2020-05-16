@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
         // flex: 1,
         // backgroundColor: '#3fa',
         maxHeight: Dimensions.get('screen').height - 150,
-        margin: 10,
+        // margin: 10,
         // justifyContent: 'center',
     },
 });

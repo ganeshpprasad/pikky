@@ -61,7 +61,7 @@ const topbarRender = msgNumber =>
 const ChatCon = (msgNumber, msgData, setUserMsgNumber, componentId) => (
     <KeyboardAvoidingView
         behavior={Platform.Os === 'ios' ? 'padding' : 'padding'}
-        keyboardVerticalOffset={220}
+        keyboardVerticalOffset={100}
         style={msgNumber > 0 ? chatConFullScreen : chatCon}>
         {topbarRender(msgNumber)}
         <OnBoardChat

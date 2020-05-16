@@ -2,6 +2,10 @@ import React from 'react';
 import {View, Text, FlatList} from 'react-native';
 // import * as Animatable from 'react-native-animatable';
 
+// components
+import UserButton from './userButton';
+
+// styles
 import {styles} from '../styles/chatMsgListStyle';
 import {msgTypes} from '../helperData/pikkyBotMsgs';
 
@@ -35,13 +39,20 @@ const MsgItem = ({item}) => {
     return item.map(msgItemCb);
 };
 
-const ChatMsgList = ({msgData}) => {
+const ChatMsgList = ({msgData, userMsg, componentId, setmsgNumber}) => {
     return (
         <View style={chatMsgsListCon}>
             <FlatList
                 inverted
                 data={msgData}
                 renderItem={({item}) => <MsgItem item={item} />}
+                ListHeaderComponent={() => (
+                    <UserButton
+                        userMsg={userMsg}
+                        componentId={componentId}
+                        setmsgNumber={setmsgNumber}
+                    />
+                )}
             />
         </View>
     );
