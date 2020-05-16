@@ -3,7 +3,7 @@ import {Text, View, TextInput} from 'react-native';
 
 import {styles} from '../styles/userButtonStyle';
 
-export default class Chatbutton extends PureComponent {
+export default class ChatTextInput extends PureComponent {
     render() {
         return (
             <View style={[styles.userText, this.props.extraTextStyle]}>
@@ -11,10 +11,8 @@ export default class Chatbutton extends PureComponent {
                 <TextInput
                     ref={this.props.textRef}
                     autoFocus
-                    keyboardType={
-                        this.props.numericKeyboard ? 'numeric' : 'default'
-                    }
-                    style={styles.textInput}
+                    keyboardType={this.props.numericKeyboard ? 'numeric' : null}
+                    style={[styles.textInput, this.props.style]}
                     value={
                         this.props.textValue.length > 0
                             ? this.props.textValue
@@ -24,6 +22,8 @@ export default class Chatbutton extends PureComponent {
                     placeholder={
                         this.props.placeholder ? this.props.placeholder : null
                     }
+                    onKeyPress={this.props.onKeyPress}
+                    onSubmitEditing={this.props.onSubmitEditing}
                 />
             </View>
         );

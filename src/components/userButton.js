@@ -1,6 +1,8 @@
 import React, {useState, useRef} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import {GoogleSignin, statusCodes} from '@react-native-community/google-signin';
+import {Navigation} from 'react-native-navigation';
+// import {View} from "react-native-animatable";
 
 GoogleSignin.configure({
     // scopes: ['https://www.googleapis.com/auth/drive.readonly'], // what API you want to access on behalf of the user, default is email and profile
@@ -14,18 +16,19 @@ GoogleSignin.configure({
     accountName: '', // [Android] specifies an account name on the device that should be used
     // iosClientId: '<FROM DEVELOPER CONSOLE>', // [iOS] optional, if you want to specify the client ID of type iOS
 });
-import {Navigation} from 'react-native-navigation';
-// import {View} from "react-native-animatable";
 
+// constants
 import {USER_ACCCOUNT} from '../screens';
 
-import ChatTextInput from './chatTexInput';
+// components
 import GenderButtons from './GenderButtons';
-
+// containers
+import FavPicker from '../containers/FavPicker';
 import OTPbuttons from '../containers/OTPbuttons';
 import LocationInput from '../containers/LocationInput';
 import UserNameInput from '../containers/UserNameinput';
 import PhoneNumberinput from '../containers/PhoneNumberinput';
+import TwoLevelSelector from '../containers/TwoLevelSelector';
 
 import {styles} from '../styles/userButtonStyle';
 
@@ -66,11 +69,7 @@ const UserButton = ({userMsg, componentId, setmsgNumber}) => {
                     style={[
                         styles.chatButton,
                         color,
-                        {
-                            width: '40%',
-                            alignSelf: 'flex-end',
-                            marginTop: 10,
-                        },
+                        {alignSelf: 'flex-end', width: '40%'},
                     ]}
                     onPress={() => userButtonCallback(umsg)}>
                     <Text style={styles.buttonText}>{umsg.display}</Text>
@@ -164,9 +163,10 @@ const UserButton = ({userMsg, componentId, setmsgNumber}) => {
 
     if (userMsg[0].verticalList) {
         return (
-            <View style={styles.buttonsForLocation}>
-                {userMsg.map(returnUserMsg)}
-            </View>
+            <FavPicker
+                optionsArray={userMsg}
+                chatNextCallback={userButtonCallback}
+            />
         );
     }
 
@@ -180,15 +180,17 @@ const UserButton = ({userMsg, componentId, setmsgNumber}) => {
         );
     }
 
+    if (userMsg[0].isTwoStepSelect) {
+        return (
+            <TwoLevelSelector
+                optionsArray={userMsg}
+                chatNextCallback={userButtonCallback}
+            />
+        );
+    }
+
     return (
-        <View
-            style={
-                userMsg[0].isSubmit
-                    ? userMsg[0].id === 15
-                        ? styles.buttonsForLocation
-                        : styles.buttonsWithSubmit
-                    : styles.buttonDefaultCon
-            }>
+        <View style={styles.buttonsWithSubmit}>
             {userMsg.map(returnUserMsg)}
         </View>
     );
