@@ -182,6 +182,36 @@ const UserButton = ({userMsg, componentId, setmsgNumber}) => {
         );
     }
 
+    if (userMsg[0].id === 22) {
+        return (
+            <View style={styles.buttonsWithSubmit}>
+                {userMsg.map(returnUserMsg)}
+            </View>
+        );
+    }
+    if (userMsg[0].id === 25) {
+        return (
+            <View style={styles.buttonsWithSubmit}>
+                {userMsg.map(returnUserMsg)}
+            </View>
+        );
+    }
+    if (userMsg[0].id === 26) {
+        return (
+            <View style={styles.buttonsWithSubmit}>
+                <TouchableOpacity
+                    style={[
+                        styles.chatButton,
+                        styles.submitCon,
+                        {alignSelf: 'flex-end', width: '40%'},
+                    ]}
+                    // onPress={() => userButtonCallback(userMsg[0])}
+                >
+                    <Text style={styles.buttonText}>{userMsg[0].display}</Text>
+                </TouchableOpacity>
+            </View>
+        );
+    }
     if (userMsg[0].id === 24) {
         return (
             <FavPicker
@@ -193,7 +223,7 @@ const UserButton = ({userMsg, componentId, setmsgNumber}) => {
     }
 
     return (
-        <View style={styles.buttonsWithSubmit}>
+        <View style={styles.buttonDefaultCon}>
             {userMsg.map(returnUserMsg)}
         </View>
     );

@@ -38,6 +38,7 @@ const UserNameInput = props => {
         <>
             <>
                 <ChatTextInput
+                    autoFocus={true}
                     umsg={props.userMsg[0]}
                     textRef={textRef}
                     textValue={textValue.length > 0 ? '@' + textValue : ''}

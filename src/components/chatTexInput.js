@@ -9,6 +9,7 @@ export default class ChatTextInput extends PureComponent {
             <View style={[styles.userText, this.props.extraTextStyle]}>
                 {this.props.pretext ? <Text> {this.props.pretext}</Text> : null}
                 <TextInput
+                    maxLength={this.props.maxLength}
                     ref={this.props.textRef}
                     autoFocus={this.props.autoFocus ? true : false}
                     keyboardType={this.props.numericKeyboard ? 'numeric' : null}

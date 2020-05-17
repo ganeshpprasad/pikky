@@ -43,6 +43,7 @@ const ChatMsgList = ({msgData, userMsg, componentId, setmsgNumber}) => {
     return (
         <View style={chatMsgsListCon}>
             <FlatList
+                keyboardShouldPersistTaps="always"
                 inverted
                 data={msgData}
                 renderItem={({item}) => <MsgItem item={item} />}

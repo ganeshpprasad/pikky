@@ -146,7 +146,7 @@ export const userResponses = [
             id: 22,
             isTextInput: false,
             isSelect: false,
-            isSubmit: true,
+            isSubmit: false,
         },
     ],
     [
@@ -183,7 +183,7 @@ export const userResponses = [
     [
         {
             msg: 'food-kinds',
-            display: 'Halal',
+            display: 'Photos will be added',
             type: msgTypes.USER,
             id: 26,
             isTextInput: true,

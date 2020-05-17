@@ -82,7 +82,7 @@ const secondOptions = [
 
 const TwoLevelSelector = ({optionsArray, chatNextCallback}) => {
     const [topOptions, setTopOptions] = useState([...options]);
-    const [bottomOptions, setBottomOptions] = useState([...secondOptions]);
+    const [bottomOptions, setBottomOptions] = useState([]);
 
     const _setTopOptions = (item, index) => {
         let _topOptions = [...topOptions];

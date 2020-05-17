@@ -42,6 +42,10 @@ const PhoneNumberinput = props => {
         <>
             <>
                 <ChatTextInput
+                    extraTextStyle={{width: '60%'}}
+                    style={{letterSpacing: 2, paddingLeft: 10}}
+                    maxLength={10}
+                    autoFocus={true}
                     umsg={props.userMsg[0]}
                     textRef={textRef}
                     textValue={textValue}
