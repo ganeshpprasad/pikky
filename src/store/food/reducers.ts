@@ -6,7 +6,7 @@ const {
         // INSERT_BASE_CUISINE,
         // INSERT_FAV_CUISINE,
         INSERT_PREF,
-        // SEARCH_CUISINE,
+        SEARCH_CUISINE,
     },
     reducer: {LOADING, SUCCESS, ERROR, INIT},
 } = FOOD_ACTION;
@@ -45,6 +45,18 @@ const Food = (state = initialState, {type, payload}: any): any => {
                 loading: false,
                 success: true,
                 preferences: payload,
+            };
+        case constants(action, SEARCH_CUISINE, INIT):
+            return {
+                ...state,
+                searchResults: [],
+            };
+        case constants(action, SEARCH_CUISINE, SUCCESS):
+            return {
+                ...state,
+                loading: false,
+                success: true,
+                searchResults: payload,
             };
         default:
             return state;

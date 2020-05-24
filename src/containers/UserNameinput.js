@@ -38,7 +38,7 @@ const UserNameInput = props => {
 
     let userState = useSelector(s => s.user);
     if (userState.success === true) {
-        props.userButtonCallback(props.userMsg[1]);
+        props.userButtonCallback({msg: userState.name});
     } else if (userState.error === 'Unavailable') {
         setisError('Username not available');
     }

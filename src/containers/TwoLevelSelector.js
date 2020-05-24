@@ -152,13 +152,15 @@ const TwoLevelSelector = ({optionsArray, chatNextCallback}) => {
         foodPref => dispatch(insertFoodPreferences(foodPref)),
         [dispatch],
     );
-
+    let userState = useSelector(s => s.user);
     const _callback = () => {
         let category = bottomOptions.filter(j => j.isSelected).map(k => k.name);
         let _type = topOptions.filter(i => i.isSelected)[0];
+        console.log('insert food pref', _type, category);
         let foodPref = {
             type: _type.name,
             category: category.length > 0 ? category : ['all'],
+            name: userState.name,
         };
         console.log('foodPref', foodPref);
         _insertFoodPreferences(foodPref);
@@ -166,7 +168,9 @@ const TwoLevelSelector = ({optionsArray, chatNextCallback}) => {
 
     let foodState = useSelector(s => s.food);
     if (foodState.preferences) {
-        chatNextCallback({msg: 'Prerenced Updated'});
+        console.log('foodState.preferences', foodState.preferences);
+
+        chatNextCallback({msg: 'Preference Updated'});
     }
 
     return (

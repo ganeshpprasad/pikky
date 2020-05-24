@@ -30,6 +30,7 @@ const LocationInput = props => {
                 longitude: item.longitude,
                 latitude: item.latitude,
             },
+            userName: userState.name,
         };
         insertLocation(userObj);
     };
@@ -101,7 +102,7 @@ const LocationInput = props => {
 
     return (
         <>
-            <TouchableOpacity
+            {/* <TouchableOpacity
                 style={[
                     styles.chatButton,
                     styles.cancelCon,
@@ -116,7 +117,7 @@ const LocationInput = props => {
                 <Text style={styles.buttonText}>
                     {props.userMsg[0].display}
                 </Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             <ChatTextInput
                 extraTextStyle={styles.locationTextInput}
                 umsg={props.userMsg[1]}

@@ -3,10 +3,10 @@ import constants from '../../actions';
 const {
     action,
     type: {
-        // INSERT_BASE_CUISINE,
+        INSERT_BASE_CUISINE,
         INSERT_PREF,
-        // INSERT_FAV_CUISINE,
-        // SEARCH_CUISINE,
+        INSERT_FAV_CUISINE,
+        SEARCH_CUISINE,
     },
     reducer: {INIT},
 } = FOOD_ACTION;
@@ -16,3 +16,22 @@ export const insertFoodPreferences = (foodData: any) => ({
     type: constants(action, INSERT_PREF, INIT),
     payload: foodData,
 });
+
+export const saveBaseCuisine = (foodData: any) => ({
+    type: constants(action, INSERT_BASE_CUISINE, INIT),
+    payload: foodData,
+});
+
+export const saveFavCuisine = (foodData: any) => ({
+    type: constants(action, INSERT_FAV_CUISINE, INIT),
+    payload: foodData,
+});
+
+export const searchCuisine = (foodData: any) => {
+    console.log('searchCuisine', foodData);
+
+    return {
+        type: constants(action, SEARCH_CUISINE, INIT),
+        payload: foodData,
+    };
+};

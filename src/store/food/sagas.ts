@@ -9,7 +9,7 @@ const {
         // INSERT_BASE_CUISINE,
         // INSERT_FAV_CUISINE,
         INSERT_PREF,
-        // SEARCH_CUISINE,
+        SEARCH_CUISINE,
     },
     reducer: {LOADING, ERROR, SUCCESS, INIT},
 } = FOOD_ACTION;
@@ -21,14 +21,16 @@ async function fetchInsertPreferences(payload) {
     // TODO payload load it maan
 
     var requestOptions = {
-        method: 'GET',
-        params: {
-            newUserName: payload.userName,
-            newUserFoodPref: payload.prefs,
-        },
+        method: 'POST',
     };
-    console.log('makingapi', requestOptions);
-    let url = `http://134.209.5.234:5000/insert_food_preference`;
+    let jsonString = JSON.stringify({
+        type: payload.type,
+        category: payload.category,
+    });
+    console.log('makingapi', jsonString);
+    let url = `http://pikky.io:5000/api/insert_food_preference?newUserName=${
+        payload.name
+    }&newUserFoodPref=${jsonString}`;
     try {
         console.log('url >>>> ', url);
         const response = await fetch(url, requestOptions);
@@ -70,4 +72,59 @@ function* insertPrefs({payload}) {
 
 export function* foodPrefs() {
     yield takeEvery<any>(constants(action, INSERT_PREF, INIT), insertPrefs);
+}
+
+async function fetchSearchCuisines(payload) {
+    // TODO payload load it maan
+
+    var requestOptions = {
+        method: 'POST',
+    };
+    console.log('makingapi', requestOptions);
+    let url = `http://pikky.io:5000/api/search_cuisines?cuisine=${payload}`;
+    try {
+        console.log('url >>>> ', url);
+        const response = await fetch(url, requestOptions);
+        // TODO Exception handling based on response
+        const json = response.json();
+        return json;
+    } catch (error) {
+        console.log('error', error);
+        return error;
+    }
+}
+
+function* _searchCuisines({payload}) {
+    console.log('insertPrefs');
+
+    yield put({
+        type: constants(action, SEARCH_CUISINE, LOADING),
+    });
+    try {
+        console.log('wtf');
+        const json = yield call(fetchSearchCuisines, payload);
+        // TODO ERROR CHECK FOR LOGIN FAIL
+        console.log('wtf2', json);
+
+        // if (json.status === 'success') {
+        yield put({
+            type: constants(action, SEARCH_CUISINE, SUCCESS),
+            payload: json,
+        });
+        // }
+    } catch (e) {
+        console.log('ee', e);
+
+        yield put({
+            type: constants(action, SEARCH_CUISINE, ERROR),
+            payload: e,
+        });
+    }
+}
+
+export function* searchCuisines() {
+    yield takeEvery<any>(
+        constants(action, SEARCH_CUISINE, INIT),
+        _searchCuisines,
+    );
 }

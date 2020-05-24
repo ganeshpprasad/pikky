@@ -18,13 +18,14 @@ async function fetchInsertUserNameApi(userName) {
     var requestOptions = {
         method: 'POST',
     };
-    console.log('makingapi');
-    let url = `http://134.209.5.234:5000/api/insert_username?newUserName=alaa`;
+    console.log('makingapi', userName);
+    let url = `http://pikky.io:5000/api/insert_username?newUserName=${userName}`;
     try {
-        console.log('url >>>> ', url);
         const response = await fetch(url, requestOptions);
         // TODO Exception handling based on response
-        return await response.json();
+        let json = response.json();
+        console.log('response', response, json);
+        return json;
     } catch (error) {
         console.log('error', error);
         return error;
@@ -36,19 +37,18 @@ async function updateUserDetailsApi(userDetails) {
 
     var requestOptions = {
         method: 'POST',
-        params: {
-            newUserGender: userDetails.gender,
-            newUserCity: userDetails.cityCoords,
-        },
     };
-    console.log('makingapi');
-    let url = `http://134.209.5.234:5000/api/insert_personal_details`;
+    console.log('makingapi', userDetails);
+    let url = `http://pikky.io:5000/api/insert_personal_details?newUserName=${
+        userDetails.userName
+    }&newUserFirstName=Sanjays&newUserLastName=Naidu&newUserGender=${
+        userDetails.gender
+    }&newUserDOB=25/01/1885&newUserCity=${userDetails.city}`;
     try {
-        console.log('url >>>> ', url);
         const response = await fetch(url, requestOptions);
         // TODO Exception handling based on response
-        console.log('response >>>> ', response);
-        return await response.json();
+        let json = response.json();
+        return json;
     } catch (error) {
         console.log('error', error);
         return error;
@@ -65,14 +65,14 @@ function* _updateUserDetails({payload}) {
         console.log('wtf');
         const json = yield call(updateUserDetailsApi, payload);
         // TODO ERROR CHECK FOR LOGIN FAIL
-        console.log('wtf2', json.data);
+        console.log('wtf2', json);
 
-        // if (json.status === 'success') {
-        yield put({
-            type: constants(action, UPDATE_DETAILS, SUCCESS),
-            payload: json,
-        });
-        // }
+        if (json.status === 'success') {
+            yield put({
+                type: constants(action, UPDATE_DETAILS, SUCCESS),
+                payload: json,
+            });
+        }
     } catch (e) {
         console.log('ee', e);
 
@@ -91,14 +91,14 @@ function* _insertUserName({payload}) {
         console.log('wtf');
         const json = yield call(fetchInsertUserNameApi, payload);
         // TODO ERROR CHECK FOR LOGIN FAIL
-        console.log('wtf2', json.data);
+        console.log('wtf2', json);
 
-        // if (json.status === 'success') {
-        yield put({
-            type: constants(action, INSERT_USERNAME, SUCCESS),
-            payload: json,
-        });
-        // }
+        if (json.status === 'success') {
+            yield put({
+                type: constants(action, INSERT_USERNAME, SUCCESS),
+                payload: json,
+            });
+        }
     } catch (e) {
         console.log('ee', e);
 

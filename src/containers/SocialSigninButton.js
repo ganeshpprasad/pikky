@@ -52,7 +52,7 @@ const SocialSigninButton = props => {
     let authState = useSelector(s => s.auth);
 
     if (authState.success === true) {
-        props.userButtonCallback(MSG_NUM_OF_LOGIN_DONE);
+        props.userButtonCallback(MSG_NUM_OF_LOGIN_DONE, {msg: 'Social Login'});
     }
 
     let loginToPikky = useCallback(

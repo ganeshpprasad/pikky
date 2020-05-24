@@ -25,6 +25,7 @@ const User = (state = initialState, {type, payload}: any): any => {
         case constants(action, INSERT_USERNAME, INIT):
             return {
                 ...state,
+                name: payload,
                 init: true,
             };
         case constants(action, INSERT_USERNAME, ERROR):

@@ -9,8 +9,9 @@ export const useOnBoardChat = onBoardingData => {
             setMsgData(msgs => [onBoardingData[msgNumber], ...msgs]);
     }, [msgNumber, onBoardingData]);
 
-    const goto = msgNumber => {
+    const goto = (msgNumber, msg) => {
         setmsgNumber(msgNumber);
+        // setMsgData(msgs => [ ...msgs]);
     };
 
     const setUserMsgNumber = userMsg => {

@@ -77,7 +77,7 @@ const UserButton = ({userMsg, componentId, setmsgNumber, goto}) => {
                 <SocialSigninButton
                     umsg={userMsg[0]}
                     color={styles.cancelCon}
-                    userButtonCallback={i => goto(i)}
+                    userButtonCallback={(i, n) => goto(i, n)}
                 />
                 {/* <TouchableOpacity
                     style={[styles.chatButton, styles.cancelCon]}
@@ -161,6 +161,7 @@ const UserButton = ({userMsg, componentId, setmsgNumber, goto}) => {
                 options={options}
                 optionsArray={userMsg}
                 chatNextCallback={userButtonCallback}
+                isFav={false}
             />
         );
     }
@@ -210,6 +211,7 @@ const UserButton = ({userMsg, componentId, setmsgNumber, goto}) => {
                 options={options2}
                 optionsArray={userMsg}
                 chatNextCallback={userButtonCallback}
+                isFav={true}
             />
         );
     }
