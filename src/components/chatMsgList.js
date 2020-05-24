@@ -39,7 +39,7 @@ const MsgItem = ({item}) => {
     return item.map(msgItemCb);
 };
 
-const ChatMsgList = ({msgData, userMsg, componentId, setmsgNumber}) => {
+const ChatMsgList = ({msgData, userMsg, componentId, setmsgNumber, goto}) => {
     return (
         <View style={chatMsgsListCon}>
             <FlatList
@@ -52,6 +52,7 @@ const ChatMsgList = ({msgData, userMsg, componentId, setmsgNumber}) => {
                         userMsg={userMsg}
                         componentId={componentId}
                         setmsgNumber={setmsgNumber}
+                        goto={goto}
                     />
                 )}
             />

@@ -10,6 +10,7 @@ const OnBoardChat = ({
     msgNumber,
     componentId,
     userResponses,
+    goto,
 }) => {
     const userMsg = userResponses[msgNumber] || {msg: 'Next'};
     return (
@@ -19,6 +20,7 @@ const OnBoardChat = ({
                 userMsg={userMsg}
                 componentId={componentId}
                 setmsgNumber={setmsgNumber}
+                goto={goto}
             />
         </View>
     );

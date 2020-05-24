@@ -9,6 +9,10 @@ export const useOnBoardChat = onBoardingData => {
             setMsgData(msgs => [onBoardingData[msgNumber], ...msgs]);
     }, [msgNumber, onBoardingData]);
 
+    const goto = msgNumber => {
+        setmsgNumber(msgNumber);
+    };
+
     const setUserMsgNumber = userMsg => {
         setMsgData(msgs => [[userMsg], ...msgs]);
         setmsgNumber(_msgNumber => _msgNumber + 1);
@@ -18,5 +22,6 @@ export const useOnBoardChat = onBoardingData => {
         msgNumber,
         setUserMsgNumber,
         msgData,
+        goto,
     };
 };

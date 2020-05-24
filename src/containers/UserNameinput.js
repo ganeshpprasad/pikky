@@ -1,9 +1,12 @@
-import React, {useRef, useState} from 'react';
+import React, {useRef, useState, useCallback} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
+
 import {Text, TouchableOpacity} from 'react-native';
 
 import ChatTextInput from '../components/chatTexInput';
 
 import {styles} from '../styles/userButtonStyle';
+import {insertUserName} from '../store/user/actions';
 
 const UserNameInput = props => {
     const textRef = useRef(null);
@@ -20,13 +23,25 @@ const UserNameInput = props => {
         setisError('');
     };
 
+    const dispatch = useDispatch();
+    let _insertUserName = useCallback(
+        userName => dispatch(insertUserName(userName)),
+        [dispatch],
+    );
     const _callback = () => {
         if (textValue.length < 1) {
             setisError('Username cannot be empty');
             return;
         }
-        props.userButtonCallback(props.userMsg[1]);
+        _insertUserName(textValue);
     };
+
+    let userState = useSelector(s => s.user);
+    if (userState.success === true) {
+        props.userButtonCallback(props.userMsg[1]);
+    } else if (userState.error === 'Unavailable') {
+        setisError('Username not available');
+    }
 
     const ErrorMsg = () => {
         if (isError.length > 0) {

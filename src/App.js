@@ -1,10 +1,21 @@
 import {Navigation} from 'react-native-navigation';
 
-import Landing from './screens/Login';
-import UserAccount from './screens/UserAccount';
+// store
+import {withReducer, withReduxProvider} from './store';
+
+// screens
 import {LOGIN, USER_ACCCOUNT} from './screens';
 
-Navigation.registerComponent(LOGIN, () => Landing);
+import Login from './screens/Login';
+import UserAccount from './screens/UserAccount';
+
+const Screens = new Map();
+Screens.set(LOGIN, Login);
+
+Screens.forEach((C, key) => {
+    Navigation.registerComponent(key, () => withReduxProvider(C), () => C);
+});
+
 Navigation.registerComponent(USER_ACCCOUNT, () => UserAccount);
 
 const App = () => {

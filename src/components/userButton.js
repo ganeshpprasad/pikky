@@ -1,23 +1,9 @@
 import React, {useState, useRef} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
-import {GoogleSignin, statusCodes} from '@react-native-community/google-signin';
 import {Navigation} from 'react-native-navigation';
 // import {View} from "react-native-animatable";
 
 import {options, options2} from '../helperData/food';
-
-// GoogleSignin.configure({
-//     // scopes: ['https://www.googleapis.com/auth/drive.readonly'], // what API you want to access on behalf of the user, default is email and profile
-//     client_id:
-//         '235278786718-nat9vk6f9c6p9orov5d9ur66n2kse9pm.apps.googleusercontent.com',
-//     // webClientId: '', // client ID of type WEB for your server (needed to verify user ID and offline access)
-//     // offlineAccess: true, // if you want to access Google API on behalf of the user FROM YOUR SERVER
-//     // hostedDomain: '', // specifies a hosted domain restriction
-//     // loginHint: '', // [iOS] The user's ID, or email address, to be prefilled in the authentication UI if possible. [See docs here](https://developers.google.com/identity/sign-in/ios/api/interface_g_i_d_sign_in.html#a0a68c7504c31ab0b728432565f6e33fd)
-//     forceCodeForRefreshToken: true, // [Android] related to `serverAuthCode`, read the docs link below *.
-//     accountName: '', // [Android] specifies an account name on the device that should be used
-//     // iosClientId: '<FROM DEVELOPER CONSOLE>', // [iOS] optional, if you want to specify the client ID of type iOS
-// });
 
 // constants
 import {USER_ACCCOUNT} from '../screens';
@@ -31,10 +17,11 @@ import LocationInput from '../containers/LocationInput';
 import UserNameInput from '../containers/UserNameinput';
 import PhoneNumberinput from '../containers/PhoneNumberinput';
 import TwoLevelSelector from '../containers/TwoLevelSelector';
+import SocialSigninButton from '../containers/SocialSigninButton';
 
 import {styles} from '../styles/userButtonStyle';
 
-const UserButton = ({userMsg, componentId, setmsgNumber}) => {
+const UserButton = ({userMsg, componentId, setmsgNumber, goto}) => {
     const navigateToNext = () => {
         Navigation.push(componentId, {
             component: {
@@ -87,11 +74,16 @@ const UserButton = ({userMsg, componentId, setmsgNumber}) => {
     if (userMsg[0].id === 4) {
         return (
             <View style={styles.buttonDefaultCon}>
-                <TouchableOpacity
+                <SocialSigninButton
+                    umsg={userMsg[0]}
+                    color={styles.cancelCon}
+                    userButtonCallback={i => goto(i)}
+                />
+                {/* <TouchableOpacity
                     style={[styles.chatButton, styles.cancelCon]}
                     onPress={() => userButtonCallback(userMsg[0])}>
                     <Text style={styles.buttonText}>{userMsg[0].display}</Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
                 <TouchableOpacity
                     style={[styles.chatButton, styles.submitCon]}
                     onPress={() => userButtonCallback(userMsg[1])}>

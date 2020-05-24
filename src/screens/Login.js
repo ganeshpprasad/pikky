@@ -11,6 +11,7 @@ import {
     StatusBar,
     View,
 } from 'react-native';
+import {useSelector} from 'react-redux';
 
 import ImageItem from '../components/ImageItem';
 import OnBoardChat from '../components/onBoardChat';
@@ -58,7 +59,7 @@ const topbarRender = msgNumber =>
         </View>
     ) : null;
 
-const ChatCon = (msgNumber, msgData, setUserMsgNumber, componentId) => (
+const ChatCon = (msgNumber, msgData, setUserMsgNumber, componentId, goto) => (
     <KeyboardAvoidingView
         behavior={Platform.Os === 'ios' ? 'padding' : 'padding'}
         keyboardVerticalOffset={100}
@@ -70,14 +71,19 @@ const ChatCon = (msgNumber, msgData, setUserMsgNumber, componentId) => (
             msgNumber={msgNumber}
             componentId={componentId}
             userResponses={userResponses}
+            goto={goto}
         />
     </KeyboardAvoidingView>
 );
 
 const Login = props => {
-    const {msgData, setUserMsgNumber, msgNumber} = useOnBoardChat(
+    const {msgData, setUserMsgNumber, msgNumber, goto} = useOnBoardChat(
         onBoardingData,
     );
+
+    let auth = useSelector(s => s.auth);
+    // if auth.data.userId ? main screen or else continue
+    console.log('auth', auth);
 
     return (
         <>
@@ -90,6 +96,7 @@ const Login = props => {
                         msgData,
                         setUserMsgNumber,
                         props.componentId,
+                        goto,
                     )}
                 </View>
             </SafeAreaView>
