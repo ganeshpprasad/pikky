@@ -19,12 +19,12 @@ async function fetchInsertSocialTokenApi(payload) {
         method: 'POST',
     };
     console.log('makingapi');
-    let url = `http://134.209.5.234:5000/insert_social_token?token=${'ab'}&user_id=3`;
+    let url = `http://pikky.io:5000/api/insert_social_token?user_id=246228&token=alasdf`;
     try {
-        console.log('url >>>> ', url);
         const response = await fetch(url, requestOptions);
         // TODO Exception handling based on response
-        return await response.json();
+        let json = response.json();
+        return json;
     } catch (error) {
         console.log('error', error);
         return error;
@@ -36,17 +36,17 @@ function* socialLogin({payload}) {
         type: constants(action, SOCIAL_LOGIN, LOADING),
     });
     try {
-        console.log('wtf');
         const json = yield call(fetchInsertSocialTokenApi, payload);
         // TODO ERROR CHECK FOR LOGIN FAIL
-        console.log('wtf2', json.data);
 
-        // if (json.status === 'success') {
-        yield put({
-            type: constants(action, SOCIAL_LOGIN, SUCCESS),
-            payload: json,
-        });
-        // }
+        if (json.status === 'success') {
+            yield put({
+                type: constants(action, SOCIAL_LOGIN, SUCCESS),
+                payload: json,
+            });
+        } else {
+            throw json.message;
+        }
     } catch (e) {
         console.log('ee', e);
 
