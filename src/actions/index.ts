@@ -15,7 +15,11 @@ export const LOGIN_ACTION = {
 
 export const USER_ACTION = {
     action: 'user',
-    type: {INSERT_USERNAME: 'insert_username'},
+    type: {
+        INSERT_USERNAME: 'insert_username',
+        SET_GENDER: 'set_gender',
+        UPDATE_DETAILS: 'update_details',
+    },
     reducer: {...default_reducers},
 };
 

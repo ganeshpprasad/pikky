@@ -2,7 +2,7 @@ import {USER_ACTION} from '../../actions';
 import constants from '../../actions/';
 const {
     action,
-    type: {INSERT_USERNAME},
+    type: {INSERT_USERNAME, SET_GENDER, UPDATE_DETAILS},
     reducer: {LOADING, SUCCESS, ERROR, INIT},
 } = USER_ACTION;
 
@@ -40,6 +40,20 @@ const User = (state = initialState, {type, payload}: any): any => {
                 loading: false,
                 success: true,
                 data: payload,
+            };
+        case constants(action, SET_GENDER, SUCCESS):
+            return {
+                ...state,
+                loading: false,
+                success: true,
+                gender: payload,
+            };
+        case constants(action, UPDATE_DETAILS, SUCCESS):
+            return {
+                ...state,
+                loading: false,
+                success: true,
+                city: payload,
             };
         default:
             return state;

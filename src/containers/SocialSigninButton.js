@@ -50,7 +50,6 @@ const SocialSigninButton = props => {
     // actions
     const dispatch = useDispatch();
     let authState = useSelector(s => s.auth);
-    console.log('authState', authState);
 
     if (authState.success === true) {
         props.userButtonCallback(MSG_NUM_OF_LOGIN_DONE);

@@ -1,23 +1,42 @@
-import React, {useEffect, useState, useRef} from 'react';
+import React, {useEffect, useState, useRef, useCallback} from 'react';
 import {TouchableOpacity, Image, Text, FlatList} from 'react-native';
-import GetLocation from 'react-native-get-location';
-import ChatTextInput from '../components/chatTexInput';
-import RNGooglePlaces from 'react-native-google-places';
+import {useDispatch, useSelector} from 'react-redux';
 import {debounce} from 'lodash';
+import GetLocation from 'react-native-get-location';
+import RNGooglePlaces from 'react-native-google-places';
 
+import {updateUserDetails} from '../store/user/actions';
+
+import ChatTextInput from '../components/chatTexInput';
 import {styles} from '../styles/userButtonStyle';
-
-const getLocation = async () => {
-    const location = await GetLocation.getCurrentPosition({
-        enableHighAccuracy: true,
-        timeout: 15000,
-    });
-};
 
 const LocationInput = props => {
     const [locations, setLocation] = useState([]);
     const [textValue, setText] = useState('');
     const textRef = useRef(null);
+    let dispatch = useDispatch();
+    let insertLocation = useCallback(
+        location => dispatch(updateUserDetails(location)),
+        [dispatch],
+    );
+
+    let userState = useSelector(s => s.user);
+
+    let _updateUserDetails = item => {
+        console.log('items', item);
+        let userObj = {
+            gender: userState.gender,
+            city: item.primaryText || {
+                longitude: item.longitude,
+                latitude: item.latitude,
+            },
+        };
+        insertLocation(userObj);
+    };
+
+    if (userState.city) {
+        props.userButtonCallback({msg: userState.city || 'city name'});
+    }
 
     const LocationItem = ({item}) => (
         <TouchableOpacity
@@ -25,6 +44,7 @@ const LocationInput = props => {
                 console.log('loc', item);
                 // userButtonCallback({id: 16});
                 setLocation([]);
+                _updateUserDetails(item);
                 props.userButtonCallback(props.userMsg[0]);
             }}
             key={item.placeID}
@@ -51,9 +71,12 @@ const LocationInput = props => {
 
     useEffect(
         debounce(() => {
+            if (textValue.length < 1) {
+                return [];
+            }
             RNGooglePlaces.getAutocompletePredictions(textValue, {
                 country: 'IN',
-                types: ['geocode', 'address', 'establishment', 'regions'],
+                types: ['cities'],
             })
                 .then(place => {
                     console.log('place, ', place);
@@ -69,9 +92,11 @@ const LocationInput = props => {
         [textValue],
     );
 
-    const locateAutomatically = () => {
-        getLocation();
-        props.userButtonCallback(props.userMsg[0]);
+    const locateAutomatically = async () => {
+        GetLocation.getCurrentPosition({
+            enableHighAccuracy: true,
+            timeout: 15000,
+        }).then(location => _updateUserDetails(location));
     };
 
     return (
