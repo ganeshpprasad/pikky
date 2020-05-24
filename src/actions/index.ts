@@ -23,6 +23,17 @@ export const USER_ACTION = {
     reducer: {...default_reducers},
 };
 
+export const FOOD_ACTION = {
+    action: 'food',
+    type: {
+        INSERT_PREF: 'insert_preferences',
+        SEARCH_CUISINE: 'search_cuisine',
+        INSERT_BASE_CUISINE: 'insert_base_cuisine',
+        INSERT_FAV_CUISINE: 'insert_fav_cuisine',
+    },
+    reducer: {...default_reducers},
+};
+
 export default function constants(action: any, type: any, reducer: any) {
     return `${type}/${action}/_/${reducer}`;
 }

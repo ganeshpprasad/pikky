@@ -65,20 +65,13 @@ export const onBoardingData = [
     ],
     [
         {
+            msg: 'What are your food preferences?',
+            type: msgTypes.PIKKY,
+        },
+    ],
+    [
+        {
             msg: 'Alright @moodyfoody, do you have any favourites?',
-            type: msgTypes.PIKKY,
-        },
-    ],
-    [
-        {
-            msg: 'Now that’s an explorer!',
-            type: msgTypes.PIKKY,
-        },
-    ],
-    [
-        {
-            msg:
-                'What are your food preferences? Make as many choices you like.',
             type: msgTypes.PIKKY,
         },
     ],
@@ -86,6 +79,12 @@ export const onBoardingData = [
         {
             msg:
                 'What food did you grow up eating? Let me know at least three.',
+            type: msgTypes.PIKKY,
+        },
+    ],
+    [
+        {
+            msg: 'Now that’s an explorer!',
             type: msgTypes.PIKKY,
         },
     ],

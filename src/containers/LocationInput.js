@@ -35,7 +35,7 @@ const LocationInput = props => {
     };
 
     if (userState.city) {
-        props.userButtonCallback({msg: userState.city || 'city name'});
+        props.userButtonCallback(userState.city);
     }
 
     const LocationItem = ({item}) => (

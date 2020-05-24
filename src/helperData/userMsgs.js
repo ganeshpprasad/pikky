@@ -128,6 +128,27 @@ export const userResponses = [
     ],
     [
         {
+            msg: 'food-kinds',
+            display: 'Vegatarian',
+            type: msgTypes.USER,
+            id: 23,
+            isTextInput: false,
+            isSelect: true,
+            isTwoStepSelect: true,
+        },
+    ],
+    [
+        {
+            msg: 'food-been-eating',
+            display: 'Next',
+            type: msgTypes.USER,
+            id: 24,
+            isTextInput: false,
+            isSelect: true,
+        },
+    ],
+    [
+        {
             msg: 'food-fav',
             display: 'Next',
             type: msgTypes.USER,
@@ -147,27 +168,6 @@ export const userResponses = [
             isTextInput: false,
             isSelect: false,
             isSubmit: false,
-        },
-    ],
-    [
-        {
-            msg: 'food-kinds',
-            display: 'Vegatarian',
-            type: msgTypes.USER,
-            id: 23,
-            isTextInput: false,
-            isSelect: true,
-            isTwoStepSelect: true,
-        },
-    ],
-    [
-        {
-            msg: 'food-been-eating',
-            display: 'Next',
-            type: msgTypes.USER,
-            id: 24,
-            isTextInput: false,
-            isSelect: true,
         },
     ],
     [

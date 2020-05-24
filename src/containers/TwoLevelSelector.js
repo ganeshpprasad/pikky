@@ -1,39 +1,15 @@
-import React, {useState} from 'react';
+import React, {useState, useCallback} from 'react';
 import {StyleSheet, View} from 'react-native';
 
 import {Chatbutton} from '../components/chatbutton';
 import PikkyMessageItem from '../components/PikkyMessageItem';
 
+import {insertFoodPreferences} from '../store/food/actions';
+
 // styles
 import {styles} from '../styles/userButtonStyle';
-
-const options = [
-    {
-        name: 'Veg',
-        isSelected: false,
-        id: 1,
-    },
-    {
-        name: 'Halal',
-        isSelected: false,
-        id: 2,
-    },
-    {
-        name: 'Pescatarian',
-        isSelected: false,
-        id: 3,
-    },
-    {
-        name: 'Vegan',
-        isSelected: false,
-        id: 4,
-    },
-    {
-        name: 'Non-Veg',
-        isSelected: false,
-        id: 5,
-    },
-];
+import {useDispatch} from 'react-redux';
+import {useSelector} from 'react-redux';
 
 const secondOptions = [
     {
@@ -45,7 +21,7 @@ const secondOptions = [
     {
         name: 'SeaFood',
         isSelected: false,
-        typeId: [2, 5, 3],
+        typeId: [2, 5],
         id: 2,
     },
     {
@@ -66,31 +42,45 @@ const secondOptions = [
         typeId: [2, 5],
         id: 4,
     },
-    {
-        name: 'Greek Salad',
-        isSelected: false,
-        typeId: [1],
-        id: 5,
-    },
-    {
-        name: 'Oats',
-        isSelected: false,
-        typeId: [1, 4],
-        id: 6,
-    },
 ];
 
 const TwoLevelSelector = ({optionsArray, chatNextCallback}) => {
+    const options = [
+        {
+            name: 'Veg',
+            isSelected: false,
+            id: 1,
+        },
+        {
+            name: 'Halal',
+            isSelected: false,
+            id: 2,
+        },
+        {
+            name: 'Pescatarian',
+            isSelected: false,
+            id: 3,
+        },
+        {
+            name: 'Vegan',
+            isSelected: false,
+            id: 4,
+        },
+        {
+            name: 'Non-Veg',
+            isSelected: false,
+            id: 5,
+        },
+    ];
+
     const [topOptions, setTopOptions] = useState([...options]);
     const [bottomOptions, setBottomOptions] = useState([]);
 
     const _setTopOptions = (item, index) => {
-        let _topOptions = [...topOptions];
-        if (topOptions[index].isSelected) {
-            _topOptions[index].isSelected = false;
-        } else {
-            _topOptions[index].isSelected = true;
-        }
+        let _topOptions = [...options];
+        console.log('_topOptions', _topOptions, bottomOptions);
+
+        _topOptions[index].isSelected = true;
         // filter selected options and get onlu ids
         let selectedOptions = _topOptions
             .filter(i => i.isSelected)
@@ -157,18 +147,42 @@ const TwoLevelSelector = ({optionsArray, chatNextCallback}) => {
     let msg =
         'You can further choose from the following. Click on the above to change.';
 
+    const dispatch = useDispatch();
+    const _insertFoodPreferences = useCallback(
+        foodPref => dispatch(insertFoodPreferences(foodPref)),
+        [dispatch],
+    );
+
+    const _callback = () => {
+        let category = bottomOptions.filter(j => j.isSelected).map(k => k.name);
+        let _type = topOptions.filter(i => i.isSelected)[0];
+        let foodPref = {
+            type: _type.name,
+            category: category.length > 0 ? category : ['all'],
+        };
+        console.log('foodPref', foodPref);
+        _insertFoodPreferences(foodPref);
+    };
+
+    let foodState = useSelector(s => s.food);
+    if (foodState.preferences) {
+        chatNextCallback({msg: 'Prerenced Updated'});
+    }
+
     return (
         <>
             <View style={favPickerStyles.container}>
                 {topOptions.map(renderChatButtons)}
-                <PikkyMessageItem msg={msg} isWhiteMsg={true} />
+                {bottomOptions.length > 1 && (
+                    <PikkyMessageItem msg={msg} isWhiteMsg={true} />
+                )}
                 {bottomOptions.map(renderBottomOptions)}
             </View>
             <Chatbutton
                 list={{name: 'Next'}}
                 color={styles.submitCon}
                 extraStyle={[favPickerStyles.button, favPickerStyles.righJust]}
-                userButtonCallback={chatNextCallback}
+                userButtonCallback={() => _callback()}
             />
         </>
     );
