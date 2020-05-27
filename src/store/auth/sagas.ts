@@ -19,11 +19,10 @@ async function fetchInsertSocialTokenApi(payload) {
         method: 'POST',
     };
     console.log('makingapi', payload);
-    let url = `http://pikky.io:5000/api/insert_social_token?user_id=${
-        payload.id
-    }&token=${payload.idToken}`;
+    let url = `https://pikky.io/phase1/api/insert_social_token?user_id=${'23'}&token=${'s4'}`;
     try {
         const response = await fetch(url, requestOptions);
+        console.log('response', response);
         // TODO Exception handling based on response
         let json = response.json();
         return json;

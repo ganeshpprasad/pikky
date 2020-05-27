@@ -28,7 +28,7 @@ async function fetchInsertPreferences(payload) {
         category: payload.category,
     });
     console.log('makingapi', jsonString);
-    let url = `http://pikky.io:5000/api/insert_food_preference?newUserName=${
+    let url = `http://pikky.io/phase1/api/insert_food_preference?newUserName=${
         payload.name
     }&newUserFoodPref=${jsonString}`;
     try {
@@ -81,7 +81,7 @@ async function fetchSearchCuisines(payload) {
         method: 'POST',
     };
     console.log('makingapi', requestOptions);
-    let url = `http://pikky.io:5000/api/search_cuisines?cuisine=${payload}`;
+    let url = `http://pikky.io/phase1/api/search_cuisines?cuisine=${payload}`;
     try {
         console.log('url >>>> ', url);
         const response = await fetch(url, requestOptions);

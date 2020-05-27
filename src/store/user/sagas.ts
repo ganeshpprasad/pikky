@@ -12,26 +12,6 @@ const {
 // let BASE_URL = `https://134.209.5.234:5000`;
 // let INSERT_SOCIAL_TOKEN_API = `/api/insert_social_token`;
 
-async function fetchInsertUserNameApi(userName) {
-    // TODO payload load it maan
-
-    var requestOptions = {
-        method: 'POST',
-    };
-    console.log('makingapi', userName);
-    let url = `http://pikky.io:5000/api/insert_username?newUserName=${userName}`;
-    try {
-        const response = await fetch(url, requestOptions);
-        // TODO Exception handling based on response
-        let json = response.json();
-        console.log('response', response, json);
-        return json;
-    } catch (error) {
-        console.log('error', error);
-        return error;
-    }
-}
-
 async function updateUserDetailsApi(userDetails) {
     // TODO payload load it maan
 
@@ -39,7 +19,7 @@ async function updateUserDetailsApi(userDetails) {
         method: 'POST',
     };
     console.log('makingapi', userDetails);
-    let url = `http://pikky.io:5000/api/insert_personal_details?newUserName=${
+    let url = `http://pikky.io/phase1/api/insert_personal_details?newUserName=${
         userDetails.userName
     }&newUserFirstName=Sanjays&newUserLastName=Naidu&newUserGender=${
         userDetails.gender
@@ -83,6 +63,26 @@ function* _updateUserDetails({payload}) {
     }
 }
 
+async function fetchInsertUserNameApi(userName) {
+    // TODO payload load it maan
+
+    var requestOptions = {
+        method: 'POST',
+    };
+    console.log('makingapi', userName);
+    let url = `https://pikky.io/phase1/api/insert_username?newUserName=${userName}`;
+    try {
+        const response = await fetch(url, requestOptions);
+        // TODO Exception handling based on response
+        let json = response.json();
+        console.log('response', response, json);
+        return json;
+    } catch (error) {
+        console.log('error', error);
+        return error;
+    }
+}
+
 function* _insertUserName({payload}) {
     yield put({
         type: constants(action, INSERT_USERNAME, LOADING),
@@ -96,6 +96,11 @@ function* _insertUserName({payload}) {
         if (json.status === 'success') {
             yield put({
                 type: constants(action, INSERT_USERNAME, SUCCESS),
+                payload: json,
+            });
+        } else if (json.message === 'UserName already exists') {
+            yield put({
+                type: constants(action, INSERT_USERNAME, ERROR),
                 payload: json,
             });
         }

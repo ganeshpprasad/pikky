@@ -141,7 +141,7 @@ const FavPicker = ({chatNextCallback, isFav}) => {
         } else {
             _saveBaseCuisines();
         }
-        chatNextCallback();
+        chatNextCallback({msg: 'Preferences added'});
     };
 
     return (

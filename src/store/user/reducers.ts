@@ -31,7 +31,8 @@ const User = (state = initialState, {type, payload}: any): any => {
         case constants(action, INSERT_USERNAME, ERROR):
             return {
                 ...state,
-                error: payload,
+                msg: payload.message,
+                error: true,
                 loading: false,
                 success: false,
             };

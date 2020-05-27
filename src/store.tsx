@@ -1,11 +1,12 @@
 import React from 'react';
-import AsyncStorage from '@react-native-community/async-storage';
 import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import {persistStore, persistReducer} from 'redux-persist';
+import AsyncStorage from '@react-native-community/async-storage';
 import {createLogger} from 'redux-logger';
 import {PersistGate} from 'redux-persist/integration/react';
 import createSagaMiddleware from 'redux-saga';
+import {SafeAreaView} from 'react-native';
 
 import reducer from './store/reducers';
 import saga from './store/sagas';
@@ -32,7 +33,9 @@ sagaMiddleware.run(saga);
 export const withReduxProvider = C => props => (
     <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-            <C {...props} />
+            <SafeAreaView>
+                <C {...props} />
+            </SafeAreaView>
         </PersistGate>
     </Provider>
 );
