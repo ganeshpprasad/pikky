@@ -33,7 +33,7 @@ sagaMiddleware.run(saga);
 export const withReduxProvider = C => props => (
     <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
-            <SafeAreaView style={{flex: 1, backgroundColor: '#a4a'}}>
+            <SafeAreaView style={{flex: 1}}>
                 <C {...props} />
             </SafeAreaView>
         </PersistGate>

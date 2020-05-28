@@ -10,34 +10,18 @@ import ONE from './assets/1.png';
 import TWO from './assets/2.png';
 
 // comps
-import LoginScreen from '../Login';
+import Login from '../Login';
 
-export default class Login extends React.Component {
+export default class Home extends React.Component {
     state = {
         goToLogin: false,
-    };
-
-    renderSlides = ({item}) => {
-        return (
-            <View
-                style={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    backgroundColor: 'blue',
-                    height: 100,
-                    flex: 1,
-                }}>
-                <Text>askdjflkj</Text>
-            </View>
-        );
     };
 
     openLoginScreen = () => this.setState({goToLogin: true});
 
     render() {
         if (this.state.goToLogin) {
-            return <LoginScreen />;
+            return <Login />;
         } else {
             return (
                 <View style={{flex: 1}}>
@@ -47,18 +31,22 @@ export default class Login extends React.Component {
                         style={styles.wrapper}
                         loop={false}>
                         <OnboardingSlide
+                            cb={this.openLoginScreen}
                             img={ONE}
                             text="Know your flavour & eat your heart out."
                         />
                         <OnboardingSlide
+                            cb={this.openLoginScreen}
                             img={TWO}
                             text="Explore recipes from around the world."
                         />
                         <OnboardingSlide
+                            cb={this.openLoginScreen}
                             img={ONE}
                             text="Create a flavourful food profile."
                         />
                         <OnboardingSlide
+                            cb={this.openLoginScreen}
                             img={TWO}
                             text="Let us get started with an account."
                         />

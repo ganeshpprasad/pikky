@@ -11,17 +11,19 @@ export default class OnboardingSlide extends PureComponent {
                 {/* <TouchableOpacity style={styles.button}>
                     <Text>SIGN UP</Text>
                 </TouchableOpacity> */}
-                <LinearGradient
-                    colors={[
-                        'rgb(255, 230, 72)',
-                        'rgb(255, 125, 99)',
-                        'rgb(255, 115, 102)',
-                    ]}
-                    start={{x: 0, y: 0}}
-                    end={{x: 1, y: 1}}
-                    style={styles.linearGradient}>
-                    <Text style={styles.buttonText}>SIGN UP</Text>
-                </LinearGradient>
+                <TouchableOpacity onPress={this.props.cb}>
+                    <LinearGradient
+                        colors={[
+                            'rgb(255, 230, 72)',
+                            'rgb(255, 125, 99)',
+                            'rgb(255, 115, 102)',
+                        ]}
+                        start={{x: 0, y: 0}}
+                        end={{x: 1, y: 1}}
+                        style={styles.linearGradient}>
+                        <Text style={styles.buttonText}>SIGN UP</Text>
+                    </LinearGradient>
+                </TouchableOpacity>
                 <Text style={styles.loginText}>LOGIN</Text>
             </View>
         );
