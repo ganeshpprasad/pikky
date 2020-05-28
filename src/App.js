@@ -4,19 +4,19 @@ import {Navigation} from 'react-native-navigation';
 import {withReducer, withReduxProvider} from './store';
 
 // screens
-import {LOGIN, USER_ACCCOUNT} from './screens';
+import {LOGIN, USER_ACCCOUNT, HOME} from './screens';
 
 import Login from './screens/Login';
+import Home from './screens/Home';
 import UserAccount from './screens/UserAccount';
 
 const Screens = new Map();
 Screens.set(LOGIN, Login);
+Screens.set(HOME, Home);
 
 Screens.forEach((C, key) => {
     Navigation.registerComponent(key, () => withReduxProvider(C), () => C);
 });
-
-Navigation.registerComponent(USER_ACCCOUNT, () => UserAccount);
 
 const App = () => {
     Navigation.setRoot({
@@ -25,7 +25,7 @@ const App = () => {
                 children: [
                     {
                         component: {
-                            name: LOGIN,
+                            name: HOME,
                             options: {
                                 topBar: {
                                     height: 0,
