@@ -15,7 +15,7 @@ export default class LoginDone extends PureComponent {
                     Let us explore your food habits to create a flavourful
                     profile!
                 </Text>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={this.props.gotoFoodPref}>
                     <LinearGradient
                         colors={[
                             'rgb(255, 230, 72)',

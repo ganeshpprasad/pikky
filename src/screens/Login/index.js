@@ -2,13 +2,15 @@ import React, {PureComponent} from 'react';
 import {Text, View, TouchableOpacity, Image, TextInput} from 'react-native';
 
 import LoginDone from './components/LoginDone';
+import Topbar from './components/Topbar';
+import Question from './components/Question';
+import BasePrefs from './components/BasePrefs';
 
-import BACK from './assets/back.png';
-import HELP from './assets/help.png';
 import LOGO from './assets/logo.png';
 import NEXT from './assets/next.png';
 import NEXTA from './assets/nexta.png';
 import ERROR from './assets/i.png';
+import STRT from './assets/strt.png';
 
 export default class Login extends PureComponent {
     constructor(props) {
@@ -20,7 +22,10 @@ export default class Login extends PureComponent {
             errorMsg: '',
             otp: false,
             otpNum: '',
-            loginDone: false,
+            loginDone: true,
+            isFoodPref: false,
+            isChilhoodFood: false,
+            isFavCuisine: false,
         };
     }
 
@@ -62,35 +67,43 @@ export default class Login extends PureComponent {
         this.setState({otpNum: t});
     };
 
+    gotoFoodPref = () => this.setState({isFoodPref: true});
+
     render() {
-        if (this.state.loginDone) {
-            return <LoginDone />;
+        if (this.state.isFoodPref) {
+            let question = this.state.isChilhoodFood
+                ? 'What food did you grow up eating? Enter at least three. '
+                : this.state.isFavCuisine
+                ? 'What are your favourite cuisines?'
+                : 'What are your food preferences? Select as many as you like.';
+
+            return (
+                <View>
+                    <Topbar />
+                    <View style={styles.logoStrt}>
+                        <Image source={STRT} />
+                    </View>
+                    <Question question={question} />
+                    <BasePrefs />
+                </View>
+            );
         }
+        if (this.state.loginDone) {
+            return <LoginDone gotoFoodPref={this.gotoFoodPref} />;
+        }
+
+        let question = this.state.otp
+            ? 'Enter the OTP sent to your mobile.'
+            : 'What is your mobile phone number?';
+
         return (
             <View style={styles.loginCon}>
                 <View>
-                    <View style={styles.topBarCon}>
-                        <TouchableOpacity>
-                            <Image source={BACK} />
-                        </TouchableOpacity>
-                        <TouchableOpacity>
-                            <Image source={HELP} />
-                        </TouchableOpacity>
-                    </View>
+                    <Topbar />
                     <View style={styles.logoCon}>
                         <Image style={styles.logo} source={LOGO} />
                     </View>
-                    <View style={styles.mainTextCon}>
-                        {this.state.otp ? (
-                            <Text style={styles.mainText}>
-                                Enter the OTP sent to your mobile.
-                            </Text>
-                        ) : (
-                            <Text style={styles.mainText}>
-                                What is your mobile phone number?
-                            </Text>
-                        )}
-                    </View>
+                    <Question question={question} />
                     {!this.state.otp ? (
                         <View style={styles.textInputCon}>
                             <Text style={styles.textInputP}>+91</Text>
@@ -159,13 +172,6 @@ const styles = {
         justifyContent: 'space-between',
         flexGrow: 1,
     },
-    topBarCon: {
-        display: 'flex',
-        flexDirection: 'row',
-        margin: 15,
-        width: '90%',
-        justifyContent: 'space-between',
-    },
     topBarImg: {},
     logo: {},
     logoCon: {
@@ -175,17 +181,10 @@ const styles = {
         justifyContent: 'flex-end',
         height: '40%',
     },
-    mainTextCon: {
-        display: 'flex',
-        alignItems: 'center',
-        width: '100%',
-        marginTop: 15,
-    },
-    mainText: {
-        // textAlign: 'left',
-        fontSize: 24,
-        fontFamily: 'OpenSans-Regular',
-        marginLeft: 30,
+    logoStrt: {
+        marginLeft: 20,
+        marginTop: 10,
+        marginBottom: 20,
     },
     textInputCon: {
         marginTop: 10,
