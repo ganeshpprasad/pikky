@@ -5,12 +5,10 @@ import LoginDone from './components/LoginDone';
 import Topbar from './components/Topbar';
 import Question from './components/Question';
 import BasePrefs from './components/BasePrefs';
+import NextButton from './components/NextButton';
 
 import LOGO from './assets/logo.png';
-import NEXT from './assets/next.png';
-import NEXTA from './assets/nexta.png';
 import ERROR from './assets/i.png';
-import STRT from './assets/strt.png';
 
 export default class Login extends PureComponent {
     constructor(props) {
@@ -26,6 +24,7 @@ export default class Login extends PureComponent {
             isFoodPref: false,
             isChilhoodFood: false,
             isFavCuisine: false,
+            baseCuis: [],
         };
     }
 
@@ -71,22 +70,7 @@ export default class Login extends PureComponent {
 
     render() {
         if (this.state.isFoodPref) {
-            let question = this.state.isChilhoodFood
-                ? 'What food did you grow up eating? Enter at least three. '
-                : this.state.isFavCuisine
-                ? 'What are your favourite cuisines?'
-                : 'What are your food preferences? Select as many as you like.';
-
-            return (
-                <View>
-                    <Topbar />
-                    <View style={styles.logoStrt}>
-                        <Image source={STRT} />
-                    </View>
-                    <Question question={question} />
-                    <BasePrefs />
-                </View>
-            );
+            return <BasePrefs />;
         }
         if (this.state.loginDone) {
             return <LoginDone gotoFoodPref={this.gotoFoodPref} />;
@@ -141,17 +125,10 @@ export default class Login extends PureComponent {
                         </>
                     )}
                 </View>
-                <View style={styles.bottomBtnCon}>
-                    <TouchableOpacity
-                        onPress={this.openOtpField}
-                        style={styles.bottomBtn}>
-                        {this.state.activateNext ? (
-                            <Image source={NEXTA} />
-                        ) : (
-                            <Image source={NEXT} />
-                        )}
-                    </TouchableOpacity>
-                </View>
+                <NextButton
+                    cb={this.openOtpField}
+                    active={this.state.activateNext}
+                />
             </View>
         );
     }
@@ -205,13 +182,5 @@ const styles = {
         flexGrow: 1,
         fontFamily: 'OpenSans-Regular',
         fontSize: 24,
-    },
-    bottomBtnCon: {
-        alignSelf: 'flex-end',
-        flexGrow: 1,
-        margin: 15,
-    },
-    bottomBtn: {
-        marginTop: 'auto',
     },
 };
